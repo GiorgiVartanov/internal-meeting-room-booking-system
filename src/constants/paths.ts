@@ -1,0 +1,37 @@
+export const PATHS = {
+  home: "/",
+  dashboard: "/dashboard",
+  schedule: "/schedule",
+  documentation: "/documentation",
+  about: "/about",
+  notFound: "*",
+  room: (roomId: string) => `/?room=${encodeURIComponent(roomId)}`,
+
+  api: {
+    bookings: "/bookings",
+    booking: (bookingId: string) => `/bookings/${bookingId}`,
+    bookingSearch: "/bookings/search",
+    roomBookings: (roomId: string) => `/rooms/${roomId}/bookings`,
+    employeeBookings: (employeeId: string) => `/employees/${employeeId}/bookings`,
+    rooms: "/rooms",
+    room: (roomId: string) => `/rooms/${roomId}`,
+    employees: "/employees",
+    holidays: "/holidays",
+    bookingActivity: "/booking-activity",
+    guideProgress: "/guide-progress",
+  },
+
+  mockApi: {
+    bookings: "/api/bookings",
+    bookingPattern: "/api/bookings/:bookingId",
+    bookingSearch: "/api/bookings/search",
+    roomBookingsPattern: "/api/rooms/:roomId/bookings",
+    employeeBookingsPattern: "/api/employees/:employeeId/bookings",
+    rooms: "/api/rooms",
+    roomPattern: "/api/rooms/:roomId",
+    employees: "/api/employees",
+    holidays: "/api/holidays",
+    bookingActivity: "/api/booking-activity",
+    guideProgress: "/api/guide-progress",
+  },
+} as const

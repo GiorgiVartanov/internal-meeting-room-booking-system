@@ -1,0 +1,7 @@
+export { default as DashboardPage } from "./Dashboard.page"
+export { default as SchedulePage } from "./Schedule.page"
+export { default as ErrorPage } from "./Error.page"
+export { default as HomePage } from "./Home.page"
+export { default as LoadingPage } from "./Loading.page"
+export { default as NotFoundPage } from "./NotFound.page"
+export { default as AboutPage } from "./About.page"

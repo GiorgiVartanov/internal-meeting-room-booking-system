@@ -1,0 +1,194 @@
+[
+  {
+    "id": "employee-482701",
+    "name": {
+      "en": "Giorgi Vartanov",
+      "ka": "გიორგი ვართანოვი"
+    },
+    "email": "giorgi.vartanov@techzy.ge",
+    "department": {
+      "en": "Engineering",
+      "ka": "ინჟინერია"
+    }
+  },
+  {
+    "id": "employee-482702",
+    "name": {
+      "en": "Jim Halpert",
+      "ka": "ჯიმ ჰალპერტი"
+    },
+    "email": "jim.halpert@dundermifflin.com",
+    "department": {
+      "en": "Sales",
+      "ka": "გაყიდვები"
+    }
+  },
+  {
+    "id": "employee-193846",
+    "name": {
+      "en": "Pam Beesly",
+      "ka": "პემ ბიზლი"
+    },
+    "email": "pam.beesly@dundermifflin.com",
+    "department": {
+      "en": "Office Administration",
+      "ka": "ოფისის ადმინისტრაცია"
+    }
+  },
+  {
+    "id": "employee-750294",
+    "name": {
+      "en": "Michael Scott",
+      "ka": "მაიკლ სკოტი"
+    },
+    "email": "michael.scott@dundermifflin.com",
+    "department": {
+      "en": "Management",
+      "ka": "მენეჯმენტი"
+    }
+  },
+  {
+    "id": "employee-628315",
+    "name": {
+      "en": "Dwight Schrute",
+      "ka": "დუაიტ შრუტი"
+    },
+    "email": "dwight.schrute@dundermifflin.com",
+    "department": {
+      "en": "Sales",
+      "ka": "გაყიდვები"
+    }
+  },
+  {
+    "id": "employee-305971",
+    "name": {
+      "en": "Angela Martin",
+      "ka": "ანჯელა მარტინი"
+    },
+    "email": "angela.martin@dundermifflin.com",
+    "department": {
+      "en": "Accounting",
+      "ka": "ბუღალტერია"
+    }
+  },
+  {
+    "id": "employee-864203",
+    "name": {
+      "en": "Stanley Hudson",
+      "ka": "სტენლი ჰადსონი"
+    },
+    "email": "stanley.hudson@dundermifflin.com",
+    "department": {
+      "en": "Sales",
+      "ka": "გაყიდვები"
+    }
+  },
+  {
+    "id": "employee-914527",
+    "name": {
+      "en": "Kevin Malone",
+      "ka": "კევინ მელოუნი"
+    },
+    "email": "kevin.malone@dundermifflin.com",
+    "department": {
+      "en": "Accounting",
+      "ka": "ბუღალტერია"
+    }
+  },
+  {
+    "id": "employee-247618",
+    "name": {
+      "en": "Oscar Martinez",
+      "ka": "ოსკარ მარტინესი"
+    },
+    "email": "oscar.martinez@dundermifflin.com",
+    "department": {
+      "en": "Accounting",
+      "ka": "ბუღალტერია"
+    }
+  },
+  {
+    "id": "employee-671305",
+    "name": {
+      "en": "Phyllis Vance",
+      "ka": "ფილის ვენსი"
+    },
+    "email": "phyllis.vance@dundermifflin.com",
+    "department": {
+      "en": "Sales",
+      "ka": "გაყიდვები"
+    }
+  },
+  {
+    "id": "employee-538429",
+    "name": {
+      "en": "Andy Bernard",
+      "ka": "ენდი ბერნარდი"
+    },
+    "email": "andy.bernard@dundermifflin.com",
+    "department": {
+      "en": "Sales",
+      "ka": "გაყიდვები"
+    }
+  },
+  {
+    "id": "employee-806142",
+    "name": {
+      "en": "Kelly Kapoor",
+      "ka": "კელი კაპური"
+    },
+    "email": "kelly.kapoor@dundermifflin.com",
+    "department": {
+      "en": "Customer Service",
+      "ka": "მომხმარებელთა მომსახურება"
+    }
+  },
+  {
+    "id": "employee-359784",
+    "name": {
+      "en": "Ryan Howard",
+      "ka": "რაიან ჰოვარდი"
+    },
+    "email": "ryan.howard@dundermifflin.com",
+    "department": {
+      "en": "Temp Staff",
+      "ka": "დროებითი პერსონალი"
+    }
+  },
+  {
+    "id": "employee-125963",
+    "name": {
+      "en": "Creed Bratton",
+      "ka": "კრიდ ბრატონი"
+    },
+    "email": "creed.bratton@dundermifflin.com",
+    "department": {
+      "en": "Quality Assurance",
+      "ka": "ხარისხის კონტროლი"
+    }
+  },
+  {
+    "id": "employee-743250",
+    "name": {
+      "en": "Meredith Palmer",
+      "ka": "მერედიტ პალმერი"
+    },
+    "email": "meredith.palmer@dundermifflin.com",
+    "department": {
+      "en": "Supplier Relations",
+      "ka": "მომწოდებლებთან ურთიერთობა"
+    }
+  },
+  {
+    "id": "employee-490816",
+    "name": {
+      "en": "Darryl Philbin",
+      "ka": "დერილ ფილბინი"
+    },
+    "email": "darryl.philbin@dundermifflin.com",
+    "department": {
+      "en": "Warehouse",
+      "ka": "საწყობი"
+    }
+  }
+]

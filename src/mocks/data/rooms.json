@@ -1,0 +1,282 @@
+[
+  {
+    "id": "room-sommen",
+    "name": {
+      "en": "Sommen",
+      "ka": "სომენი"
+    },
+    "description": {
+      "en": "Large presentation room on the second floor, beside the main staircase and opposite the shared kitchen.",
+      "ka": "ჩრდილოეთის ტბა სომენი-ის სახელობის 20-ადგილიანი ჰიბრიდული ოთახი, რომელიც განკუთვნილია დიდი გუნდური შეხვედრებისა და პრეზენტაციებისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 2,
+    "capacity": 20,
+    "imageUrl": "/images/meeting-room-placeholder.webp",
+    "amenities": [
+      "whiteboard",
+      "display",
+      "video-conference",
+      "speakerphone"
+    ],
+    "hasNaturalLight": false,
+    "lightQuality": "professional",
+    "airConditionerCount": 3,
+    "isAccessible": true,
+    "isActive": true
+  },
+  {
+    "id": "room-bolmen",
+    "name": {
+      "en": "Bolmen",
+      "ka": "ბოლმენი"
+    },
+    "description": {
+      "en": "Large team room on the third floor, at the end of the main corridor near the emergency exit.",
+      "ka": "ჩრდილოეთის ტბა ბოლმენი-ის სახელობის 20-ადგილიანი პირისპირ ოთახი, რომელიც განკუთვნილია დიდი გუნდური შეხვედრებისა და პრეზენტაციებისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 3,
+    "capacity": 20,
+    "imageUrl": "/images/meeting-room-placeholder.webp",
+    "amenities": [
+      "whiteboard"
+    ],
+    "hasNaturalLight": true,
+    "lightQuality": "good",
+    "airConditionerCount": 3,
+    "isAccessible": true,
+    "isActive": true
+  },
+  {
+    "id": "room-roxen",
+    "name": {
+      "en": "Roxen",
+      "ka": "როქსენი"
+    },
+    "description": {
+      "en": "Bright hybrid meeting room on the fourth floor, beside the elevators and the open workspace.",
+      "ka": "ჩრდილოეთის ტბა როქსენი-ის სახელობის 16-ადგილიანი ჰიბრიდული ოთახი, რომელიც განკუთვნილია დიდი გუნდური შეხვედრებისა და პრეზენტაციებისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 4,
+    "capacity": 16,
+    "imageUrl": "/images/meeting-room-placeholder.webp",
+    "amenities": [
+      "whiteboard",
+      "display",
+      "video-conference",
+      "speakerphone"
+    ],
+    "hasNaturalLight": true,
+    "lightQuality": "studio",
+    "airConditionerCount": 3,
+    "isAccessible": true,
+    "isActive": true
+  },
+  {
+    "id": "room-glan",
+    "name": {
+      "en": "Glan",
+      "ka": "გლანი"
+    },
+    "description": {
+      "en": "Quiet two-person room on the fifth floor, behind the lounge and next to the printer area.",
+      "ka": "ჩრდილოეთის ტბა გლანი-ის სახელობის 14-ადგილიანი ონლაინ ოთახი, რომელიც განკუთვნილია კომფორტული გუნდური მუშაობისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 5,
+    "capacity": 2,
+    "imageUrl": "",
+    "amenities": [
+      "whiteboard",
+      "display",
+      "video-conference",
+      "speakerphone"
+    ],
+    "hasNaturalLight": false,
+    "lightQuality": "good",
+    "airConditionerCount": 2,
+    "isAccessible": false,
+    "isActive": true
+  },
+  {
+    "id": "room-vidostern",
+    "name": {
+      "en": "Vidostern",
+      "ka": "ვიდოსტერნი"
+    },
+    "description": {
+      "en": "Two-person video-call room on the sixth floor, immediately to the right of the stairs.",
+      "ka": "ჩრდილოეთის ტბა ვიდოსტერნი-ის სახელობის 10-ადგილიანი ჰიბრიდული ოთახი, რომელიც განკუთვნილია კომფორტული გუნდური მუშაობისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 6,
+    "capacity": 2,
+    "imageUrl": "/images/small-meeting-room-placeholder.webp",
+    "amenities": [
+      "whiteboard",
+      "video-conference",
+      "speakerphone"
+    ],
+    "hasNaturalLight": true,
+    "lightQuality": "professional",
+    "airConditionerCount": 2,
+    "isAccessible": true,
+    "isActive": true
+  },
+  {
+    "id": "room-asnen",
+    "name": {
+      "en": "Asnen",
+      "ka": "ასნენი"
+    },
+    "description": {
+      "en": "Small meeting room on the second floor, near reception and across from the coat storage.",
+      "ka": "ჩრდილოეთის ტბა ასნენი-ის სახელობის 20-ადგილიანი პირისპირ ოთახი, რომელიც განკუთვნილია დიდი გუნდური შეხვედრებისა და პრეზენტაციებისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 2,
+    "capacity": 2,
+    "imageUrl": "/images/small-meeting-room-placeholder.webp",
+    "amenities": [
+      "whiteboard",
+      "display"
+    ],
+    "hasNaturalLight": true,
+    "lightQuality": "good",
+    "airConditionerCount": 3,
+    "isAccessible": true,
+    "isActive": true
+  },
+  {
+    "id": "room-rusken",
+    "name": {
+      "en": "Rusken",
+      "ka": "რუსკენი"
+    },
+    "description": {
+      "en": "Compact hybrid room on the third floor, between the printer area and the north stairwell.",
+      "ka": "ჩრდილოეთის ტბა რუსკენი-ის სახელობის 4-ადგილიანი ჰიბრიდული ოთახი, რომელიც განკუთვნილია კომფორტული გუნდური მუშაობისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 3,
+    "capacity": 2,
+    "imageUrl": "/images/small-meeting-room-placeholder.webp",
+    "amenities": [
+      "whiteboard",
+      "display",
+      "video-conference",
+      "speakerphone"
+    ],
+    "hasNaturalLight": false,
+    "lightQuality": "professional",
+    "airConditionerCount": 1,
+    "isAccessible": true,
+    "isActive": true
+  },
+  {
+    "id": "room-rymmen",
+    "name": {
+      "en": "Rymmen",
+      "ka": "რიმენი"
+    },
+    "description": {
+      "en": "Private focus booth on the fourth floor, next to the quiet work zone and water station.",
+      "ka": "ჩრდილოეთის ტბა რიმენი-ის სახელობის 1-ადგილიანი ონლაინ ოთახი, რომელიც განკუთვნილია პირადი ზარებისა და კონცენტრირებული მუშაობისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 4,
+    "capacity": 1,
+    "imageUrl": "",
+    "amenities": [
+      "video-conference",
+      "standing-desk"
+    ],
+    "hasNaturalLight": true,
+    "lightQuality": "studio",
+    "airConditionerCount": 0,
+    "isAccessible": true,
+    "isActive": true
+  },
+  {
+    "id": "room-fegen",
+    "name": {
+      "en": "Fegen",
+      "ka": "ფეგენი"
+    },
+    "description": {
+      "en": "Single-person call room on the fifth floor, opposite the lounge entrance.",
+      "ka": "ჩრდილოეთის ტბა ფეგენი-ის სახელობის 6-ადგილიანი ჰიბრიდული ოთახი, რომელიც განკუთვნილია კომფორტული გუნდური მუშაობისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 5,
+    "capacity": 1,
+    "imageUrl": "",
+    "amenities": [
+      "whiteboard",
+      "display",
+      "video-conference",
+      "speakerphone"
+    ],
+    "hasNaturalLight": true,
+    "lightQuality": "good",
+    "airConditionerCount": 1,
+    "isAccessible": false,
+    "isActive": true
+  },
+  {
+    "id": "room-fryken",
+    "name": {
+      "en": "Fryken",
+      "ka": "ფრიკენი"
+    },
+    "description": {
+      "en": "Private focus room on the sixth floor, at the end of the east corridor near the windows.",
+      "ka": "ჩრდილოეთის ტბა ფრიკენი-ის სახელობის 16-ადგილიანი პირისპირ ოთახი, რომელიც განკუთვნილია დიდი გუნდური შეხვედრებისა და პრეზენტაციებისთვის."
+    },
+    "office": {
+      "en": "Tbilisi HQ",
+      "ka": "თბილისის ოფისი"
+    },
+    "floor": 6,
+    "capacity": 1,
+    "imageUrl": "/images/small-meeting-room-placeholder.webp",
+    "amenities": [
+      "whiteboard",
+      "display"
+    ],
+    "hasNaturalLight": false,
+    "lightQuality": "studio",
+    "airConditionerCount": 3,
+    "isAccessible": true,
+    "isActive": true
+  }
+]

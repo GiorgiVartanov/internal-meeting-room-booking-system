@@ -1,0 +1,146 @@
+[
+  {
+    "id": "new-year-1",
+    "monthDay": "01-01",
+    "name": {
+      "en": "New Year's Day",
+      "ka": "ახალი წლის პირველი დღე"
+    }
+  },
+  {
+    "id": "new-year-2",
+    "monthDay": "01-02",
+    "name": {
+      "en": "New Year Holiday",
+      "ka": "ახალი წლის მეორე დღე"
+    }
+  },
+  {
+    "id": "orthodox-christmas",
+    "monthDay": "01-07",
+    "name": {
+      "en": "Orthodox Christmas",
+      "ka": "შობა"
+    }
+  },
+  {
+    "id": "epiphany",
+    "monthDay": "01-19",
+    "name": {
+      "en": "Epiphany",
+      "ka": "ნათლისღება"
+    }
+  },
+  {
+    "id": "mothers-day",
+    "monthDay": "03-03",
+    "name": {
+      "en": "Mother's Day",
+      "ka": "დედის დღე"
+    }
+  },
+  {
+    "id": "womens-day",
+    "monthDay": "03-08",
+    "name": {
+      "en": "International Women's Day",
+      "ka": "ქალთა საერთაშორისო დღე"
+    }
+  },
+  {
+    "id": "national-unity-day",
+    "monthDay": "04-09",
+    "name": {
+      "en": "National Unity Day",
+      "ka": "ეროვნული ერთიანობის დღე"
+    }
+  },
+  {
+    "id": "orthodox-good-friday",
+    "easterOffsetDays": -2,
+    "name": {
+      "en": "Orthodox Good Friday",
+      "ka": "დიდი პარასკევი"
+    }
+  },
+  {
+    "id": "orthodox-holy-saturday",
+    "easterOffsetDays": -1,
+    "name": {
+      "en": "Orthodox Holy Saturday",
+      "ka": "დიდი შაბათი"
+    }
+  },
+  {
+    "id": "orthodox-easter",
+    "easterOffsetDays": 0,
+    "name": {
+      "en": "Orthodox Easter Sunday",
+      "ka": "აღდგომა"
+    }
+  },
+  {
+    "id": "orthodox-easter-monday",
+    "easterOffsetDays": 1,
+    "name": {
+      "en": "Orthodox Easter Monday",
+      "ka": "მიცვალებულთა მოხსენიების დღე"
+    }
+  },
+  {
+    "id": "victory-day",
+    "monthDay": "05-09",
+    "name": {
+      "en": "Victory Day",
+      "ka": "ფაშიზმზე გამარჯვების დღე"
+    }
+  },
+  {
+    "id": "saint-andrews-day",
+    "monthDay": "05-12",
+    "name": {
+      "en": "Saint Andrew's Day",
+      "ka": "წმინდა ანდრია პირველწოდებულის დღე"
+    }
+  },
+  {
+    "id": "family-purity-day",
+    "monthDay": "05-17",
+    "name": {
+      "en": "Family Purity and Respect for Parents Day",
+      "ka": "ოჯახის სიწმინდისა და მშობლების პატივისცემის დღე"
+    }
+  },
+  {
+    "id": "independence-day",
+    "monthDay": "05-26",
+    "name": {
+      "en": "Independence Day",
+      "ka": "დამოუკიდებლობის დღე"
+    }
+  },
+  {
+    "id": "mariamoba",
+    "monthDay": "08-28",
+    "name": {
+      "en": "Mariamoba",
+      "ka": "მარიამობა"
+    }
+  },
+  {
+    "id": "svetitskhovloba",
+    "monthDay": "10-14",
+    "name": {
+      "en": "Svetitskhovloba",
+      "ka": "სვეტიცხოვლობა"
+    }
+  },
+  {
+    "id": "giorgoba",
+    "monthDay": "11-23",
+    "name": {
+      "en": "Giorgoba",
+      "ka": "გიორგობა"
+    }
+  }
+]

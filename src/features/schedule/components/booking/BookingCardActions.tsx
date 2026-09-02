@@ -20,13 +20,15 @@ import { localize } from "@/lib/localize"
 import { cn } from "@/lib/utils"
 import type { IBooking } from "@/types"
 
-import type { MouseEvent, ReactElement } from "react"
+import type { CSSProperties, MouseEvent, ReactElement } from "react"
 
 interface IProps {
   booking: IBooking
   editHref?: string
   onEdit?: () => void
   onDelete?: () => void
+  className?: string
+  style?: CSSProperties
 }
 
 /** Renders the edit and cancellation controls available for a booking card. */
@@ -35,6 +37,8 @@ export const BookingCardActions = ({
   editHref,
   onEdit,
   onDelete,
+  className,
+  style,
 }: IProps): ReactElement | null => {
   const { t, i18n } = useTranslation()
   const [confirmCancel, setConfirmCancel] = useState(false)
@@ -92,7 +96,10 @@ export const BookingCardActions = ({
 
   return (
     <>
-      <div className="absolute right-0 top-0 z-30 flex gap-0">
+      <div
+        className={cn("absolute right-0 top-0 z-30 flex gap-0", className)}
+        style={style}
+      >
         {canEdit && onEdit && (
           <Button
             data-modal-opener="edit-booking"

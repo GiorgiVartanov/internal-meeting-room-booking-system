@@ -414,6 +414,8 @@ export const PersonalWeekDayPanel = ({
                 <BookingCardActions
                   booking={booking}
                   onEdit={() => onEditBooking(booking)}
+                  className="items-center"
+                  style={{ height: BOOKING_SLOT_MINUTES * WEEK_TIMELINE_PIXELS_PER_MINUTE }}
                 />
               </article>
             )

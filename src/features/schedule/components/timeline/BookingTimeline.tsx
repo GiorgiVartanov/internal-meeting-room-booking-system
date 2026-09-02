@@ -1,4 +1,5 @@
 import { addMonths, subMinutes } from "date-fns"
+import { UserRound } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -428,15 +429,24 @@ export const BookingTimeline = ({
                     </p>
                     <p
                       className={cn(
-                        "truncate text-[9px] opacity-75",
+                        "flex min-w-0 items-center gap-1 text-[9px] opacity-75",
                         fifteenMinuteLayout && "leading-none"
                       )}
                     >
                       <BookingTimeRange
                         start={displayStart}
                         end={displayEnd}
-                      />{" "}
-                      · {organizer ? localize(organizer.name, i18n.language) : booking.organizerId}
+                        className="shrink-0"
+                      />
+                      <span aria-hidden>·</span>
+                      <span className="flex min-w-0 items-center gap-1 truncate">
+                        <UserRound className="size-2.5 shrink-0" />
+                        <span className="truncate">
+                          {organizer
+                            ? localize(organizer.name, i18n.language)
+                            : booking.organizerId}
+                        </span>
+                      </span>
                     </p>
                   </div>
                 </div>

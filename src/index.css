@@ -15,6 +15,14 @@
   .calendar-desktop-gutter {
     width: calc(100% - 1rem);
   }
+
+  .dashboard-year-calendar-scroll {
+    overflow-x: auto;
+  }
+
+  .dashboard-year-calendar-grid {
+    min-width: 1200px;
+  }
 }
 
 @container (min-width: 800px) and (max-width: 1219px) {

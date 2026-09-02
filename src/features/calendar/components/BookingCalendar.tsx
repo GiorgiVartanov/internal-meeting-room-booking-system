@@ -9,7 +9,7 @@ import {
   startOfMonth,
   subMonths,
 } from "date-fns"
-import { ChevronLeft, ChevronRight, X } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -48,7 +48,6 @@ interface IProps {
   bodyFallback?: ReactNode
   onYearViewChange?: (open: boolean) => void
   horizontalYearScroll?: boolean
-  showMonthPickerTitle?: boolean
 }
 
 /** Renders the shared booking calendar with availability activity and navigation. */
@@ -72,7 +71,6 @@ export const BookingCalendar = ({
   bodyFallback,
   onYearViewChange,
   horizontalYearScroll = false,
-  showMonthPickerTitle = true,
 }: IProps): ReactElement => {
   const { t, i18n } = useTranslation()
 
@@ -140,7 +138,7 @@ export const BookingCalendar = ({
         horizontalYearScroll && "dashboard-year-calendar"
       )}
     >
-      {large && (
+      {large && !choosingMonth && (
         <div
           className={cn(
             "sticky top-0 z-30 -mx-2 mb-3 grid min-h-12 shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 bg-popover px-3 py-2 after:absolute after:inset-x-3 after:bottom-0 after:border-b after:border-border sm:grid-cols-[minmax(0,1fr)_auto_minmax(2.5rem,1fr)]",
@@ -148,7 +146,7 @@ export const BookingCalendar = ({
           )}
         >
           <div className="col-span-2 min-w-0 pr-20 sm:col-span-1 sm:pr-0">{headerTitle}</div>
-          <div className="col-span-2 row-start-2 flex min-w-0 items-center justify-center gap-0.5 sm:col-span-1 sm:col-start-2 sm:row-start-1 sm:gap-1">
+          <div className="col-span-2 row-start-2 flex h-8 min-w-0 items-center justify-center gap-0.5 sm:col-span-1 sm:col-start-2 sm:row-start-1 sm:gap-1">
             <Button
               type="button"
               size="icon"
@@ -198,21 +196,21 @@ export const BookingCalendar = ({
         </div>
       )}
       {choosingMonth && (
-        <div className="absolute inset-0 z-40 overflow-x-hidden overflow-y-auto bg-panel">
+        <div
+          className={cn(
+            "absolute inset-0 z-40 overflow-x-hidden overflow-y-auto bg-popover",
+            horizontalYearScroll && "bg-panel"
+          )}
+        >
           <div className="flex h-full min-h-0 flex-col">
             <div
               className={cn(
-                "sticky top-0 z-30 -mx-2 mb-3 grid min-h-12 shrink-0 grid-cols-[minmax(0,1fr)_auto_minmax(2.5rem,1fr)] items-center gap-2 bg-panel px-3 py-2 after:absolute after:inset-x-3 after:bottom-0 after:border-b after:border-border",
+                "sticky top-0 z-30 -mx-2 mb-3 grid min-h-12 shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 bg-popover px-3 py-2 after:absolute after:inset-x-3 after:bottom-0 after:border-b after:border-border sm:grid-cols-[minmax(0,1fr)_auto_minmax(2.5rem,1fr)]",
                 headerClassName
               )}
             >
-              {showMonthPickerTitle && (
-                <span className="font-heading truncate text-base font-semibold">
-                  {t("chooseMonth")}
-                </span>
-              )}
-              {!showMonthPickerTitle && <div aria-hidden="true" />}
-              <div className="flex min-w-0 items-center justify-center gap-0.5 sm:gap-1">
+              <div className="col-span-2 min-w-0 pr-20 sm:col-span-1 sm:pr-0">{headerTitle}</div>
+              <div className="col-span-2 row-start-2 flex h-8 min-w-0 items-center justify-center gap-0.5 sm:col-span-1 sm:col-start-2 sm:row-start-1 sm:gap-1">
                 <Button
                   type="button"
                   size="icon"
@@ -245,17 +243,7 @@ export const BookingCalendar = ({
                   <ChevronRight className="size-5" />
                 </Button>
               </div>
-              <div />
-              <Button
-                type="button"
-                size="icon"
-                variant="ghost"
-                className="absolute right-2 top-2 size-8"
-                aria-label={t("close")}
-                onClick={() => setChoosingMonth(false)}
-              >
-                <X className="size-4" />
-              </Button>
+              <div className="hidden sm:block" />
             </div>
             <div
               className={cn(
@@ -266,7 +254,7 @@ export const BookingCalendar = ({
               <div
                 className={cn(
                   "calendar-desktop-gutter grid h-full min-h-0 auto-rows-max grid-cols-1 items-start gap-2 overflow-y-auto sm:grid-cols-2 sm:gap-1.5 lg:mx-auto lg:max-w-300 lg:grid-cols-4 lg:grid-rows-3 lg:auto-rows-fr lg:gap-2 lg:overflow-hidden",
-                  horizontalYearScroll && "dashboard-year-calendar-grid px-2"
+                  horizontalYearScroll && "dashboard-year-calendar-grid px-2 pt-1"
                 )}
               >
                 {Array.from({ length: 12 }, (_, index) => {
@@ -281,6 +269,7 @@ export const BookingCalendar = ({
                       selected={isSameMonth(candidate, month)}
                       disabled={unavailable}
                       holidayDates={calendarState.holidayDateKeys}
+                      surfaceClassName={dayClassName}
                       onSelect={() => {
                         setMonth(candidate)
                         setChoosingMonth(false)

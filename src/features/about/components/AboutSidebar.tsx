@@ -14,7 +14,6 @@ const links = [
   ["principles", "aboutDecisions"],
   ["models", "aboutDomainModelsTitle"],
   ["testing", "aboutTestingTitle"],
-  ["deployment", "aboutDeploymentTitle"],
   ["technologies", "aboutTechnologies"],
   ["codex", "aboutCodexTitle"],
 ] as const

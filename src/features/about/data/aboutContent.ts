@@ -16,7 +16,6 @@ export const aboutSectionIds = [
   "principles",
   "models",
   "testing",
-  "deployment",
   "technologies",
   "codex",
 ] as const

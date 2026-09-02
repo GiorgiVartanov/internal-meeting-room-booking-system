@@ -11,6 +11,7 @@ interface IProps {
   selected: boolean
   disabled: boolean
   holidayDates: ReadonlySet<string>
+  surfaceClassName?: string
   onSelect: () => void
 }
 
@@ -20,6 +21,7 @@ export const MonthPickerCard = ({
   selected,
   disabled,
   holidayDates,
+  surfaceClassName,
   onSelect,
 }: IProps): ReactElement => {
   const { i18n } = useTranslation()
@@ -35,7 +37,8 @@ export const MonthPickerCard = ({
       disabled={disabled}
       aria-label={format(month, "LLLL yyyy", { locale })}
       className={cn(
-        "flex min-h-44 w-full flex-col rounded-none border bg-panel p-2 text-left transition-colors hover:border-primary/70 hover:bg-accent/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-35 sm:aspect-7/5 sm:min-h-0 sm:p-2.5 lg:h-full lg:aspect-auto lg:p-3",
+        "flex min-h-44 w-full flex-col rounded-none border bg-popover p-2 text-left transition-colors hover:border-primary/70 hover:bg-accent/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-35 sm:aspect-7/5 sm:min-h-0 sm:p-2.5 lg:h-full lg:aspect-auto lg:p-3",
+        surfaceClassName,
         selected && "border-primary bg-primary/10"
       )}
       onClick={onSelect}

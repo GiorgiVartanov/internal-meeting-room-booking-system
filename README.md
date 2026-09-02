@@ -2,7 +2,17 @@
 
 **TL;DR:** A React and TypeScript meeting-room booking take-home task with booking flows, schedules, localization, and guided help.
 
-[View the live demo](https://internal-meeting-room-booking-system.netlify.app)
+**Assumptions:** Where the brief was open to interpretation, I treated the app as an internal office tool with one simulated signed-in employee, a fixed Tbilisi office timezone, and room conflicts as the main booking constraint. I preferred to make the experience usable and easy to understand for people with different levels of technical confidence, rather than assuming that every employee would already be comfortable with software. In my experience, I have seen people ask HR for help even with simple meeting-room bookings in Google Calendar, so I also added an in-app tutorial and contextual guidance to make the main workflows more approachable. I added localization, themes, drag-and-drop scheduling, keyboard shortcuts, persistent cancellation history, and guided help to make the workflow feel more complete. I added a few out-of-scope features, since the timeframe left extra room, so I thought I'd use it to include some polish/portfolio-worthy touches.
+
+The [About page](https://internal-meeting-room-booking-system.netlify.app/about) contains a deeper explanation of what I built, technical decisions, and how the main parts of the application work.
+
+<p align="center">
+  <a href="https://internal-meeting-room-booking-system.netlify.app">
+    <img src="docs/screenshots/room-booking.webp" alt="Live demo preview of the room booking page" width="900">
+  </a>
+  <br>
+  <a href="https://internal-meeting-room-booking-system.netlify.app">View live demo</a>
+</p>
 
 This frontend take-home task models a meeting room booking app for a hypothetical company office. It runs without a backend: Axios makes the requests, TanStack Query manages response data and caches it, and MSW is used to simulate the backend.
 

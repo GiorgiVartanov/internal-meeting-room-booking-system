@@ -185,7 +185,6 @@ const DashboardPage = (): ReactElement => {
           large
           fillWidth
           horizontalYearScroll
-          showMonthPickerTitle={false}
           disablePast={false}
           dayClassName="bg-panel"
           headerClassName="bg-panel"

@@ -1,4 +1,4 @@
-import { Cloud, ExternalLink, FlaskConical } from "lucide-react"
+import { ExternalLink, FlaskConical } from "lucide-react"
 import { useRef } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -148,43 +148,6 @@ const AboutPage = () => {
                   </p>
                 </article>
               ))}
-            </div>
-          </section>
-
-          <section
-            id="deployment"
-            className="scroll-mt-24"
-          >
-            <div className="flex items-center gap-3">
-              <span className="flex size-10 items-center justify-center bg-primary/10 text-primary">
-                <Cloud className="size-5" />
-              </span>
-              <h2 className="text-2xl font-semibold">{t("aboutDeploymentTitle")}</h2>
-            </div>
-            <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">
-              {t("aboutDeploymentDescription")}
-            </p>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <a
-                href="https://internal-meeting-room-booking-system.netlify.app"
-                target="_blank"
-                rel="noreferrer"
-                className="group border bg-panel p-4 transition-colors hover:border-primary/70 hover:bg-accent/70"
-              >
-                <span className="flex items-center justify-between gap-3">
-                  <strong>{t("aboutDeploymentDemo")}</strong>
-                  <ExternalLink className="size-4 shrink-0" />
-                </span>
-                <span className="mt-2 block text-sm leading-6 text-muted-foreground group-hover:text-foreground">
-                  {t("aboutDeploymentDemoDescription")}
-                </span>
-              </a>
-              <article className="border bg-panel p-4">
-                <h3 className="font-semibold">{t("aboutDeploymentProduction")}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {t("aboutDeploymentProductionDescription")}
-                </p>
-              </article>
             </div>
           </section>
 

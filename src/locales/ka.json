@@ -80,6 +80,7 @@
     "studio": "სტუდიური განათება"
   },
   "airConditioning": "კონდიცირება",
+  "workingAirConditioner": "მოქმედი კონდიციონერი · {{count}}",
   "accessible": "ადაპტირებული",
   "roomFeatures": "ოთახის მახასიათებლები",
   "rooms": "ოთახები",

@@ -2,7 +2,7 @@ import { useContext } from "react"
 
 import { GuideContext } from "../context"
 
-/** Exposes the active product-guide state and navigation controls. */
+/** Exposes the active project-guide state and navigation controls. */
 export const useGuide = () => {
   const context = useContext(GuideContext)
 

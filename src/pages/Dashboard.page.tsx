@@ -77,7 +77,7 @@ const DashboardPage = (): ReactElement => {
   const activeTab: TDashboardDayTab = params.get("dayTab") === "bookings" ? "bookings" : "rooms"
   const onlyMine = params.get("dayMine") === "true"
 
-  const activity = useBookingActivity(onlyMine ? { organizerId: DEFAULT_EMPLOYEE_ID } : {})
+  const activity = useBookingActivity(onlyMine ? { participantId: DEFAULT_EMPLOYEE_ID } : {})
   const dayBookings = usePagedBookings({
     status: "confirmed",
     from: fromDateAndTime(dateValue, "00:00"),

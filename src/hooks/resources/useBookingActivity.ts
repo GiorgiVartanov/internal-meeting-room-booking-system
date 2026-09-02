@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 
 import { getBookingActivity } from "@/api"
+import { BOOKING_ACTIVITY_STALE_TIME_MILLISECONDS } from "@/constants"
 
 export const useBookingActivity = (
   filters: { organizerId?: string; participantId?: string } = {},
@@ -9,6 +10,6 @@ export const useBookingActivity = (
   useQuery({
     queryKey: ["booking-activity", filters],
     queryFn: () => getBookingActivity(filters),
-    staleTime: 60_000,
+    staleTime: BOOKING_ACTIVITY_STALE_TIME_MILLISECONDS,
     enabled,
   })

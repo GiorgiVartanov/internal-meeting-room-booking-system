@@ -17,7 +17,7 @@ Build a responsive internal React application where employees can discover meeti
 - React Hook Form with Zod schemas and `@hookform/resolvers` for booking forms and validation.
 - shadcn's Embla-based Carousel for room navigation.
 - Install and use shadcn components whenever an appropriate primitive exists (for example Carousel, Drawer/Sheet, Dialog, Calendar, Slider, Skeleton, Form, Input, Select, and Alert) instead of recreating those controls locally. Add components incrementally with the shadcn CLI as features need them.
-- When discovering or installing shadcn components, use the [shadcn MCP server documentation](https://ui.shadcn.com/docs/mcp) as the integration reference.
+- Use the connected shadcn MCP server when discovering or installing shadcn components. Follow the existing `components.json` configuration and shadcn registry conventions.
 
 Do not add a competing component, icon, HTTP, server-state, form, schema, or date library without a documented reason.
 
@@ -107,6 +107,8 @@ Do not add a competing component, icon, HTTP, server-state, form, schema, or dat
 - Use shadcn primitives through `@/components/ui`, compose application components separately, and use the `cn` helper for conditional classes.
 - Every interactive control needs a visible label or accessible name, keyboard operation, visible focus, and appropriate loading/empty/error/disabled feedback.
 - Use native semantic controls such as `button` instead of assigning interactive roles to non-interactive elements.
+- Do not attach click or keyboard interaction handlers to `div` or `span` elements. Use a semantic control, or attach propagation handling to the named action handler (or an appropriate dialog/content boundary) instead of an inert wrapper.
+- Declare named event-handler functions for event logic, especially when it has multiple statements or branching; do not place multi-statement logic inline in JSX event props.
 - Never rely on color alone to communicate availability or booking status.
 
 ## Quality bar

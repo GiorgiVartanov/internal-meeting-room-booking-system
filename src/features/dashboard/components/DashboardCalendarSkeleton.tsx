@@ -5,7 +5,7 @@ import type { ReactElement } from "react"
 /** Mirrors the dashboard calendar geometry while its data is loading. */
 export const DashboardCalendarSkeleton = (): ReactElement => (
   <div
-    className="mx-auto flex h-auto w-full max-w-[1200px] flex-col gap-2 lg:w-[calc(100%_-_1rem)] lg:min-w-[840px]"
+    className="calendar-desktop-gutter mx-auto flex h-auto w-full max-w-[1200px] flex-col gap-2 lg:min-w-[840px]"
     aria-hidden="true"
   >
     <div className="grid shrink-0 grid-cols-7 gap-2">

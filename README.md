@@ -1,26 +1,24 @@
 # Internal Meeting Room Booking System
 
-**TL;DR:** A responsive React and TypeScript meeting-room booking app built for a frontend take-home task, with complete booking workflows plus drag-and-drop scheduling, localization, theming, and interactive product guides.
+**TL;DR:** A React and TypeScript meeting-room booking take-home task with booking flows, schedules, localization, and guided help.
 
-[View the live demo](https://here-a-i-will-add-actual-link-after-i-deploy-it)
+[View the live demo](https://internal-meeting-room-booking-system.netlify.app)
 
-A responsive internal application for finding meeting rooms, checking availability, and managing bookings. I built it with React and TypeScript as a frontend take-home assignment. The demo represents a hypothetical office in Tbilisi and runs without a backend: the interface makes typed Axios requests, TanStack Query manages server state, and MSW intercepts the requests and persists accepted changes in the browser.
+This frontend take-home task models a meeting room booking app for a hypothetical company office. It runs without a backend: Axios makes the requests, TanStack Query manages response data and caches it, and MSW is used to simulate the backend.
 
-The original brief asked for a dashboard, searchable rooms, daily and weekly schedules, complete booking management, URL-backed state, responsive layouts, local JSON seed data, and persistence across refreshes. Where the brief left room for interpretation, I chose the behavior I considered most useful and recorded the important decisions below.
-
-I also deliberately built several features beyond the assignment requirements. I plan to include this project in my portfolio because my current portfolio projects were built quite a while ago, so I wanted this application to demonstrate more of my current product thinking, frontend architecture, accessibility, performance work, and attention to interaction details.
+The task requirements asked for a dashboard, searchable rooms, daily and weekly schedules, booking management, URL-backed state, local JSON seed data, and persistence across refreshes. I wrote the decisions I made below.
 
 ## Table of contents
 
 - [Assignment coverage](#assignment-coverage)
-- [Additional portfolio work](#additional-portfolio-work)
+- [Additional implementation work](#additional-implementation-work)
 - [Technology and architecture](#technology-and-architecture)
 - [Product decisions and assumptions](#product-decisions-and-assumptions)
 - [Seed data and browser persistence](#seed-data-and-browser-persistence)
 - [Booking policy](#booking-policy)
-- [AI use and review](#ai-use-and-review)
-- [Run locally](#run-locally)
-- [Deploy to Netlify](#deploy-to-netlify)
+- [AI use in this project](#ai-use-and-review)
+- [How to run locally](#run-locally)
+- [How was it deployed to Netlify](#deploy-to-netlify)
 - [Validation](#validation)
 - [Screenshots](#screenshots)
 
@@ -28,27 +26,19 @@ I also deliberately built several features beyond the assignment requirements. I
 
 - **Dashboard:** The large calendar summarizes office activity. Selecting a date shows the rooms booked that day and the meetings in them; selecting a room or meeting opens its details and links to the relevant schedule. Unbooked rooms are intentionally omitted from this activity view. The calendar supports both month and year selection.
 - **Rooms:** Employees can search and filter by capacity, equipment, air conditioning, accessibility, and lighting, then compare room details before making a choice.
-- **Room booking:** The daily timeline shows availability and existing meetings. A user can click or drag across 15-minute slots, create a booking, inspect its details, and edit or cancel it when policy permits. A booking may start within the current 15-minute interval, with the explicit one-hour past allowance enforced by the API, and may be scheduled up to the configurable booking horizon.
+- **Room booking:** The daily timeline shows availability and existing meetings. A user can click or drag across 15-minute slots, create a booking, inspect its details, and edit or cancel it. The 15-minute interval controls slot selection and minimum duration; a booking may start no earlier than one hour before the current time and may be scheduled up to the configurable booking horizon (right now its 2 month).
 - **My Schedule:** The weekly view combines meetings that the current employee organizes and attends. Desktop supports dragging and resizing upcoming meetings owned by that employee; mobile presents one selected workday at a time.
 - **Search:** The full booking history can be filtered by text, date, room, organizer, capacity, amenities, and ownership, including past and cancelled records.
 - **Responsive use:** Resizable desktop panels become drawers or focused views on smaller screens without removing the core booking actions.
 - **URL state:** Selected rooms, dates, filters, open bookings, guide steps, and other useful navigation state survive refreshes and can be shared as links.
 
-## Additional portfolio work
+## Additional implementation work
 
-The brief did not require every piece of polish present in the finished application. I added features such as English and Georgian localization, light and dark themes, optimistic mutations, drag selection, drag-and-drop rescheduling, booking resizing, density calendars, a year view, keyboard shortcuts, resizable panels, detailed loading and error states, confirmation flows, and responsive modal and drawer behavior.
+Beyond the task, I added English and Georgian localization, light and dark themes, drag selection and rescheduling, booking resizing, keyboard shortcuts, and detailed loading, error, and confirmation states.
 
-The guide system is also a substantial feature rather than a small Help link. It includes:
+Guides are implemented once and used across the app: booking, schedule, dashboard, and key dialogs all use the same definitions. They support an optional first-visit prompt, URL-addressable steps, target-aware tooltips, and links back to the relevant handbook section.
 
-- an optional first-visit onboarding prompt with persisted progress;
-- step-by-step tours for Room booking, My Schedule, and Dashboard;
-- target-aware tooltips that follow the relevant controls and adapt to desktop and mobile layouts;
-- separate walkthroughs inside the calendar, booking search, booking details, editing, and room-change dialogs;
-- URL-addressable guide steps that can be shared or opened from the handbook;
-- a dedicated Documentation page built from the same guide definitions, with workflow explanations and keyboard shortcuts; and
-- return links that take readers back to the documentation section from which they launched a tour.
-
-Keeping the tours and handbook connected to the same definitions reduces duplicated documentation and helps the instructions remain aligned with the interface.
+Some of these additions are intentionally out of scope for the original task. I included them because my current portfolio projects were starting to feel a bit outdated, and I plan to include this project in my portfolio as a more current example of product, interaction, and accessibility patterns.
 
 ## Technology and architecture
 
@@ -58,13 +48,13 @@ Keeping the tours and handbook connected to the same definitions reduces duplica
 - Axios resource functions and TanStack Query hooks for all application requests and server state.
 - React Hook Form and Zod for booking forms and validation.
 - date-fns and a fixed `UTC+4` application timezone.
-- MSW for a REST-shaped mock API.
+- MSW for a REST-shaped mock API (that is used in a place of a backend, with JSON files).
 - Local JSON files for the initial rooms, employees, bookings, and Georgian holidays.
 - Schema-prefixed `localStorage` collections for persistent mock data, plus independent keys for preferences and guide progress.
 
 There is no authentication or deployed backend because the assignment focused mainly on frontend implementation. Giorgi Vartanov (me) is the simulated current user. The application boundary is still shaped like a production system: components use query and mutation hooks, hooks call typed resource functions, and every request goes through the shared Axios client. MSW intercepts those REST-shaped requests, applies the booking rules, and writes accepted changes through repository helpers.
 
-The UI never imports seed JSON, MSW handlers, or storage helpers. A real REST API can therefore replace MSW by changing the API configuration rather than rewriting feature components.
+The UI never imports seed JSON, MSW handlers, or storage helpers. A real REST API can replace MSW by changing the API configuration.
 
 Feature modules keep React components in `components/`, non-React helpers in `utils/`, and contexts or static data in dedicated directories. Feature-level `index.ts` files expose their public API, while larger schedule areas are grouped into booking, editor, navigation, and timeline modules.
 
@@ -76,7 +66,7 @@ Booking traffic is split into paginated endpoints for search, room schedules, em
 
 The requirements deliberately left some implementation details open. These are the decisions that most affect behavior:
 
-- **Room availability is the hard conflict.** Two confirmed bookings cannot occupy the same room at the same time. An organizer may reserve different rooms for parallel sessions or breakout space, and attendee conflicts are shown rather than blocked. Authentication and company permissions could tighten this in a production system.
+- **Room availability is the main conflict check.** Two confirmed bookings cannot occupy the same room at the same time. An organizer may reserve different rooms for parallel sessions or breakout space. Attendee conflicts are shown but do not block saving.
 - **Availability covers the whole meeting.** A time range is offered only when at least one suitable room remains free from start to end. Checking each 15-minute segment against a different room would produce false availability.
 - **Booking rules have one source.** Working hours, 15-minute slots, the six-hour maximum, the two-month horizon, the one-hour past allowance, weekends, and holidays are centralized and checked by both the UI and MSW.
 - **Weekends and holidays are separate policies.** Both are non-bookable by default but can be changed independently.
@@ -98,7 +88,7 @@ The phrase **schema-prefixed storage** refers to keys such as `meeting-room-book
 
 - Office timezone: fixed `UTC+4`; dates and times are shown in Tbilisi time regardless of the viewer's device timezone.
 - Working hours: 07:00–20:00, configurable through the constants.
-- Booking interval and minimum duration: 15 minutes, configurable through the constants.
+- Booking interval and minimum duration: 15 minutes, configurable through the constants. This interval does not change the past-time allowance: a booking may start no earlier than one hour before the current time.
 - Maximum duration: 6 hours.
 - Earliest permitted start: one hour before the current time.
 - Future booking horizon: 2 months.
@@ -110,15 +100,16 @@ The phrase **schema-prefixed storage** refers to keys such as `meeting-room-book
 
 ## AI use and review
 
-I built the application over three focused, part-time development days and used Codex throughout implementation, refactoring, testing, codebase review, and documentation. I used GPT-5.6 Sol for architecture, cross-feature reviews, and difficult correctness work; GPT-5.6 Terra for most day-to-day implementation and cleanup; and GPT-5.6 Luna for quick searches and small verification tasks.
+I built the application over three focused, not full development days and used Codex throughout implementation, refactoring, testing, codebase review, and documentation. I used GPT-5.6 Sol for architecture and overall reviews; GPT-5.6 Terra for most most implementations and cleanup; and GPT-5.6 Luna for quick questions about codebase and small verification tasks.
 
 The product decisions, visual direction, architecture, and acceptance of the finished work remained my responsibility. I designed the flow from pages through TanStack Query hooks and typed Axios resources to MSW handlers, domain validation, and repositories. I also decided which state belonged in the URL, how mutations should update or invalidate schedules and dashboards, and where booking policy should live.
 
-My review loop was to compare generated work with the brief, exercise it in the browser, inspect the implementation, and run formatting, tests, linting, and production builds before accepting it. I also directly handled restyling, performance fixes, responsive behavior, and adjustments that were faster or clearer to make myself.
+My review loop was to compare generated work with the task requirements, exercise it in the browser, and inspect the implementation before accepting it. Codex ran formatting, tests, linting, and production builds as part of that loop. I directly handled restyling, performance fixes, responsive behavior, and features that were quicker or clearer to implement myself than to specify to AI, as well as work that needed correction after an AI attempt.
 
 Examples that required substantial human review or correction include:
 
 - **Calendar performance:** A Codex-generated implementation recreated timezone formatters and rescanned all bookings inside nested day and slot loops, making the full calendar noticeably slow with the complete seed dataset. I profiled it in the browser, reused the formatters, generated Tbilisi calendar keys consistently, and moved booking aggregation outside the nested render loops.
+- **Calendar modal header controls:** When placing the calendar controls in the modal header, the AI-generated version did not achieve the intended layout and behavior reliably, so I implemented that part directly.
 - **Drag-and-drop and resizing:** Basic pointer movement did not cover resizing from both edges, preserving duration, snapping to 15-minute intervals, or previewing room conflicts before a drop.
 - **Responsive scheduling:** Shrinking the desktop week produced cramped columns and horizontal scrolling, so I replaced it with a focused single-day mobile view and moved appropriate controls into drawers.
 - **URL and dialog state:** Generated implementations often defaulted to local component state; I identified which rooms, dates, filters, bookings, dialogs, and guide steps needed to survive refreshes and browser navigation.
@@ -132,7 +123,7 @@ npm install
 npm run dev
 ```
 
-MSW starts automatically before React in Vite's development mode. You do **not** need a local `VITE_ENABLE_MSW` variable: `src/mocks/enableMocking.ts` enables the worker whenever `import.meta.env.DEV` is true.
+MSW starts automatically before React in Vite's development mode. local `VITE_ENABLE_MSW` isn't needed, variable: `src/mocks/enableMocking.ts` enables the worker whenever `import.meta.env.DEV` is true.
 
 On first use, seed JSON is copied into browser storage. Later booking changes are persisted through the repository layer and remain after refresh.
 
@@ -152,7 +143,7 @@ If a real API replaces MSW, remove the `VITE_ENABLE_MSW` setting from `netlify.t
 
 ## Validation
 
-The project has 13 automated tests across six files. Vitest covers booking schemas, domain rules, MSW behavior, persistence, overlaps, permissions, and Georgian holiday generation. React Testing Library tests exercise visible creation and editing forms, user input, validation, enabled state, and submitted drafts. A dedicated `tsconfig.test.json` keeps tests and JSON fixtures under the same strict path aliases and type checks as application code.
+The project has 17 automated tests across seven files. Vitest covers booking validation and schemas, domain rules, MSW behavior, persistence, overlaps, permissions, and Georgian holiday generation. React Testing Library tests exercise visible creation and editing forms, user input, validation, enabled state, and submitted drafts. A dedicated `tsconfig.test.json` keeps tests and JSON fixtures under the same strict path aliases and type checks as application code.
 
 ```sh
 npm run format:check
@@ -167,20 +158,20 @@ The screenshot files live under `docs/screenshots/`, outside the application bun
 
 ### Room booking
 
-![Room booking page](docs/screenshots/room-booking.png)
+![Room booking page](docs/screenshots/room-booking.webp)
 
 ### My Schedule
 
-![My Schedule page](docs/screenshots/my-schedule.png)
+![Schedule page](docs/screenshots/my-schedule.webp)
 
 ### Dashboard
 
-![Dashboard page](docs/screenshots/dashboard.png)
+![Dashboard page](docs/screenshots/dashboard.webp)
 
 ### Documentation
 
-![Documentation page](docs/screenshots/documentation.png)
+![Documentation page](docs/screenshots/documentation.webp)
 
 ### About
 
-![About page](docs/screenshots/about.png)
+![About page](docs/screenshots/about.webp)

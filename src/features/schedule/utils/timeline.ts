@@ -1,6 +1,8 @@
 import { BOOKING_SLOT_MINUTES, WORKING_HOURS } from "@/constants"
 
 export const TIMELINE_PIXELS_PER_MINUTE = 1.15
+/** Extra overlay coverage for the end-time label translated below the timeline edge. */
+export const TIMELINE_END_LABEL_OVERLAY_PIXELS = 16
 export const TIMELINE_FIRST_MINUTE = WORKING_HOURS.start * 60
 export const TIMELINE_DAY_MINUTES = (WORKING_HOURS.end - WORKING_HOURS.start) * 60
 export const TIMELINE_SLOTS = Array.from(

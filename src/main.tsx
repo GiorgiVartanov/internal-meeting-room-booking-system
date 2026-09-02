@@ -2,6 +2,8 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
+import { QUERY_GC_TIME_MILLISECONDS, QUERY_STALE_TIME_MILLISECONDS } from "@/constants"
+
 import "./index.css"
 import "./i18n"
 
@@ -10,7 +12,12 @@ import { enableMocking } from "./mocks/enableMocking.ts"
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { staleTime: 5 * 60_000, gcTime: 30 * 60_000, retry: 1, refetchOnWindowFocus: false },
+    queries: {
+      staleTime: QUERY_STALE_TIME_MILLISECONDS,
+      gcTime: QUERY_GC_TIME_MILLISECONDS,
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
   },
 })
 

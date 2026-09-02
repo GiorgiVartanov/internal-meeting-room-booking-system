@@ -1,9 +1,10 @@
 import * as React from "react"
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer"
+import { X } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import i18n from "@/i18n"
-import { X } from "lucide-react"
 
 type DrawerContextProps = {
   hasSnapPoints: boolean
@@ -173,7 +174,14 @@ function DrawerContent({
           >
             <DrawerPrimitive.Close
               aria-label={i18n.t("close")}
-              className="absolute right-2 top-2 z-50 flex size-8 items-center justify-center border bg-popover text-popover-foreground shadow-sm outline-none transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+              data-slot="drawer-close"
+              render={
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-4 top-4 z-50"
+                />
+              }
             >
               <X className="size-4" />
             </DrawerPrimitive.Close>

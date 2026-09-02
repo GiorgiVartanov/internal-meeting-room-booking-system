@@ -8,12 +8,13 @@ interface IProps {
 }
 
 const links = [
-  ["product", "aboutProduct"],
+  ["project", "aboutProduct"],
   ["capabilities", "aboutPages"],
   ["architecture", "aboutArchitecture"],
   ["principles", "aboutDecisions"],
   ["models", "aboutDomainModelsTitle"],
   ["testing", "aboutTestingTitle"],
+  ["deployment", "aboutDeploymentTitle"],
   ["technologies", "aboutTechnologies"],
   ["codex", "aboutCodexTitle"],
 ] as const

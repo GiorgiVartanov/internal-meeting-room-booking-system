@@ -1,5 +1,5 @@
 export { AboutDataModelsSection } from "./AboutDataModelsSection"
-export { AboutProductHeader } from "./AboutProductHeader"
+export { AboutProjectHeader } from "./AboutProjectHeader"
 export { AboutRichText } from "./AboutRichText"
 export { AboutSidebar } from "./AboutSidebar"
 export { CodexDevelopmentSection } from "./CodexDevelopmentSection"

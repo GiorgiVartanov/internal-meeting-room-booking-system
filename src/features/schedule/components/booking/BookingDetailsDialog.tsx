@@ -84,7 +84,7 @@ export const BookingDetailsDialog = ({
           if (!showDetailsGuideOpener) onOpenChange(next)
         }}
       >
-        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-2xl">
+        <DialogContent className="flex max-h-[90dvh] flex-col overflow-hidden gap-0 sm:max-w-2xl">
           <ModalGuideQuestionButton guideId="booking-details" />
           <DialogHeader>
             <DialogTitle>
@@ -92,106 +92,108 @@ export const BookingDetailsDialog = ({
             </DialogTitle>
             <DialogDescription>{t("bookingDetails")}</DialogDescription>
           </DialogHeader>
-          {loading && !booking && (
-            <div className="space-y-3">
-              <Skeleton className="h-44 w-full" />
-              <Skeleton className="h-24 w-full" />
-              <Skeleton className="h-10 w-40" />
-            </div>
-          )}
-          {booking && (
-            <div className="space-y-4">
-              {room && (
-                <div data-modal-guide="details-room">
-                  <RoomCard
-                    room={room}
-                    compact
-                    showImage
-                  />
-                </div>
-              )}
-              <dl
-                data-modal-guide="details-information"
-                className="grid grid-cols-2 gap-3 border p-3 text-sm"
-              >
-                <div>
-                  <dt className="text-xs text-muted-foreground">{t("organizer")}</dt>
-                  <dd className="font-medium">
-                    {employee ? localize(employee.name, i18n.language) : booking.organizerId}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-muted-foreground">{t("date")}</dt>
-                  <dd className="font-medium">
-                    {formatAppDate(booking.startAt, i18n.language, { dateStyle: "full" })}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-muted-foreground">{t("startTime")}</dt>
-                  <dd className="font-medium">{formatAppTime(booking.startAt, i18n.language)}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-muted-foreground">{t("endTime")}</dt>
-                  <dd className="font-medium">{formatAppTime(booking.endAt, i18n.language)}</dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="text-xs text-muted-foreground">{t("attendees")}</dt>
-                  <dd className="font-medium">
-                    {attendees.length
-                      ? attendees
-                          .map((attendee) => localize(attendee.name, i18n.language))
-                          .join(", ")
-                      : t("noAttendees")}
-                  </dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="text-xs text-muted-foreground">{t("scheduledAt")}</dt>
-                  <dd className="font-medium">
-                    {formatAppDate(booking.createdAt, i18n.language, {
-                      dateStyle: "medium",
-                      timeStyle: "short",
-                    })}
-                  </dd>
-                </div>
-                <div className="col-span-2">
-                  <dt className="text-xs text-muted-foreground">{t("notes")}</dt>
-                  <dd className="whitespace-pre-wrap font-medium">
-                    {localize(booking.notes, i18n.language) || t("noNotes")}
-                  </dd>
-                </div>
-              </dl>
-              <div
-                data-modal-guide="details-actions"
-                className="flex flex-wrap gap-2"
-              >
-                {canEdit && onEdit && (
-                  <Button
-                    data-modal-opener="edit-booking"
-                    type="button"
-                    onClick={onEdit}
-                  >
-                    {t("editBooking")}
-                  </Button>
-                )}
-                {canCancel && (
-                  <Button
-                    data-modal-opener="cancel-booking"
-                    type="button"
-                    variant="destructive"
-                    onClick={() => setConfirmCancel(true)}
-                  >
-                    {t("cancelBooking")}
-                  </Button>
-                )}
-                {scheduleHref && (
-                  <Button render={<Link to={scheduleHref} />}>{t("goToBooking")}</Button>
-                )}
-                {returnHref && (
-                  <Button render={<Link to={returnHref} />}>{t("backToPrevious")}</Button>
-                )}
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pt-4">
+            {loading && !booking && (
+              <div className="space-y-3">
+                <Skeleton className="h-44 w-full" />
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-10 w-40" />
               </div>
-            </div>
-          )}
+            )}
+            {booking && (
+              <div className="space-y-4">
+                {room && (
+                  <div data-modal-guide="details-room">
+                    <RoomCard
+                      room={room}
+                      compact
+                      showImage
+                    />
+                  </div>
+                )}
+                <dl
+                  data-modal-guide="details-information"
+                  className="grid grid-cols-2 gap-3 border p-3 text-sm"
+                >
+                  <div>
+                    <dt className="text-xs text-muted-foreground">{t("organizer")}</dt>
+                    <dd className="font-medium">
+                      {employee ? localize(employee.name, i18n.language) : booking.organizerId}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">{t("date")}</dt>
+                    <dd className="font-medium">
+                      {formatAppDate(booking.startAt, i18n.language, { dateStyle: "full" })}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">{t("startTime")}</dt>
+                    <dd className="font-medium">{formatAppTime(booking.startAt, i18n.language)}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-muted-foreground">{t("endTime")}</dt>
+                    <dd className="font-medium">{formatAppTime(booking.endAt, i18n.language)}</dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="text-xs text-muted-foreground">{t("attendees")}</dt>
+                    <dd className="font-medium">
+                      {attendees.length
+                        ? attendees
+                            .map((attendee) => localize(attendee.name, i18n.language))
+                            .join(", ")
+                        : t("noAttendees")}
+                    </dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="text-xs text-muted-foreground">{t("scheduledAt")}</dt>
+                    <dd className="font-medium">
+                      {formatAppDate(booking.createdAt, i18n.language, {
+                        dateStyle: "medium",
+                        timeStyle: "short",
+                      })}
+                    </dd>
+                  </div>
+                  <div className="col-span-2">
+                    <dt className="text-xs text-muted-foreground">{t("notes")}</dt>
+                    <dd className="whitespace-pre-wrap font-medium">
+                      {localize(booking.notes, i18n.language) || t("noNotes")}
+                    </dd>
+                  </div>
+                </dl>
+                <div
+                  data-modal-guide="details-actions"
+                  className="flex flex-wrap gap-2"
+                >
+                  {canEdit && onEdit && (
+                    <Button
+                      data-modal-opener="edit-booking"
+                      type="button"
+                      onClick={onEdit}
+                    >
+                      {t("editBooking")}
+                    </Button>
+                  )}
+                  {canCancel && (
+                    <Button
+                      data-modal-opener="cancel-booking"
+                      type="button"
+                      variant="destructive"
+                      onClick={() => setConfirmCancel(true)}
+                    >
+                      {t("cancelBooking")}
+                    </Button>
+                  )}
+                  {scheduleHref && (
+                    <Button render={<Link to={scheduleHref} />}>{t("goToBooking")}</Button>
+                  )}
+                  {returnHref && (
+                    <Button render={<Link to={returnHref} />}>{t("backToPrevious")}</Button>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
         </DialogContent>
       </Dialog>
       <Dialog

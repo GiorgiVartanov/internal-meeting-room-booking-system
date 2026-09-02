@@ -197,24 +197,34 @@ export const AppHeader = () => {
     void i18n.changeLanguage(language)
   }
 
+  const openGuideIfAvailable = (): void => {
+    if (!documentationActive) openGuide()
+  }
+
   return (
     <header className="sticky top-0 z-[60] border-b bg-background/90 backdrop-blur-xl">
       <div className="flex h-16 w-full min-w-0 items-center gap-1 p-2 sm:gap-2">
-        <Link
-          data-header-obscured
-          to={PATHS.home}
-          className="mr-auto flex min-w-0 items-center gap-2 font-semibold tracking-tight"
-          aria-label={t("appName")}
-        >
-          <span className="line-clamp-2 max-w-24 text-[11px] leading-tight min-[390px]:max-w-40 min-[390px]:text-xs sm:max-w-none sm:text-sm">
-            {t("appName")}
-          </span>
-          {currentEmployee && (
-            <span className="hidden border-l pl-3 text-xs font-normal text-muted-foreground md:inline">
-              {localize(currentEmployee.name, i18n.language)}
+        <div className="mr-auto flex min-w-0 items-center gap-2 font-semibold tracking-tight">
+          <Link
+            data-header-obscured
+            to={PATHS.home}
+            aria-label={t("appName")}
+          >
+            <span className="line-clamp-2 max-w-24 text-[11px] leading-tight min-[390px]:max-w-40 min-[390px]:text-xs sm:max-w-none sm:text-sm">
+              {t("appName")}
             </span>
+          </Link>
+          {currentEmployee && (
+            <a
+              href="https://github.com/GiorgiVartanov/internal-meeting-room-booking-system"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden border-l pl-3 text-xs font-normal text-muted-foreground hover:text-foreground md:inline"
+            >
+              {localize(currentEmployee.name, i18n.language)}
+            </a>
           )}
-        </Link>
+        </div>
         <nav
           data-header-obscured
           data-guide="primary-navigation"
@@ -270,9 +280,7 @@ export const AppHeader = () => {
           disabled={visiblePath === PATHS.about}
           onPointerEnter={() => void preloadPage(PATHS.documentation)}
           onFocus={() => void preloadPage(PATHS.documentation)}
-          onClick={() => {
-            if (!documentationActive) openGuide()
-          }}
+          onClick={openGuideIfAvailable}
         >
           <CircleHelp className="size-4" />
         </Button>

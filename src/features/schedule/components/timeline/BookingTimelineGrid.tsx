@@ -4,6 +4,7 @@ import { BOOKING_SLOT_MINUTES } from "@/constants"
 
 import {
   TIMELINE_FIRST_MINUTE,
+  TIMELINE_END_LABEL_OVERLAY_PIXELS,
   TIMELINE_PIXELS_PER_MINUTE,
   TIMELINE_SLOTS,
   timelineTimeText,
@@ -47,7 +48,7 @@ export const BookingTimelineGrid = ({
             blocked || outsideWindow(minute) || !available(minute, minute + BOOKING_SLOT_MINUTES)
           }
           aria-label={`${t("selectStart")} ${timelineTimeText(minute)}`}
-          className="absolute left-12 right-0 cursor-default border-t text-left hover:bg-primary/10 disabled:pointer-events-none disabled:bg-muted/20"
+          className="absolute left-12 right-0 touch-none cursor-default border-t text-left hover:bg-primary/10 disabled:bg-muted/20"
           style={{
             top: (minute - TIMELINE_FIRST_MINUTE) * TIMELINE_PIXELS_PER_MINUTE,
             height: BOOKING_SLOT_MINUTES * TIMELINE_PIXELS_PER_MINUTE,
@@ -70,7 +71,9 @@ export const BookingTimelineGrid = ({
           className="pointer-events-none absolute inset-x-0 z-[15] bg-background/45"
           style={{
             top: -8,
-            height: (pastOverlayMinute - TIMELINE_FIRST_MINUTE) * TIMELINE_PIXELS_PER_MINUTE + 8,
+            height:
+              (pastOverlayMinute - TIMELINE_FIRST_MINUTE) * TIMELINE_PIXELS_PER_MINUTE +
+              TIMELINE_END_LABEL_OVERLAY_PIXELS,
           }}
         />
       )}

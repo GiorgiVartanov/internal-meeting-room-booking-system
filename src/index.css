@@ -11,6 +11,12 @@
   container-type: inline-size;
 }
 
+@media (min-width: 64rem) {
+  .calendar-desktop-gutter {
+    width: calc(100% - 1rem);
+  }
+}
+
 @container (max-width: 1219px) {
   .dashboard-year-calendar-scroll {
     overflow-x: auto;

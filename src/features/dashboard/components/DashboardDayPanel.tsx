@@ -1,5 +1,6 @@
 import { differenceInMinutes } from "date-fns"
 import { ArrowLeft, ArrowRight, UserRound } from "lucide-react"
+import { useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 
@@ -63,6 +64,7 @@ export const DashboardDayPanel = ({
   onEditBooking,
 }: IDashboardDayProps): ReactElement => {
   const { t, i18n } = useTranslation()
+  const timelineScrollRef = useRef<HTMLDivElement>(null)
 
   const roomBookings = (room: IRoom): IBooking[] =>
     bookings.filter((booking) => booking.roomId === room.id)
@@ -88,7 +90,11 @@ export const DashboardDayPanel = ({
       duration: durationLabel(bookedMinutes(items)),
     })
   const visibleBookings = onlyMine
-    ? bookings.filter((booking) => booking.organizerId === DEFAULT_EMPLOYEE_ID)
+    ? bookings.filter(
+        (booking) =>
+          booking.organizerId === DEFAULT_EMPLOYEE_ID ||
+          booking.attendeeIds.includes(DEFAULT_EMPLOYEE_ID)
+      )
     : bookings
 
   return (
@@ -126,6 +132,7 @@ export const DashboardDayPanel = ({
         </div>
       </header>
       <div
+        ref={timelineScrollRef}
         className="min-h-0 flex-1 overflow-auto bg-panel p-3"
         aria-busy={loading}
       >
@@ -238,6 +245,8 @@ export const DashboardDayPanel = ({
                 rooms={rooms}
                 bookings={visibleBookings}
                 employees={employees}
+                active={activeTab === "bookings"}
+                scrollContainerRef={timelineScrollRef}
                 onBooking={onBooking}
                 onEditBooking={onEditBooking}
               />

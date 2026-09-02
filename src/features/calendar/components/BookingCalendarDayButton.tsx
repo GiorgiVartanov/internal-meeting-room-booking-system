@@ -79,7 +79,7 @@ export const BookingCalendarDayButton = ({
       {holiday && (
         <span
           title={`${t("holiday")}: ${localize(holiday.name, i18n.language)}`}
-          className="pointer-events-none absolute bottom-1 left-1 right-1 z-20 truncate border border-destructive bg-destructive px-1 py-0.5 text-left text-[8px] font-semibold leading-tight text-destructive-foreground shadow-sm sm:bottom-1.5 sm:left-1.5 sm:right-1.5 sm:line-clamp-2 sm:px-1.5 sm:py-1 sm:text-[10px]"
+          className="pointer-events-none absolute bottom-1 left-1 right-1 z-20 truncate border border-destructive/70 bg-destructive/55 px-1 py-0.5 text-left text-[8px] font-semibold leading-tight text-foreground shadow-sm sm:bottom-1.5 sm:left-1.5 sm:right-1.5 sm:line-clamp-2 sm:px-1.5 sm:py-1 sm:text-[10px]"
         >
           <span className="uppercase tracking-wide">{t("holiday")}</span>
           <span className="hidden truncate normal-case tracking-normal sm:block">

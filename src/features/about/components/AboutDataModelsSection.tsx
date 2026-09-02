@@ -27,11 +27,11 @@ export const AboutDataModelsSection = () => {
         {dataModels.map(({ titleKey, descriptionKey, fields }) => (
           <article
             key={titleKey}
-            className="border bg-background p-5"
+            className="border bg-panel p-5"
           >
             <h3 className="font-semibold">{t(titleKey)}</h3>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{t(descriptionKey)}</p>
-            <dl className="mt-4 divide-y border bg-background text-xs">
+            <dl className="mt-4 divide-y border bg-panel text-xs">
               {fields.map(([name, type]) => (
                 <div
                   key={name}

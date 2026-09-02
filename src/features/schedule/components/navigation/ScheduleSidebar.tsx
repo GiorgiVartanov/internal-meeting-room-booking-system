@@ -101,6 +101,7 @@ export const ScheduleSidebar = ({
   const create = useCreateBooking()
   const edit = useEditBooking()
   const rescheduleQueues = useRef(new Map<string, Promise<void>>())
+  const timelineScrollRef = useRef<HTMLDivElement>(null)
   const remove = useDeleteBooking()
   const employees = useEmployees()
   const now = useTimelineNow()
@@ -397,6 +398,7 @@ export const ScheduleSidebar = ({
         </div>
       )}
       <div
+        ref={timelineScrollRef}
         data-guide="booking-timeline"
         className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain p-2"
         aria-busy={loading}
@@ -411,6 +413,7 @@ export const ScheduleSidebar = ({
           end={end}
           blocked={blocked}
           selectedBookingId={selectedBookingId}
+          scrollContainerRef={timelineScrollRef}
           onRange={(nextStart, nextEnd) => {
             form.setValue("start", nextStart)
             form.setValue("end", nextEnd)

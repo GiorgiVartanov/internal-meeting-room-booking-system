@@ -174,7 +174,7 @@ const SchedulePage = (): ReactElement => {
   }
 
   return (
-    <main className="flex h-[calc(100dvh-4rem)] min-h-[calc(100dvh-4rem)] w-full flex-col gap-2 overflow-y-scroll p-2 [scrollbar-gutter:stable]">
+    <main className="flex h-[calc(100dvh-4rem)] min-h-[calc(100dvh-4rem)] w-full flex-col gap-2 overflow-y-scroll p-2 scrollbar-gutter-stable">
       <header className="flex shrink-0 flex-wrap items-center justify-between gap-2">
         <h1 className="text-lg font-semibold capitalize sm:text-xl">
           {t("weekOfRange", { range })}

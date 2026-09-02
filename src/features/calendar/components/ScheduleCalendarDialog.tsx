@@ -64,22 +64,22 @@ export const ScheduleCalendarDialog = ({
       >
         <DialogContent
           className={cn(
-            "h-auto max-w-6xl overflow-y-auto p-2 sm:max-w-6xl",
+            "flex h-[89dvh] max-w-6xl flex-col overflow-hidden p-2 sm:max-w-6xl",
             yearViewOpen && "h-[calc(94dvh-0.75rem)] max-h-[calc(94dvh-0.75rem)] overflow-hidden"
           )}
         >
           <ModalGuideQuestionButton guideId="calendar" />
           <div
             data-modal-guide="calendar"
-            className="min-h-0"
+            className="min-h-0 flex-1"
           >
             <BookingCalendar
               large
               fillWidth
               calendarClassName="bg-popover"
-              dayClassName="bg-popover"
+              dayClassName="bg-panel"
               disablePast={false}
-              headerClassName="mx-2 pr-20"
+              headerClassName="-mx-1 pr-20"
               headerTitle={title}
               headerActions={filter}
               activity={onlyMine ? myActivity : activity}

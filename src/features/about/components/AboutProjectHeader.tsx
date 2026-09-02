@@ -5,13 +5,13 @@ import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { PATHS } from "@/constants"
 
-/** Introduces the product and summarizes its core capabilities. */
-export const AboutProductHeader = () => {
+/** Introduces the project and summarizes its core capabilities. */
+export const AboutProjectHeader = () => {
   const { t } = useTranslation()
 
   return (
     <header
-      id="product"
+      id="project"
       className="scroll-mt-6 border-b pb-8"
     >
       <div className="flex size-12 items-center justify-center bg-primary/10 text-primary">

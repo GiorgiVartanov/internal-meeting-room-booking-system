@@ -17,6 +17,8 @@ interface IProps {
   rooms: IRoom[]
   loading: boolean
   filters: IRoomFilters
+  description?: string
+  countFirst?: boolean
   selectedId?: string
   unavailableRoomIds?: ReadonlySet<string>
   onFilters: (filters: IRoomFilters) => void
@@ -28,6 +30,8 @@ export const RoomsSidebar = ({
   rooms,
   loading,
   filters,
+  description,
+  countFirst = false,
   selectedId,
   unavailableRoomIds,
   onFilters,
@@ -71,12 +75,25 @@ export const RoomsSidebar = ({
       className="flex h-full min-h-0 flex-col bg-panel"
     >
       <div className="border-b p-3">
-        <div className="flex items-center justify-between gap-2">
+        <div
+          className={cn(
+            "flex items-center gap-2",
+            countFirst ? "justify-start" : "justify-between"
+          )}
+        >
+          {countFirst && (
+            <span className="text-xs text-muted-foreground">
+              {loading ? t("loading") : t("roomResults", { count: rooms.length })}
+            </span>
+          )}
           <h2 className="font-semibold">{t("rooms")}</h2>
-          <span className="text-xs text-muted-foreground">
-            {loading ? t("loading") : t("roomResults", { count: rooms.length })}
-          </span>
+          {!countFirst && (
+            <span className="text-xs text-muted-foreground">
+              {loading ? t("loading") : t("roomResults", { count: rooms.length })}
+            </span>
+          )}
         </div>
+        {description && <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>}
         <label className="relative mt-3 block">
           <span className="sr-only">{t("searchRooms")}</span>
           <Search className="absolute left-2.5 top-2 size-4 text-muted-foreground" />

@@ -195,6 +195,11 @@ export const GuideProvider = ({ children }: IProps) => {
     closeGuide()
   }
 
+  const startGuide = (): void => {
+    updateProgress.mutate({ welcomeSeen: true })
+    openGuide()
+  }
+
   const contextValue = useMemo(() => ({ openGuide }), [openGuide])
 
   const tooltipStyle = getTooltipStyle(targetBounds)
@@ -231,14 +236,7 @@ export const GuideProvider = ({ children }: IProps) => {
             >
               {t("guideLater")}
             </Button>
-            <Button
-              onClick={() => {
-                updateProgress.mutate({ welcomeSeen: true })
-                openGuide()
-              }}
-            >
-              {t("guideStart")}
-            </Button>
+            <Button onClick={startGuide}>{t("guideStart")}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

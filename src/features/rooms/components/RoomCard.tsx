@@ -96,7 +96,7 @@ export const RoomCard = ({ room, compact = false, showImage = false }: IProps) =
           {room.airConditionerCount > 0 && (
             <Badge variant="secondary">
               <AirVent />
-              {room.airConditionerCount}
+              {t("workingAirConditioner", { count: room.airConditionerCount })}
             </Badge>
           )}
           {room.isAccessible && (

@@ -1,11 +1,14 @@
 import { UserRound } from "lucide-react"
+import { useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 
 import { BOOKING_SLOT_MINUTES, WORKING_HOURS } from "@/constants"
 import { BookingCardActions, BookingTimeRange } from "@/features/schedule"
+import { CompactBookingDetails } from "@/features/schedule/components/timeline/CompactBookingDetails"
 import {
   bookingParticipationClassName,
   TIMELINE_DAY_MINUTES,
+  TIMELINE_END_LABEL_OVERLAY_PIXELS,
   TIMELINE_FIRST_MINUTE,
   TIMELINE_SLOTS,
   timelineTimeText,
@@ -16,7 +19,7 @@ import { localize } from "@/lib/localize"
 import { cn } from "@/lib/utils"
 import type { IBooking, IEmployee, IRoom } from "@/types"
 
-import type { ReactElement } from "react"
+import type { ReactElement, RefObject } from "react"
 
 const DASHBOARD_PIXELS_PER_MINUTE = 1.35
 const CARD_WIDTH = 200
@@ -27,6 +30,8 @@ interface IProps {
   rooms: IRoom[]
   bookings: IBooking[]
   employees: IEmployee[]
+  active: boolean
+  scrollContainerRef: RefObject<HTMLDivElement | null>
   onBooking: (booking: IBooking) => void
   onEditBooking: (booking: IBooking) => void
 }
@@ -61,11 +66,14 @@ export const DashboardBookingsTimeline = ({
   rooms,
   bookings,
   employees,
+  active,
+  scrollContainerRef,
   onBooking,
   onEditBooking,
 }: IProps): ReactElement => {
   const { t, i18n } = useTranslation()
   const now = useTimelineNow()
+  const nowLineRef = useRef<HTMLDivElement>(null)
 
   const positioned = positionBookings(bookings)
   const laneCount = Math.max(1, ...positioned.map((item) => item.lane + 1))
@@ -76,6 +84,24 @@ export const DashboardBookingsTimeline = ({
   const pastOverlayMinute = Math.max(TIMELINE_FIRST_MINUTE, Math.min(dayEnd, currentMinute))
   const showNow =
     today && currentMinute >= TIMELINE_FIRST_MINUTE && currentMinute <= WORKING_HOURS.end * 60
+
+  useEffect(() => {
+    if (!active || !showNow) return
+
+    const frame = window.requestAnimationFrame(() => {
+      const scrollContainer = scrollContainerRef.current
+      const nowLine = nowLineRef.current
+      if (!scrollContainer || !nowLine) return
+
+      scrollContainer.scrollTo({
+        top: Math.max(0, nowLine.offsetTop - scrollContainer.clientHeight / 2),
+        left: 0,
+        behavior: "smooth",
+      })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [active, scrollContainerRef, showNow])
 
   return (
     <div
@@ -101,10 +127,12 @@ export const DashboardBookingsTimeline = ({
       {today && pastOverlayMinute > TIMELINE_FIRST_MINUTE && (
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 z-[15] bg-background/45"
+          className="pointer-events-none absolute inset-x-0 z-15 bg-background/45"
           style={{
             top: -8,
-            height: (pastOverlayMinute - TIMELINE_FIRST_MINUTE) * DASHBOARD_PIXELS_PER_MINUTE + 8,
+            height:
+              (pastOverlayMinute - TIMELINE_FIRST_MINUTE) * DASHBOARD_PIXELS_PER_MINUTE +
+              TIMELINE_END_LABEL_OVERLAY_PIXELS,
           }}
         />
       )}
@@ -120,7 +148,7 @@ export const DashboardBookingsTimeline = ({
             data-booking
             key={booking.id}
             className={cn(
-              "absolute z-10 max-w-[200px] overflow-hidden border border-primary/60 px-2 py-1 text-left shadow-sm outline outline-1 -outline-offset-1 outline-transparent transition-[background-color,outline-color] hover:outline-2 hover:outline-primary focus-within:outline-2 focus-within:outline-primary",
+              "absolute z-10 max-w-50 overflow-hidden border border-primary/60 px-2 py-1 text-left shadow-sm outline -outline-offset-1 outline-transparent transition-[background-color,outline-color] hover:outline-2 hover:outline-primary focus-within:outline-2 focus-within:outline-primary",
               bookingParticipationClassName(booking),
               fifteenMinuteLayout && "py-0"
             )}
@@ -143,19 +171,25 @@ export const DashboardBookingsTimeline = ({
                 fifteenMinuteLayout && "flex h-full items-center gap-1 pr-8"
               )}
             >
-              <p
-                className={cn(
-                  "truncate pr-12 text-[11px] font-semibold",
-                  fifteenMinuteLayout && "min-w-0 flex-1 pr-0 leading-none"
-                )}
-              >
-                {localize(booking.title, i18n.language)}
-              </p>
+              {!fifteenMinuteLayout && (
+                <p
+                  className={cn(
+                    "truncate pr-12 text-[11px] font-semibold",
+                    fifteenMinuteLayout && "min-w-0 flex-1 pr-0 leading-none"
+                  )}
+                >
+                  {localize(booking.title, i18n.language)}
+                </p>
+              )}
               {fifteenMinuteLayout ? (
-                <BookingTimeRange
+                <CompactBookingDetails
+                  title={localize(booking.title, i18n.language)}
+                  organizer={
+                    organizer ? localize(organizer.name, i18n.language) : booking.organizerId
+                  }
                   start={start}
                   end={end}
-                  className="shrink-0 text-[8px] leading-none opacity-75"
+                  className="pr-8"
                 />
               ) : (
                 <>
@@ -194,6 +228,7 @@ export const DashboardBookingsTimeline = ({
       )}
       {showNow && (
         <div
+          ref={nowLineRef}
           className="pointer-events-none absolute left-10 right-0 z-20 border-t-2 border-destructive"
           style={{ top: (currentMinute - TIMELINE_FIRST_MINUTE) * DASHBOARD_PIXELS_PER_MINUTE }}
         >

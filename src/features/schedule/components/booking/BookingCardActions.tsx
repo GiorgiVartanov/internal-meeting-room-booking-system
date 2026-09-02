@@ -20,12 +20,13 @@ import { localize } from "@/lib/localize"
 import { cn } from "@/lib/utils"
 import type { IBooking } from "@/types"
 
-import type { ReactElement } from "react"
+import type { MouseEvent, ReactElement } from "react"
 
 interface IProps {
   booking: IBooking
   editHref?: string
   onEdit?: () => void
+  onDelete?: () => void
   compact?: boolean
 }
 
@@ -34,6 +35,7 @@ export const BookingCardActions = ({
   booking,
   editHref,
   onEdit,
+  onDelete,
   compact = false,
 }: IProps): ReactElement | null => {
   const { t, i18n } = useTranslation()
@@ -56,12 +58,44 @@ export const BookingCardActions = ({
     }
   }
 
+  /** Keeps an action from activating the booking card beneath it. */
+  const stopPropagation = (event: MouseEvent<HTMLElement>): void => {
+    event.stopPropagation()
+  }
+
+  /** Opens the supplied edit flow without activating the booking card. */
+  const edit = (event: MouseEvent<HTMLButtonElement>): void => {
+    stopPropagation(event)
+    onEdit?.()
+  }
+
+  /** Opens the cancellation confirmation or delegates cancellation to the caller. */
+  const requestCancel = (event: MouseEvent<HTMLButtonElement>): void => {
+    stopPropagation(event)
+
+    if (onDelete) {
+      onDelete()
+
+      return
+    }
+
+    setConfirmCancel(true)
+  }
+
+  /** Closes the cancellation confirmation dialog. */
+  const closeConfirmation = (): void => {
+    setConfirmCancel(false)
+  }
+
+  /** Runs the asynchronous cancellation request from the confirmation control. */
+  const confirmCancellation = (): void => {
+    void cancel()
+  }
+
   return (
     <>
-      <span
-        className={cn("absolute right-1 top-1 z-30 flex", compact && "top-0")}
-        onClick={(event) => event.stopPropagation()}
-        onKeyDown={(event) => event.stopPropagation()}
+      <div
+        className={cn("absolute -right-1 top-0 z-30 flex", compact && "top-1/2 -translate-y-1/2")}
       >
         {canEdit && onEdit && (
           <Button
@@ -70,11 +104,10 @@ export const BookingCardActions = ({
             size="icon-xs"
             variant="ghost"
             className={cn(
-              "transition-colors duration-200 hover:bg-transparent hover:text-primary",
-              compact && "size-4"
+              "size-4 transition-colors duration-200 hover:bg-transparent hover:text-primary"
             )}
             aria-label={t("editBooking")}
-            onClick={onEdit}
+            onClick={edit}
           >
             <Pencil />
           </Button>
@@ -85,10 +118,10 @@ export const BookingCardActions = ({
             size="icon-xs"
             variant="ghost"
             className={cn(
-              "transition-colors duration-200 hover:bg-transparent hover:text-primary",
-              compact && "size-4"
+              "size-4 transition-colors duration-200 hover:bg-transparent hover:text-primary"
             )}
             aria-label={t("editBooking")}
+            onClick={stopPropagation}
             render={<Link to={editHref} />}
           >
             <Pencil />
@@ -100,64 +133,59 @@ export const BookingCardActions = ({
             size="icon-xs"
             variant="ghost"
             className={cn(
-              "transition-colors duration-200 hover:bg-transparent hover:text-destructive",
-              compact && "size-4"
+              "size-4 transition-colors duration-200 hover:bg-transparent hover:text-destructive"
             )}
             aria-label={t("cancelBooking")}
-            onClick={() => setConfirmCancel(true)}
+            onClick={requestCancel}
           >
             <Trash2 />
           </Button>
         )}
-      </span>
-      <span
-        className="contents"
-        onClick={(event) => event.stopPropagation()}
-        onPointerDown={(event) => event.stopPropagation()}
-        onKeyDown={(event) => event.stopPropagation()}
+      </div>
+      <Dialog
+        open={confirmCancel}
+        onOpenChange={(next) => !remove.isPending && setConfirmCancel(next)}
       >
-        <Dialog
-          open={confirmCancel}
-          onOpenChange={(next) => !remove.isPending && setConfirmCancel(next)}
+        <DialogContent
+          placement="center"
+          onClick={stopPropagation}
         >
-          <DialogContent placement="center">
-            <DialogHeader>
-              <DialogTitle>{t("confirmCancelTitle")}</DialogTitle>
-              <DialogDescription>
-                {t("confirmCancelDescription", {
-                  title: localize(booking.title, i18n.language),
-                })}
-              </DialogDescription>
-            </DialogHeader>
-            {remove.error && (
-              <p
-                role="alert"
-                className="text-sm text-destructive"
-              >
-                {getApiErrorMessage(remove.error, t("bookingDeleteFailed"))}
-              </p>
-            )}
-            <DialogFooter>
-              <Button
-                type="button"
-                variant="outline"
-                disabled={remove.isPending}
-                onClick={() => setConfirmCancel(false)}
-              >
-                {t("keepBooking")}
-              </Button>
-              <Button
-                type="button"
-                variant="destructive"
-                disabled={remove.isPending}
-                onClick={() => void cancel()}
-              >
-                {remove.isPending ? t("loading") : t("confirmCancel")}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </span>
+          <DialogHeader>
+            <DialogTitle>{t("confirmCancelTitle")}</DialogTitle>
+            <DialogDescription>
+              {t("confirmCancelDescription", {
+                title: localize(booking.title, i18n.language),
+              })}
+            </DialogDescription>
+          </DialogHeader>
+          {remove.error && (
+            <p
+              role="alert"
+              className="text-sm text-destructive"
+            >
+              {getApiErrorMessage(remove.error, t("bookingDeleteFailed"))}
+            </p>
+          )}
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              disabled={remove.isPending}
+              onClick={closeConfirmation}
+            >
+              {t("keepBooking")}
+            </Button>
+            <Button
+              type="button"
+              variant="destructive"
+              disabled={remove.isPending}
+              onClick={confirmCancellation}
+            >
+              {remove.isPending ? t("loading") : t("confirmCancel")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

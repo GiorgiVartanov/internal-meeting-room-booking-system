@@ -6,10 +6,7 @@
     "title": "Product planning",
     "startAt": "2026-01-05T09:00:00.000Z",
     "endAt": "2026-01-05T09:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-01-01T03:15:00.000Z",
@@ -22,10 +19,7 @@
     "title": "Hiring interview",
     "startAt": "2026-01-09T03:00:00.000Z",
     "endAt": "2026-01-09T04:15:00.000Z",
-    "attendeeIds": [
-      "employee-193846",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-193846", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2025-12-31T07:00:00.000Z",
@@ -38,10 +32,7 @@
     "title": "Partner call",
     "startAt": "2026-01-20T14:15:00.000Z",
     "endAt": "2026-01-20T15:00:00.000Z",
-    "attendeeIds": [
-      "employee-193846",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-193846", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-01-06T04:45:00.000Z",
@@ -54,10 +45,7 @@
     "title": "Partner call",
     "startAt": "2026-01-26T07:30:00.000Z",
     "endAt": "2026-01-26T08:45:00.000Z",
-    "attendeeIds": [
-      "employee-193846",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-193846", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-01-17T04:00:00.000Z",
@@ -70,10 +58,7 @@
     "title": "Retrospective",
     "startAt": "2026-02-02T06:00:00.000Z",
     "endAt": "2026-02-02T06:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-01-29T06:15:00.000Z",
@@ -86,10 +71,7 @@
     "title": "Partner call",
     "startAt": "2026-02-10T03:15:00.000Z",
     "endAt": "2026-02-10T04:00:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-01-27T04:45:00.000Z",
@@ -115,10 +97,7 @@
     "title": "Client review",
     "startAt": "2026-02-24T14:45:00.000Z",
     "endAt": "2026-02-24T16:00:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-02-13T05:30:00.000Z",
@@ -131,10 +110,7 @@
     "title": "Project kickoff",
     "startAt": "2026-03-04T11:00:00.000Z",
     "endAt": "2026-03-04T11:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-02-20T03:15:00.000Z",
@@ -147,10 +123,7 @@
     "title": "Partner call",
     "startAt": "2026-03-09T05:15:00.000Z",
     "endAt": "2026-03-09T06:30:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-03-04T07:00:00.000Z",
@@ -163,10 +136,7 @@
     "title": "Daily team sync",
     "startAt": "2026-03-18T13:00:00.000Z",
     "endAt": "2026-03-18T13:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-03-08T04:45:00.000Z",
@@ -179,10 +149,7 @@
     "title": "Daily team sync",
     "startAt": "2026-03-24T08:45:00.000Z",
     "endAt": "2026-03-24T10:00:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-03-19T04:00:00.000Z",
@@ -195,10 +162,7 @@
     "title": "Product planning",
     "startAt": "2026-03-31T09:00:00.000Z",
     "endAt": "2026-03-31T09:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-03-19T06:15:00.000Z",
@@ -211,10 +175,7 @@
     "title": "Daily team sync",
     "startAt": "2026-04-08T06:15:00.000Z",
     "endAt": "2026-04-08T07:00:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-03-29T04:45:00.000Z",
@@ -240,10 +201,7 @@
     "title": "Quarterly planning",
     "startAt": "2026-04-23T05:00:00.000Z",
     "endAt": "2026-04-23T06:15:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-04-16T05:30:00.000Z",
@@ -256,10 +214,7 @@
     "title": "Retrospective",
     "startAt": "2026-04-30T03:45:00.000Z",
     "endAt": "2026-04-30T04:30:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-04-22T03:15:00.000Z",
@@ -272,10 +227,7 @@
     "title": "Daily team sync",
     "startAt": "2026-05-05T03:30:00.000Z",
     "endAt": "2026-05-05T04:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-04-22T07:00:00.000Z",
@@ -288,10 +240,7 @@
     "title": "Hiring interview",
     "startAt": "2026-05-15T06:00:00.000Z",
     "endAt": "2026-05-15T06:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-05-09T04:45:00.000Z",
@@ -304,10 +253,7 @@
     "title": "Hiring interview",
     "startAt": "2026-05-21T05:15:00.000Z",
     "endAt": "2026-05-21T06:30:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-05-08T04:00:00.000Z",
@@ -320,10 +266,7 @@
     "title": "Project kickoff",
     "startAt": "2026-05-29T12:00:00.000Z",
     "endAt": "2026-05-29T12:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-05-21T06:15:00.000Z",
@@ -336,10 +279,7 @@
     "title": "Hiring interview",
     "startAt": "2026-06-08T06:30:00.000Z",
     "endAt": "2026-06-08T07:15:00.000Z",
-    "attendeeIds": [
-      "employee-750294",
-      "employee-359784"
-    ],
+    "attendeeIds": ["employee-750294", "employee-359784"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-06-02T04:45:00.000Z",
@@ -365,10 +305,7 @@
     "title": "Budget review",
     "startAt": "2026-06-22T13:30:00.000Z",
     "endAt": "2026-06-22T14:45:00.000Z",
-    "attendeeIds": [
-      "employee-750294",
-      "employee-628315"
-    ],
+    "attendeeIds": ["employee-750294", "employee-628315"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-06-19T05:30:00.000Z",
@@ -381,10 +318,7 @@
     "title": "Product planning",
     "startAt": "2026-06-29T15:00:00.000Z",
     "endAt": "2026-06-29T15:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-06-25T03:15:00.000Z",
@@ -397,10 +331,7 @@
     "title": "Customer discovery",
     "startAt": "2026-07-02T03:30:00.000Z",
     "endAt": "2026-07-02T04:15:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-06-24T03:15:00.000Z",
@@ -413,10 +344,7 @@
     "title": "Sales pipeline",
     "startAt": "2026-07-07T14:15:00.000Z",
     "endAt": "2026-07-07T15:30:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-07-02T10:00:00.000Z",
@@ -429,10 +357,7 @@
     "title": "Budget review",
     "startAt": "2026-07-10T07:15:00.000Z",
     "endAt": "2026-07-10T08:00:00.000Z",
-    "attendeeIds": [
-      "employee-750294",
-      "employee-490816"
-    ],
+    "attendeeIds": ["employee-750294", "employee-490816"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-07-06T09:15:00.000Z",
@@ -445,10 +370,7 @@
     "title": "Retrospective",
     "startAt": "2026-07-16T08:15:00.000Z",
     "endAt": "2026-07-16T09:00:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-07-02T07:45:00.000Z",
@@ -461,10 +383,7 @@
     "title": "Daily team sync",
     "startAt": "2026-07-21T13:00:00.000Z",
     "endAt": "2026-07-21T14:15:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-07-08T07:00:00.000Z",
@@ -490,10 +409,7 @@
     "title": "Design critique",
     "startAt": "2026-07-30T03:30:00.000Z",
     "endAt": "2026-07-30T04:15:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-07-20T04:45:00.000Z",
@@ -519,10 +435,7 @@
     "title": "Design critique",
     "startAt": "2026-08-07T10:45:00.000Z",
     "endAt": "2026-08-07T12:00:00.000Z",
-    "attendeeIds": [
-      "employee-490816",
-      "employee-538429"
-    ],
+    "attendeeIds": ["employee-490816", "employee-538429"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-07-31T11:30:00.000Z",
@@ -548,10 +461,7 @@
     "title": "Project kickoff",
     "startAt": "2026-08-18T14:30:00.000Z",
     "endAt": "2026-08-18T15:15:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-628315"
-    ],
+    "attendeeIds": ["employee-482701", "employee-628315"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-08-14T09:15:00.000Z",
@@ -577,10 +487,7 @@
     "title": "Customer discovery",
     "startAt": "2026-08-27T03:15:00.000Z",
     "endAt": "2026-08-27T04:00:00.000Z",
-    "attendeeIds": [
-      "employee-490816",
-      "employee-914527"
-    ],
+    "attendeeIds": ["employee-490816", "employee-914527"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-08-19T03:15:00.000Z",
@@ -9706,10 +9613,7 @@
     "title": "Engineering review",
     "startAt": "2026-09-18T10:30:00.000Z",
     "endAt": "2026-09-18T11:00:00.000Z",
-    "attendeeIds": [
-      "employee-193846",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-193846", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-09-09T10:45:00.000Z",
@@ -9735,10 +9639,7 @@
     "title": "Quarterly planning",
     "startAt": "2026-09-29T05:30:00.000Z",
     "endAt": "2026-09-29T06:30:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-09-23T08:30:00.000Z",
@@ -9764,10 +9665,7 @@
     "title": "Partner call",
     "startAt": "2026-10-08T04:15:00.000Z",
     "endAt": "2026-10-08T04:45:00.000Z",
-    "attendeeIds": [
-      "employee-193846",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-193846", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-10-05T06:15:00.000Z",
@@ -9780,10 +9678,7 @@
     "title": "Retrospective",
     "startAt": "2026-10-13T03:30:00.000Z",
     "endAt": "2026-10-13T04:30:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-10-05T10:00:00.000Z",
@@ -9796,10 +9691,7 @@
     "title": "Leadership update",
     "startAt": "2026-10-20T06:45:00.000Z",
     "endAt": "2026-10-20T07:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-10-08T04:00:00.000Z",
@@ -9812,10 +9704,7 @@
     "title": "Budget review",
     "startAt": "2026-10-23T10:45:00.000Z",
     "endAt": "2026-10-23T11:45:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-482701", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-10-19T07:00:00.000Z",
@@ -9828,10 +9717,7 @@
     "title": "Product planning",
     "startAt": "2026-10-28T07:00:00.000Z",
     "endAt": "2026-10-28T07:30:00.000Z",
-    "attendeeIds": [
-      "employee-193846",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-193846", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-10-25T06:15:00.000Z",
@@ -9857,10 +9743,7 @@
     "title": "Engineering review",
     "startAt": "2026-11-06T07:30:00.000Z",
     "endAt": "2026-11-06T08:30:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-10-25T04:00:00.000Z",
@@ -9886,10 +9769,7 @@
     "title": "Engineering review",
     "startAt": "2026-11-16T09:15:00.000Z",
     "endAt": "2026-11-16T09:45:00.000Z",
-    "attendeeIds": [
-      "employee-193846",
-      "employee-750294"
-    ],
+    "attendeeIds": ["employee-193846", "employee-750294"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-11-07T10:45:00.000Z",
@@ -9915,10 +9795,7 @@
     "title": "Quarterly planning",
     "startAt": "2026-11-26T12:15:00.000Z",
     "endAt": "2026-11-26T13:15:00.000Z",
-    "attendeeIds": [
-      "employee-482701",
-      "employee-193846"
-    ],
+    "attendeeIds": ["employee-482701", "employee-193846"],
     "notes": "Internal office meeting",
     "status": "confirmed",
     "createdAt": "2026-11-20T08:30:00.000Z",

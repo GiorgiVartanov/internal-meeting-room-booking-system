@@ -225,13 +225,25 @@ const HomePage = () => {
         loading={anyRoomMode ? allDayBookings.isFetching : dayBookings.isPending}
       />
     ) : null
+  const availableRooms = [...(filteredRooms.data ?? [])].sort(
+    (first, second) => first.capacity - second.capacity
+  )
   const rooms = (
     <RoomsSidebar
-      rooms={[...(filteredRooms.data ?? [])].sort(
-        (first, second) => first.capacity - second.capacity
-      )}
+      rooms={availableRooms}
       loading={filteredRooms.isLoading}
       filters={filters}
+      selectedId={anyRoomMode ? undefined : selectedRoom?.id}
+      onFilters={updateFilters}
+      onSelect={selectRoom}
+    />
+  )
+  const mobileRooms = (
+    <RoomsSidebar
+      rooms={availableRooms}
+      loading={filteredRooms.isLoading}
+      filters={filters}
+      countFirst
       selectedId={anyRoomMode ? undefined : selectedRoom?.id}
       onFilters={updateFilters}
       onSelect={selectRoom}
@@ -316,8 +328,8 @@ const HomePage = () => {
         onOpenChange={handleLeftOpenChange}
         swipeDirection="left"
       >
-        <DrawerContent className="h-dvh">
-          <DrawerHeader>
+        <DrawerContent className="h-dvh bg-panel [&_[data-slot=drawer-close]]:border-0 [&_[data-slot=drawer-close]]:bg-panel [&_[data-slot=drawer-close]]:shadow-none data-[swipe-axis=x]:top-16 data-[swipe-axis=x]:bottom-auto data-[swipe-axis=x]:h-[calc(100dvh-4rem)] data-[swipe-axis=x]:[--drawer-content-width:min(30rem,86vw)]">
+          <DrawerHeader className="sticky top-0 z-10 shrink-0 flex-row items-baseline gap-2 border-b bg-panel p-4 pb-3 pr-12">
             <DrawerTitle>{t("schedule")}</DrawerTitle>
             <DrawerDescription>{scheduleDescription}</DrawerDescription>
           </DrawerHeader>
@@ -329,12 +341,8 @@ const HomePage = () => {
         onOpenChange={handleRightOpenChange}
         swipeDirection="right"
       >
-        <DrawerContent className="h-dvh">
-          <DrawerHeader>
-            <DrawerTitle>{t("rooms")}</DrawerTitle>
-            <DrawerDescription>{t("showFilters")}</DrawerDescription>
-          </DrawerHeader>
-          <div className="min-h-0 flex-1">{rooms}</div>
+        <DrawerContent className="h-dvh bg-panel [&_[data-slot=drawer-close]]:border-0 [&_[data-slot=drawer-close]]:bg-panel [&_[data-slot=drawer-close]]:shadow-none data-[swipe-axis=x]:top-16 data-[swipe-axis=x]:bottom-auto data-[swipe-axis=x]:h-[calc(100dvh-4rem)] data-[swipe-axis=x]:[--drawer-content-width:min(30rem,86vw)]">
+          <div className="min-h-0 flex-1">{mobileRooms}</div>
         </DrawerContent>
       </Drawer>
       <ScheduleCalendarDialog

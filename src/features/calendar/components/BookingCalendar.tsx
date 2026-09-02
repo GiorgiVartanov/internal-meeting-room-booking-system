@@ -3,13 +3,9 @@ import {
   addMonths,
   endOfMonth,
   format,
-  isBefore,
-  isSameDay,
   isSameMonth,
-  isWeekend,
   setMonth as setCalendarMonth,
   setYear,
-  startOfDay,
   startOfMonth,
   subMonths,
 } from "date-fns"
@@ -19,17 +15,13 @@ import { useTranslation } from "react-i18next"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import {
-  ALLOW_HOLIDAY_BOOKINGS,
-  ALLOW_WEEKEND_BOOKINGS,
-  CALENDAR_FUTURE_MONTHS,
-  CALENDAR_PAST_MONTHS,
-} from "@/constants"
-import { appCalendarDate, appDateKey, dateLocale } from "@/lib/date"
+import { CALENDAR_FUTURE_MONTHS } from "@/constants"
+import { appCalendarDate, dateLocale } from "@/lib/date"
 import { cn } from "@/lib/utils"
 import type { IBooking, IBookingDayActivity, IHoliday } from "@/types"
 
 import { BookingCalendarContext } from "../context"
+import { getBookingCalendarState } from "../utils/bookingCalendarState"
 
 import { BookingCalendarDayButton } from "./BookingCalendarDayButton"
 import { MonthPickerCard } from "./MonthPickerCard"
@@ -114,44 +106,32 @@ export const BookingCalendar = ({
     return () => window.removeEventListener("keydown", closeYearView, true)
   }, [choosingMonth])
 
-  const availability = useMemo(
+  const calendarState = useMemo(
     () =>
-      activity
-        ? Object.fromEntries(activity.map((item) => [item.date, item.availability]))
-        : Object.fromEntries(
-            [...new Set(bookings.map((booking) => appDateKey(booking.startAt)))].map((date) => [
-              date,
-              "low" as const,
-            ])
-          ),
-    [activity, bookings]
+      getBookingCalendarState({
+        activity,
+        bookings,
+        currentMonth,
+        disablePast,
+        holidays,
+        selected,
+        showBlockedSelection,
+        today,
+      }),
+    [activity, bookings, currentMonth, disablePast, holidays, selected, showBlockedSelection, today]
+  )
+  const calendarContextValue = useMemo(
+    () => ({
+      availability: calendarState.availability,
+      holidaysByDate: calendarState.holidaysByDate,
+    }),
+    [calendarState.availability, calendarState.holidaysByDate]
   )
 
-  let earliestDate = currentMonth
-  if (bookings.length)
-    earliestDate = new Date(
-      Math.min(...bookings.map((booking) => new Date(booking.startAt).getTime()))
-    )
-  if (activity?.[0]?.date)
-    earliestDate = new Date(`${activity.map((item) => item.date).sort()[0]}T12:00:00`)
-  const dataEarliest = startOfMonth(earliestDate)
-  const policyEarliest = startOfMonth(subMonths(currentMonth, CALENDAR_PAST_MONTHS))
-  const earliest = dataEarliest < policyEarliest ? dataEarliest : policyEarliest
-  const latest = startOfMonth(addMonths(currentMonth, CALENDAR_FUTURE_MONTHS))
-  const holidayDates = holidays.map((holiday) => new Date(`${holiday.date}T12:00:00`))
-  const holidayDateKeys = new Set(holidays.map((holiday) => holiday.date))
-  const holidaysByDate = Object.fromEntries(holidays.map((holiday) => [holiday.date, holiday]))
-  const disabled = [
-    ...(!ALLOW_WEEKEND_BOOKINGS ? [{ dayOfWeek: [0, 6] }] : []),
-    ...(!ALLOW_HOLIDAY_BOOKINGS ? holidayDates : []),
-    ...(disablePast ? [{ before: startOfDay(today) }] : []),
-  ]
-  const selectedIsBlocked =
-    !showBlockedSelection &&
-    selected &&
-    ((!ALLOW_WEEKEND_BOOKINGS && isWeekend(selected)) ||
-      (!ALLOW_HOLIDAY_BOOKINGS && holidayDates.some((date) => isSameDay(date, selected))) ||
-      (disablePast && isBefore(selected, startOfDay(today))))
+  const selectCurrentMonth = (): void => {
+    setMonth(currentMonth)
+    onSelect(today)
+  }
 
   return (
     <div
@@ -163,7 +143,7 @@ export const BookingCalendar = ({
       {large && (
         <div
           className={cn(
-            "sticky top-0 z-30 -mx-2 mb-3 grid min-h-12 shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border-b bg-popover px-3 py-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(2.5rem,1fr)]",
+            "sticky top-0 z-30 -mx-2 mb-3 grid min-h-12 shrink-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 bg-popover px-3 py-2 after:absolute after:inset-x-3 after:bottom-0 after:border-b after:border-border sm:grid-cols-[minmax(0,1fr)_auto_minmax(2.5rem,1fr)]",
             headerClassName
           )}
         >
@@ -174,7 +154,7 @@ export const BookingCalendar = ({
               size="icon"
               variant="outline"
               className="size-8 border-transparent bg-transparent"
-              disabled={month <= earliest}
+              disabled={month <= calendarState.earliest}
               aria-label={t("previousMonth")}
               onClick={() => setMonth((current) => subMonths(current, 1))}
             >
@@ -194,7 +174,7 @@ export const BookingCalendar = ({
               size="icon"
               variant="outline"
               className="size-8 border-transparent bg-transparent"
-              disabled={month >= latest}
+              disabled={month >= calendarState.latest}
               aria-label={t("nextMonth")}
               onClick={() => setMonth((current) => addMonths(current, 1))}
             >
@@ -208,10 +188,7 @@ export const BookingCalendar = ({
                 size="sm"
                 variant="outline"
                 className="h-8"
-                onClick={() => {
-                  setMonth(currentMonth)
-                  onSelect(today)
-                }}
+                onClick={selectCurrentMonth}
               >
                 {t("goToCurrentMonth")}
               </Button>
@@ -221,11 +198,11 @@ export const BookingCalendar = ({
         </div>
       )}
       {choosingMonth && (
-        <div className="absolute inset-0 z-40 overflow-x-hidden overflow-y-auto bg-popover">
+        <div className="absolute inset-0 z-40 overflow-x-hidden overflow-y-auto bg-panel">
           <div className="flex h-full min-h-0 flex-col">
             <div
               className={cn(
-                "sticky top-0 z-30 -mx-2 mb-3 grid min-h-12 shrink-0 grid-cols-[minmax(0,1fr)_auto_minmax(2.5rem,1fr)] items-center gap-2 border-b bg-popover px-3 py-2",
+                "sticky top-0 z-30 -mx-2 mb-3 grid min-h-12 shrink-0 grid-cols-[minmax(0,1fr)_auto_minmax(2.5rem,1fr)] items-center gap-2 bg-panel px-3 py-2 after:absolute after:inset-x-3 after:bottom-0 after:border-b after:border-border",
                 headerClassName
               )}
             >
@@ -241,7 +218,7 @@ export const BookingCalendar = ({
                   size="icon"
                   variant="outline"
                   className="size-8 border-transparent bg-transparent"
-                  disabled={month.getFullYear() <= earliest.getFullYear()}
+                  disabled={month.getFullYear() <= calendarState.earliest.getFullYear()}
                   aria-label={t("previousYear")}
                   onClick={() => setMonth((current) => setYear(current, current.getFullYear() - 1))}
                 >
@@ -261,7 +238,7 @@ export const BookingCalendar = ({
                   size="icon"
                   variant="outline"
                   className="size-8 border-transparent bg-transparent"
-                  disabled={month.getFullYear() >= latest.getFullYear()}
+                  disabled={month.getFullYear() >= calendarState.latest.getFullYear()}
                   aria-label={t("nextYear")}
                   onClick={() => setMonth((current) => setYear(current, current.getFullYear() + 1))}
                 >
@@ -278,13 +255,14 @@ export const BookingCalendar = ({
             >
               <div
                 className={cn(
-                  "grid h-full min-h-0 auto-rows-max grid-cols-2 items-start gap-1 overflow-y-auto sm:grid-cols-3 sm:gap-1.5 lg:mx-auto lg:w-[calc(100%_-_1rem)] lg:max-w-[1200px] lg:grid-cols-4 lg:grid-rows-3 lg:auto-rows-fr lg:gap-2 lg:overflow-hidden",
-                  horizontalYearScroll && "dashboard-year-calendar-grid"
+                  "calendar-desktop-gutter grid h-full min-h-0 auto-rows-max grid-cols-2 items-start gap-1 overflow-y-auto sm:grid-cols-3 sm:gap-1.5 lg:mx-auto lg:max-w-300 lg:grid-cols-4 lg:grid-rows-3 lg:auto-rows-fr lg:gap-2 lg:overflow-hidden",
+                  horizontalYearScroll && "dashboard-year-calendar-grid px-2"
                 )}
               >
                 {Array.from({ length: 12 }, (_, index) => {
                   const candidate = startOfMonth(setCalendarMonth(month, index))
-                  const unavailable = candidate < earliest || candidate > latest
+                  const unavailable =
+                    candidate < calendarState.earliest || candidate > calendarState.latest
 
                   return (
                     <MonthPickerCard
@@ -292,7 +270,7 @@ export const BookingCalendar = ({
                       month={candidate}
                       selected={isSameMonth(candidate, month)}
                       disabled={unavailable}
-                      holidayDates={holidayDateKeys}
+                      holidayDates={calendarState.holidayDateKeys}
                       onSelect={() => {
                         setMonth(candidate)
                         setChoosingMonth(false)
@@ -311,22 +289,22 @@ export const BookingCalendar = ({
         {bodyFallback !== undefined ? (
           bodyFallback
         ) : (
-          <BookingCalendarContext.Provider value={{ availability, holidaysByDate }}>
+          <BookingCalendarContext.Provider value={calendarContextValue}>
             <Calendar
               mode="single"
               month={month}
               onMonthChange={setMonth}
-              startMonth={earliest}
+              startMonth={calendarState.earliest}
               endMonth={endOfMonth(addMonths(currentMonth, CALENDAR_FUTURE_MONTHS))}
-              selected={selectedIsBlocked ? undefined : selected}
+              selected={calendarState.selectedIsBlocked ? undefined : selected}
               onSelect={(date) => date && onSelect(date)}
-              disabled={disabled}
+              disabled={calendarState.disabled}
               weekStartsOn={1}
               fixedWeeks
               showOutsideDays
               locale={dateLocale(i18n.language)}
               modifiers={{
-                holiday: holidayDates,
+                holiday: calendarState.holidayDates,
                 weekend: { dayOfWeek: [0, 6] },
                 ...(selectedWeekStart
                   ? { selectedWeek: { from: selectedWeekStart, to: addDays(selectedWeekStart, 6) } }
@@ -339,7 +317,7 @@ export const BookingCalendar = ({
               }}
               classNames={{
                 root: fillWidth
-                  ? "mx-auto h-auto w-full max-w-[1200px] lg:w-[calc(100%_-_1rem)] lg:min-w-[840px]"
+                  ? "calendar-desktop-gutter mx-auto h-auto w-full max-w-[1200px] lg:min-w-[840px]"
                   : "mx-auto h-auto w-full min-w-0 max-w-[min(1200px,calc((100dvh-9rem)*14/9))]",
                 months: "h-auto w-full",
                 month: "h-auto min-h-0 w-full gap-1 sm:gap-2",

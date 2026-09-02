@@ -188,21 +188,30 @@ const DocumentationPage = () => {
             <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">
               {t("documentationWorkflowIntro")}
             </p>
-            <p className="mt-4 max-w-3xl border border-amber-500/40 bg-background p-3 text-sm leading-6">
+            <p className="mt-4 max-w-3xl border border-amber-500/40 bg-panel p-3 text-sm leading-6">
               {t("mswLoadingNote")}
             </p>
           </header>
           <section className="grid gap-4 sm:grid-cols-2">
-            <div className="border bg-background p-4">
+            <div className="border bg-panel p-4">
               <h2 className="font-semibold">{t("documentationStateTitle")}</h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 {t("documentationStateDescription")}
               </p>
             </div>
-            <div className="border bg-background p-4">
+            <div className="border bg-panel p-4">
               <h2 className="font-semibold">{t("documentationRulesTitle")}</h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 {t("documentationRulesDescription")}
+              </p>
+            </div>
+            <div className="border bg-panel p-4 sm:col-span-2">
+              <div className="flex items-center gap-2">
+                <Clock3 className="size-4 text-primary" />
+                <h2 className="font-semibold">{t("documentationTimelineTitle")}</h2>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {t("documentationTimelineDescription")}
               </p>
             </div>
           </section>
@@ -228,7 +237,8 @@ const DocumentationPage = () => {
                   </div>
                 </div>
                 <Accordion
-                  className="mt-5 border bg-background px-4"
+                  className="mt-5 border bg-panel px-4"
+                  hiddenUntilFound
                   value={openSections[page]}
                   onValueChange={(value) =>
                     setOpenSections((current) => ({ ...current, [page]: value }))
@@ -270,7 +280,10 @@ const DocumentationPage = () => {
             <p className="mt-3 text-sm leading-6 text-muted-foreground">
               {t("documentationDialogsIntro")}
             </p>
-            <Accordion className="mt-5 border bg-background px-4">
+            <Accordion
+              className="mt-5 border bg-panel px-4"
+              hiddenUntilFound
+            >
               {modalTopics.map(([id, titleKey, descriptionKey, guideHref]) => (
                 <AccordionItem
                   key={id}
@@ -309,7 +322,7 @@ const DocumentationPage = () => {
             <p className="mt-3 text-sm leading-6 text-muted-foreground">
               {t("documentationKeyboardIntro")}
             </p>
-            <div className="mt-5 border bg-background text-sm">
+            <div className="mt-5 border bg-panel text-sm">
               <dl className="grid items-center gap-3 p-4 sm:grid-cols-[7rem_1fr]">
                 <dt>
                   <Kbd>Esc</Kbd>

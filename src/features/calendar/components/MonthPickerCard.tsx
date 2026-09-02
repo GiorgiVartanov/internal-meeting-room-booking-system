@@ -35,7 +35,7 @@ export const MonthPickerCard = ({
       disabled={disabled}
       aria-label={format(month, "LLLL yyyy", { locale })}
       className={cn(
-        "flex aspect-[7/5] min-h-0 w-full flex-col rounded-none border bg-popover p-1 text-left transition-colors hover:border-primary/70 hover:bg-accent/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-35 sm:p-1.5 lg:h-full lg:aspect-auto lg:p-2",
+        "flex aspect-7/5 min-h-0 w-full flex-col rounded-none border bg-panel p-2 text-left transition-colors hover:border-primary/70 hover:bg-accent/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-35 sm:p-2.5 lg:h-full lg:aspect-auto lg:p-3",
         selected && "border-primary bg-primary/10"
       )}
       onClick={onSelect}
@@ -59,11 +59,11 @@ export const MonthPickerCard = ({
           <span
             key={day.toISOString()}
             className={cn(
-              "flex size-3 min-h-0 self-center justify-self-center items-center justify-center text-[7px] leading-none text-foreground min-[380px]:size-3.5 min-[380px]:text-[8px] sm:text-[9px] sm:leading-4 lg:text-[10px] lg:leading-4 xl:text-[11px]",
+              "flex size-3 min-h-0 items-center justify-center self-center justify-self-center text-[7px] leading-none text-foreground min-[380px]:size-3.5 min-[380px]:text-[8px] sm:size-4 sm:text-[9px] sm:leading-4 lg:text-[10px] lg:leading-4 xl:text-[11px]",
               !isSameMonth(day, month) && "text-muted-foreground/35",
               isSameMonth(day, month) &&
                 holidayDates.has(dateKey(day)) &&
-                "bg-destructive/70 text-destructive-foreground opacity-70"
+                "size-5 bg-destructive/70 text-destructive-foreground opacity-70 sm:size-6"
             )}
           >
             {format(day, "d")}

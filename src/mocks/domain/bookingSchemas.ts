@@ -1,7 +1,8 @@
 import { z } from "zod"
 
-const timestamp = z.string().refine((value) => !Number.isNaN(new Date(value).valueOf()), {
-  message: "A valid ISO 8601 timestamp is required.",
+const timestamp = z.string().datetime({
+  offset: true,
+  message: "A valid ISO 8601 timestamp with a timezone offset is required.",
 })
 
 export const createBookingSchema = z

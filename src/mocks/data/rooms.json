@@ -15,13 +15,8 @@
     },
     "floor": 2,
     "capacity": 20,
-    "imageUrl": "/images/meeting-room-placeholder.webp",
-    "amenities": [
-      "whiteboard",
-      "display",
-      "video-conference",
-      "speakerphone"
-    ],
+    "imageUrl": "/images/bright-boardroom.webp",
+    "amenities": ["whiteboard", "display", "video-conference", "speakerphone"],
     "hasNaturalLight": false,
     "lightQuality": "professional",
     "airConditionerCount": 3,
@@ -44,10 +39,8 @@
     },
     "floor": 3,
     "capacity": 20,
-    "imageUrl": "/images/meeting-room-placeholder.webp",
-    "amenities": [
-      "whiteboard"
-    ],
+    "imageUrl": "/images/red-boardroom.webp",
+    "amenities": ["whiteboard"],
     "hasNaturalLight": true,
     "lightQuality": "good",
     "airConditionerCount": 3,
@@ -70,13 +63,8 @@
     },
     "floor": 4,
     "capacity": 16,
-    "imageUrl": "/images/meeting-room-placeholder.webp",
-    "amenities": [
-      "whiteboard",
-      "display",
-      "video-conference",
-      "speakerphone"
-    ],
+    "imageUrl": "/images/wood-boardroom.webp",
+    "amenities": ["whiteboard", "display", "video-conference", "speakerphone"],
     "hasNaturalLight": true,
     "lightQuality": "studio",
     "airConditionerCount": 3,
@@ -100,12 +88,7 @@
     "floor": 5,
     "capacity": 2,
     "imageUrl": "",
-    "amenities": [
-      "whiteboard",
-      "display",
-      "video-conference",
-      "speakerphone"
-    ],
+    "amenities": ["whiteboard", "display", "video-conference", "speakerphone"],
     "hasNaturalLight": false,
     "lightQuality": "good",
     "airConditionerCount": 2,
@@ -128,12 +111,8 @@
     },
     "floor": 6,
     "capacity": 2,
-    "imageUrl": "/images/small-meeting-room-placeholder.webp",
-    "amenities": [
-      "whiteboard",
-      "video-conference",
-      "speakerphone"
-    ],
+    "imageUrl": "/images/glass-boardroom.webp",
+    "amenities": ["whiteboard", "video-conference", "speakerphone"],
     "hasNaturalLight": true,
     "lightQuality": "professional",
     "airConditionerCount": 2,
@@ -156,11 +135,8 @@
     },
     "floor": 2,
     "capacity": 2,
-    "imageUrl": "/images/small-meeting-room-placeholder.webp",
-    "amenities": [
-      "whiteboard",
-      "display"
-    ],
+    "imageUrl": "/images/creative-boardroom.webp",
+    "amenities": ["whiteboard", "display"],
     "hasNaturalLight": true,
     "lightQuality": "good",
     "airConditionerCount": 3,
@@ -183,13 +159,8 @@
     },
     "floor": 3,
     "capacity": 2,
-    "imageUrl": "/images/small-meeting-room-placeholder.webp",
-    "amenities": [
-      "whiteboard",
-      "display",
-      "video-conference",
-      "speakerphone"
-    ],
+    "imageUrl": "/images/glass-boardroom.webp",
+    "amenities": ["whiteboard", "display", "video-conference", "speakerphone"],
     "hasNaturalLight": false,
     "lightQuality": "professional",
     "airConditionerCount": 1,
@@ -213,10 +184,7 @@
     "floor": 4,
     "capacity": 1,
     "imageUrl": "",
-    "amenities": [
-      "video-conference",
-      "standing-desk"
-    ],
+    "amenities": ["video-conference", "standing-desk"],
     "hasNaturalLight": true,
     "lightQuality": "studio",
     "airConditionerCount": 0,
@@ -240,12 +208,7 @@
     "floor": 5,
     "capacity": 1,
     "imageUrl": "",
-    "amenities": [
-      "whiteboard",
-      "display",
-      "video-conference",
-      "speakerphone"
-    ],
+    "amenities": ["whiteboard", "display", "video-conference", "speakerphone"],
     "hasNaturalLight": true,
     "lightQuality": "good",
     "airConditionerCount": 1,
@@ -268,11 +231,8 @@
     },
     "floor": 6,
     "capacity": 1,
-    "imageUrl": "/images/small-meeting-room-placeholder.webp",
-    "amenities": [
-      "whiteboard",
-      "display"
-    ],
+    "imageUrl": "/images/bright-boardroom.webp",
+    "amenities": ["whiteboard", "display"],
     "hasNaturalLight": false,
     "lightQuality": "studio",
     "airConditionerCount": 3,

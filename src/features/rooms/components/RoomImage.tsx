@@ -5,17 +5,6 @@ import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 import type { IRoom } from "@/types"
 
-const placeholderUrls = [
-  "/images/meeting-room-placeholder.webp",
-  "/images/small-meeting-room-placeholder.webp",
-]
-
-if (typeof Image !== "undefined")
-  placeholderUrls.forEach((source) => {
-    const image = new Image()
-    image.src = source
-  })
-
 interface IProps {
   room: IRoom
   compact: boolean

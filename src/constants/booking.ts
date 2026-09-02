@@ -1,0 +1,11 @@
+export const MIN_BOOKING_DURATION_MINUTES = 15
+export const MAX_BOOKING_DURATION_MINUTES = 6 * 60
+export const BOOKING_PAST_GRACE_MINUTES = 60
+export const BOOKING_HORIZON_MONTHS = 2
+export const BOOKING_SLOT_MINUTES = 15
+export const WORKING_HOURS = { start: 7, end: 20 } as const
+export const ALLOW_WEEKEND_BOOKINGS = false
+export const ALLOW_HOLIDAY_BOOKINGS = false
+export const BOOKING_PAGE_SIZE = 50
+export const BOOKING_SEARCH_PAGE_SIZE = 20
+export const BOOKING_SEARCH_DEBOUNCE_MILLISECONDS = 350

@@ -1,6 +1,7 @@
 import { Outlet, useNavigation } from "react-router-dom"
 
 import { AppHeader } from "@/components/AppHeader"
+import PageMetadata from "@/components/PageMetadata"
 import { PATHS } from "@/constants"
 import { DashboardPageSkeleton } from "@/features/dashboard"
 import { DocumentationPageSkeleton } from "@/features/documentation"
@@ -19,6 +20,7 @@ const RouteLayout = () => {
   return (
     <GuideProvider>
       <div className="h-dvh overflow-hidden">
+        <PageMetadata />
         <AppHeader />
         <ModalGuideUrlLauncher />
         {content}

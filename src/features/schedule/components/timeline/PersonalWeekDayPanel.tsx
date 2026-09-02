@@ -1,17 +1,19 @@
-import { format } from "date-fns"
+import { addMonths, format, subMinutes } from "date-fns"
 import { UserRound } from "lucide-react"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import {
   ALLOW_BOOKING_DRAG_AND_RESIZE,
+  BOOKING_HORIZON_MONTHS,
+  BOOKING_PAST_GRACE_MINUTES,
   BOOKING_SLOT_MINUTES,
   DEFAULT_EMPLOYEE_ID,
   MAX_BOOKING_DURATION_MINUTES,
   MIN_BOOKING_DURATION_MINUTES,
   WORKING_HOURS,
 } from "@/constants"
-import { appClockMinutes, appDateKey, dateKey, dateLocale } from "@/lib/date"
+import { appClockMinutes, appDateKey, dateKey, dateLocale, fromDateAndTime } from "@/lib/date"
 import { localize } from "@/lib/localize"
 import { cn } from "@/lib/utils"
 import type { IBooking, IEmployee, IRoom } from "@/types"
@@ -26,6 +28,7 @@ import {
   positionBookings,
   TIMELINE_DAY_MINUTES,
   TIMELINE_FIRST_MINUTE,
+  TIMELINE_END_LABEL_OVERLAY_PIXELS,
   TIMELINE_SLOTS,
   timelineTimeText,
   WEEK_TIMELINE_PIXELS_PER_MINUTE,
@@ -34,6 +37,7 @@ import { BookingCardActions } from "../booking"
 
 import { BookingResizeHandles } from "./BookingResizeHandles"
 import { BookingTimeRange } from "./BookingTimeRange"
+import { CompactBookingDetails } from "./CompactBookingDetails"
 
 import type { ReactElement } from "react"
 
@@ -70,6 +74,7 @@ export const PersonalWeekDayPanel = ({
     useTimelineBookingDrag()
   const [pending, setPending] = useState<Record<string, { start: number; end: number }>>({})
   const timelineRef = useRef<HTMLDivElement>(null)
+  const nowLineRef = useRef<HTMLDivElement>(null)
 
   const key = dateKey(day)
   const today = key === appDateKey(now)
@@ -92,6 +97,10 @@ export const PersonalWeekDayPanel = ({
     return { start: start + activeDrag.deltaMinutes, end: end + activeDrag.deltaMinutes }
   }
   const roomIsAvailable = (booking: IBooking, start: number, end: number): boolean =>
+    new Date(fromDateAndTime(key, timelineTimeText(start))) >=
+      subMinutes(now, BOOKING_PAST_GRACE_MINUTES) &&
+    new Date(fromDateAndTime(key, timelineTimeText(start))) <=
+      addMonths(now, BOOKING_HORIZON_MONTHS) &&
     !collisionBookings.some(
       (other) =>
         other.id !== booking.id &&
@@ -124,6 +133,16 @@ export const PersonalWeekDayPanel = ({
 
   const pointerTimelineY = (clientY: number): number =>
     clientY - (timelineRef.current?.getBoundingClientRect().top ?? 0)
+
+  useEffect(() => {
+    if (!showNow) return
+
+    const frame = window.requestAnimationFrame(() =>
+      nowLineRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })
+    )
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [showNow])
 
   return (
     <section className="min-w-0 border-r last:border-r-0">
@@ -172,9 +191,10 @@ export const PersonalWeekDayPanel = ({
               style={{
                 top: -8,
                 height: past
-                  ? TIMELINE_DAY_MINUTES * WEEK_TIMELINE_PIXELS_PER_MINUTE + 8
+                  ? TIMELINE_DAY_MINUTES * WEEK_TIMELINE_PIXELS_PER_MINUTE +
+                    TIMELINE_END_LABEL_OVERLAY_PIXELS
                   : (pastOverlayMinute - TIMELINE_FIRST_MINUTE) * WEEK_TIMELINE_PIXELS_PER_MINUTE +
-                    8,
+                    TIMELINE_END_LABEL_OVERLAY_PIXELS,
               }}
             />
           )}
@@ -278,6 +298,9 @@ export const PersonalWeekDayPanel = ({
                 })
               )
             }
+            const openBooking = (): void => {
+              if (shouldOpenBooking()) onBooking(booking)
+            }
 
             return (
               <article
@@ -313,9 +336,7 @@ export const PersonalWeekDayPanel = ({
                 onPointerMove={moveDrag}
                 onPointerUp={finishDrag}
                 onPointerCancel={cancelDrag}
-                onClick={() => {
-                  if (shouldOpenBooking()) onBooking(booking)
-                }}
+                onClick={openBooking}
                 onDragStart={(event) => event.preventDefault()}
                 onPointerEnter={() => {
                   onPrefetchBooking(booking.id)
@@ -341,15 +362,27 @@ export const PersonalWeekDayPanel = ({
                       {t("invited")}
                     </span>
                   )}
-                  <strong
-                    className={cn(
-                      "block truncate pr-12 text-[11px]",
-                      fifteenMinuteLayout && "min-w-0 flex-[2] pr-0 leading-none"
-                    )}
-                  >
-                    {localize(booking.title, i18n.language)}
-                  </strong>
+                  {!fifteenMinuteLayout && (
+                    <strong
+                      className={cn(
+                        "block truncate pr-12 text-[11px]",
+                        fifteenMinuteLayout && "min-w-0 flex-[2] pr-0 leading-none"
+                      )}
+                    >
+                      {localize(booking.title, i18n.language)}
+                    </strong>
+                  )}
                   {fifteenMinuteLayout ? (
+                    <CompactBookingDetails
+                      title={localize(booking.title, i18n.language)}
+                      organizer={
+                        organizer ? localize(organizer.name, i18n.language) : booking.organizerId
+                      }
+                      start={start}
+                      end={end}
+                      className="pr-8"
+                    />
+                  ) : (
                     <>
                       <BookingTimeRange
                         start={start}
@@ -363,9 +396,6 @@ export const PersonalWeekDayPanel = ({
                       <span className="inline-flex min-w-0 max-w-[35%] truncate border border-primary/30 bg-primary/10 px-1 text-[8px] font-medium leading-none text-primary">
                         {room ? localize(room.name, i18n.language) : booking.roomId}
                       </span>
-                    </>
-                  ) : (
-                    <>
                       <span className="flex min-w-0 items-center gap-1 truncate text-[9px] opacity-75">
                         <BookingTimeRange
                           start={start}
@@ -429,6 +459,7 @@ export const PersonalWeekDayPanel = ({
           ))}
           {showNow && (
             <div
+              ref={nowLineRef}
               className="pointer-events-none absolute left-9 right-0 z-30 border-t-2 border-destructive"
               style={{
                 top: (currentMinute - TIMELINE_FIRST_MINUTE) * WEEK_TIMELINE_PIXELS_PER_MINUTE,

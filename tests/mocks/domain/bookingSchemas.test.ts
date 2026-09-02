@@ -25,4 +25,13 @@ describe("booking request schemas", () => {
   it("accepts a whitelisted booking update", () => {
     expect(updateBookingSchema.safeParse({ title: "Updated planning" }).success).toBe(true)
   })
+
+  it("requires ISO timestamps with an explicit timezone", () => {
+    expect(
+      createBookingSchema.safeParse({ ...validCreate, startAt: "2026-09-01 05:00:00" }).success
+    ).toBe(false)
+    expect(
+      createBookingSchema.safeParse({ ...validCreate, startAt: "2026-09-01T05:00:00" }).success
+    ).toBe(false)
+  })
 })

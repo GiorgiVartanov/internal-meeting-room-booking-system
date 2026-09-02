@@ -72,7 +72,7 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
     {
       search: query || undefined,
       roomIds: roomIds.length ? roomIds : undefined,
-      organizerId: mine ? DEFAULT_EMPLOYEE_ID : undefined,
+      participantId: mine ? DEFAULT_EMPLOYEE_ID : undefined,
       organizerIds: organizerIds.length ? organizerIds : undefined,
       from: from ? fromDateAndTime(from, "00:00") : undefined,
       to: to ? fromDateAndTime(to, "23:59") : undefined,
@@ -126,13 +126,13 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
           if (!showGuideOpener) onOpenChange(next)
         }}
       >
-        <DialogContent className="h-[calc(82dvh+100px)] max-h-[calc(42rem+100px)] max-w-5xl gap-3 sm:max-w-5xl">
+        <DialogContent className="flex h-[calc(82dvh+100px)] max-h-[calc(42rem+100px)] max-w-5xl flex-col overflow-hidden gap-3 sm:max-w-5xl">
           <ModalGuideQuestionButton guideId="booking-search" />
           <DialogHeader>
             <DialogTitle>{t("fullSearch")}</DialogTitle>
             <DialogDescription>{t("fullSearchHint")}</DialogDescription>
           </DialogHeader>
-          <div className="grid min-h-0 gap-3 md:grid-cols-[minmax(320px,0.85fr)_minmax(0,1.15fr)]">
+          <div className="grid min-h-0 flex-1 gap-3 md:grid-cols-[minmax(320px,0.85fr)_minmax(0,1.15fr)]">
             <div
               data-modal-guide="search-filters"
               className="flex min-h-0 flex-col gap-2 overflow-hidden border-r pr-3"

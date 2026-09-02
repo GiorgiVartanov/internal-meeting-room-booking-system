@@ -17,10 +17,12 @@ const modelRoles = [
 
 const challengeKeys = [
   ["aboutCodexCalendarChallengeTitle", "aboutCodexCalendarChallengeDescription"],
+  ["aboutCodexCalendarHeaderChallengeTitle", "aboutCodexCalendarHeaderChallengeDescription"],
   ["aboutCodexAnyRoomChallengeTitle", "aboutCodexAnyRoomChallengeDescription"],
   ["aboutCodexResponsiveChallengeTitle", "aboutCodexResponsiveChallengeDescription"],
   ["aboutCodexUrlChallengeTitle", "aboutCodexUrlChallengeDescription"],
   ["aboutCodexRulesChallengeTitle", "aboutCodexRulesChallengeDescription"],
+  ["aboutCodexDatesChallengeTitle", "aboutCodexDatesChallengeDescription"],
   ["aboutCodexPolishChallengeTitle", "aboutCodexPolishChallengeDescription"],
 ] as const
 
@@ -40,14 +42,14 @@ export const CodexDevelopmentSection = () => {
         <h2 className="text-2xl font-semibold">{t("aboutCodexTitle")}</h2>
       </div>
       <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{t("aboutCodexDescription")}</p>
-      <p className="mt-3 max-w-3xl border border-primary/30 bg-background p-3 text-sm leading-6">
+      <p className="mt-3 max-w-3xl border border-primary/30 bg-panel p-3 text-sm leading-6">
         {t("aboutCodexOwnership")}
       </p>
       <div className="mt-5 grid gap-3 md:grid-cols-3">
         {modelRoles.map(([model, roleKey, href]) => (
           <article
             key={model}
-            className="flex h-full flex-col border bg-background p-4"
+            className="flex h-full flex-col border bg-panel p-4"
           >
             <h3 className="font-semibold text-primary">{model}</h3>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{t(roleKey)}</p>
@@ -74,7 +76,7 @@ export const CodexDevelopmentSection = () => {
         {challengeKeys.map(([titleKey, descriptionKey]) => (
           <article
             key={titleKey}
-            className="border border-primary/30 bg-background p-4"
+            className="border border-primary/30 bg-panel p-4"
           >
             <h4 className="font-semibold">{t(titleKey)}</h4>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">{t(descriptionKey)}</p>

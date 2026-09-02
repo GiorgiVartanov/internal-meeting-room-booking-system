@@ -10,12 +10,13 @@ export const capabilities = [
 ] as const
 
 export const aboutSectionIds = [
-  "product",
+  "project",
   "capabilities",
   "architecture",
   "principles",
   "models",
   "testing",
+  "deployment",
   "technologies",
   "codex",
 ] as const
@@ -26,6 +27,10 @@ export const architectureTopics = [
   ["aboutRequestsTitle", "aboutRequestsDescription"],
   ["aboutRulesTitle", "aboutRulesDescription"],
   ["aboutRoutingTitle", "aboutRoutingDescription"],
+  ["aboutGuidesImplementationTitle", "aboutGuidesImplementationDescription"],
+  ["aboutOptimisticTitle", "aboutOptimisticDescription"],
+  ["aboutLayoutPersistenceTitle", "aboutLayoutPersistenceDescription"],
+  ["aboutPerformance", "aboutPerformanceDescription"],
   ["aboutQualityTitle", "aboutQualityDescription"],
 ] as const
 
@@ -37,13 +42,13 @@ export const principles = [
   ["boundaries", "aboutBoundaryDecisionTitle", "aboutBoundaryDecisionDescription"],
   ["timezone", "aboutTimezoneDecisionTitle", "aboutTimezoneDecisionDescription"],
   ["accessibility", "aboutAccessibilityDecisionTitle", "aboutAccessibilityDecisionDescription"],
-  ["documentation", "aboutDocumentationDecisionTitle", "aboutDocumentationDecisionDescription"],
 ] as const
 
 export const testSuites = [
   ["aboutCreateTestsTitle", "aboutCreateTestsDescription", 2],
   ["aboutUpdateTestsTitle", "aboutUpdateTestsDescription", 1],
-  ["aboutSchemaTestsTitle", "aboutSchemaTestsDescription", 3],
+  ["aboutValidationTestsTitle", "aboutValidationTestsDescription", 3],
+  ["aboutSchemaTestsTitle", "aboutSchemaTestsDescription", 4],
   ["aboutOverlapTestsTitle", "aboutOverlapTestsDescription", 4],
   ["aboutRepositoryTestsTitle", "aboutRepositoryTestsDescription", 1],
   ["aboutHolidayTestsTitle", "aboutHolidayTestsDescription", 2],

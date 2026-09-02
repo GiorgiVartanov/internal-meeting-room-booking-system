@@ -145,7 +145,7 @@ function DialogContent({
             render={
               <Button
                 variant="ghost"
-                className="absolute top-4 right-4 z-40"
+                className="absolute top-4 right-4 z-[90]"
                 size="icon"
               />
             }
@@ -164,7 +164,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="dialog-header"
       className={cn(
-        "sticky top-0 z-20 flex flex-col gap-1.5 border-b bg-popover pb-3 pr-10 text-left",
+        "sticky top-0 z-[80] flex shrink-0 flex-col gap-1.5 border-b bg-popover pb-3 pr-10 text-left",
         className
       )}
       {...props}

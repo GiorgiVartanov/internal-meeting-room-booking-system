@@ -17,7 +17,7 @@ export const ModalGuideQuestionButton = ({ guideId }: IProps) => {
       type="button"
       size="icon"
       variant="ghost"
-      className="absolute right-[3.25rem] top-4 z-[70]"
+      className="absolute right-[3.25rem] top-4 z-[90]"
       aria-label={t("guideOpen")}
       onClick={() =>
         window.dispatchEvent(

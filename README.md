@@ -4,14 +4,14 @@
 
 **Assumptions:** Where the brief was open to interpretation, I treated the app as an internal office tool with one simulated signed-in employee, a fixed Tbilisi office timezone, and room conflicts as the main booking constraint. I preferred to make the experience usable and easy to understand for people with different levels of technical confidence, rather than assuming that every employee would already be comfortable with software. In my experience, I have seen people ask HR for help even with simple meeting-room bookings in Google Calendar, so I also added an in-app tutorial and contextual guidance to make the main workflows more approachable. I added localization, themes, drag-and-drop scheduling, keyboard shortcuts, persistent cancellation history, and guided help to make the workflow feel more complete. I added a few out-of-scope features, since the timeframe left extra room, so I thought I'd use it to include some polish/portfolio-worthy touches.
 
-The [About page](https://internal-meeting-room-booking-system.netlify.app/about) contains a deeper explanation of what I built, technical decisions, and how the main parts of the application work.
+The <a href="https://internal-meeting-room-booking-system.netlify.app/about" target="_blank" rel="noopener noreferrer">About page</a> contains a deeper explanation of what I built, technical decisions, and how the main parts of the application work.
 
 <p align="center">
-  <a href="https://internal-meeting-room-booking-system.netlify.app">
+  <a href="https://internal-meeting-room-booking-system.netlify.app" target="_blank" rel="noopener noreferrer">
     <img src="docs/screenshots/room-booking.webp" alt="Live demo preview of the room booking page" width="900">
   </a>
   <br>
-  <a href="https://internal-meeting-room-booking-system.netlify.app">View live demo</a>
+  <a href="https://internal-meeting-room-booking-system.netlify.app" target="_blank" rel="noopener noreferrer">View live demo</a>
 </p>
 
 This frontend take-home task models a meeting room booking app for a hypothetical company office. It runs without a backend: Axios makes the requests, TanStack Query manages response data and caches it, and MSW is used to simulate the backend.
@@ -30,7 +30,7 @@ The task requirements asked for a dashboard, searchable rooms, daily and weekly 
 - [How to run locally](#run-locally)
 - [How was it deployed to Netlify](#deploy-to-netlify)
 - [Validation](#validation)
-- [Screenshots](#screenshots)
+- [Pages](#pages)
 
 ## Assignment coverage
 
@@ -162,26 +162,36 @@ npm test
 npm run build
 ```
 
-## Screenshots
+## Pages
 
-The screenshot files live under `docs/screenshots/`, outside the application bundle, because they are used only by this GitHub README.
+The page previews live under `docs/screenshots/`, outside the application bundle, because they are used only by this GitHub README.
 
-### Room booking
+### <a href="https://internal-meeting-room-booking-system.netlify.app/" target="_blank" rel="noopener noreferrer">Room booking</a>
 
-![Room booking page](docs/screenshots/room-booking.webp)
+<a href="https://internal-meeting-room-booking-system.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="docs/screenshots/room-booking.webp" alt="Room booking page"></a>
 
-### My Schedule
+<p><a href="https://internal-meeting-room-booking-system.netlify.app/" target="_blank" rel="noopener noreferrer">View this page</a></p>
 
-![Schedule page](docs/screenshots/my-schedule.webp)
+### <a href="https://internal-meeting-room-booking-system.netlify.app/schedule" target="_blank" rel="noopener noreferrer">My Schedule</a>
 
-### Dashboard
+<a href="https://internal-meeting-room-booking-system.netlify.app/schedule" target="_blank" rel="noopener noreferrer"><img src="docs/screenshots/my-schedule.webp" alt="Schedule page"></a>
 
-![Dashboard page](docs/screenshots/dashboard.webp)
+<p><a href="https://internal-meeting-room-booking-system.netlify.app/schedule" target="_blank" rel="noopener noreferrer">View this page</a></p>
 
-### Documentation
+### <a href="https://internal-meeting-room-booking-system.netlify.app/dashboard" target="_blank" rel="noopener noreferrer">Dashboard</a>
 
-![Documentation page](docs/screenshots/documentation.webp)
+<a href="https://internal-meeting-room-booking-system.netlify.app/dashboard" target="_blank" rel="noopener noreferrer"><img src="docs/screenshots/dashboard.webp" alt="Dashboard page"></a>
 
-### About
+<p><a href="https://internal-meeting-room-booking-system.netlify.app/dashboard" target="_blank" rel="noopener noreferrer">View this page</a></p>
 
-![About page](docs/screenshots/about.webp)
+### <a href="https://internal-meeting-room-booking-system.netlify.app/documentation" target="_blank" rel="noopener noreferrer">Documentation</a>
+
+<a href="https://internal-meeting-room-booking-system.netlify.app/documentation" target="_blank" rel="noopener noreferrer"><img src="docs/screenshots/documentation.webp" alt="Documentation page"></a>
+
+<p><a href="https://internal-meeting-room-booking-system.netlify.app/documentation" target="_blank" rel="noopener noreferrer">View this page</a></p>
+
+### <a href="https://internal-meeting-room-booking-system.netlify.app/about" target="_blank" rel="noopener noreferrer">About</a>
+
+<a href="https://internal-meeting-room-booking-system.netlify.app/about" target="_blank" rel="noopener noreferrer"><img src="docs/screenshots/about.webp" alt="About page"></a>
+
+<p><a href="https://internal-meeting-room-booking-system.netlify.app/about" target="_blank" rel="noopener noreferrer">View this page</a></p>

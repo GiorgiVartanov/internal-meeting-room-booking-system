@@ -10,6 +10,18 @@ import "./i18n"
 import App from "./App.tsx"
 import { enableMocking } from "./mocks/enableMocking.ts"
 
+const reloadAfterStaleChunk = (event: Event) => {
+  event.preventDefault()
+
+  const reloadKey = "vite-stale-chunk-reload"
+  if (sessionStorage.getItem(reloadKey) === "true") return
+
+  sessionStorage.setItem(reloadKey, "true")
+  window.location.reload()
+}
+
+window.addEventListener("vite:preloadError", reloadAfterStaleChunk)
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -25,6 +37,8 @@ const startApplication = async () => {
   await enableMocking()
   const root = document.getElementById("root")
   if (!root) throw new Error("Application root element was not found.")
+
+  sessionStorage.removeItem("vite-stale-chunk-reload")
 
   createRoot(root).render(
     <StrictMode>

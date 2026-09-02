@@ -9,3 +9,16 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# The HTML entry point must always be revalidated after a deploy. Otherwise a
+# browser can keep an older entry point that references chunks removed by the
+# latest build. Hashed assets remain cacheable because their names are immutable.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/mockServiceWorker.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"

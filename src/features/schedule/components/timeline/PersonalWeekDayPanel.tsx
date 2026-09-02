@@ -384,18 +384,6 @@ export const PersonalWeekDayPanel = ({
                     />
                   ) : (
                     <>
-                      <BookingTimeRange
-                        start={start}
-                        end={end}
-                        className="shrink-0 text-[8px] leading-none opacity-75"
-                      />
-                      <span className="min-w-0 flex-1 truncate text-[8px] leading-none opacity-75">
-                        <UserRound className="mr-0.5 inline size-2 shrink-0" />
-                        {organizer ? localize(organizer.name, i18n.language) : booking.organizerId}
-                      </span>
-                      <span className="inline-flex min-w-0 max-w-[35%] truncate border border-primary/30 bg-primary/10 px-1 text-[8px] font-medium leading-none text-primary">
-                        {room ? localize(room.name, i18n.language) : booking.roomId}
-                      </span>
                       <span className="flex min-w-0 items-center gap-1 truncate text-[9px] opacity-75">
                         <BookingTimeRange
                           start={start}
@@ -425,7 +413,6 @@ export const PersonalWeekDayPanel = ({
                 </div>
                 <BookingCardActions
                   booking={booking}
-                  compact={fifteenMinuteLayout}
                   onEdit={() => onEditBooking(booking)}
                 />
               </article>

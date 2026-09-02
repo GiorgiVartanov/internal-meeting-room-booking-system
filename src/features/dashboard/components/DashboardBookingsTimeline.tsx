@@ -215,7 +215,6 @@ export const DashboardBookingsTimeline = ({
             </div>
             <BookingCardActions
               booking={booking}
-              compact={fifteenMinuteLayout}
               onEdit={() => onEditBooking(booking)}
             />
           </article>

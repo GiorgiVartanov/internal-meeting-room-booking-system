@@ -27,7 +27,6 @@ interface IProps {
   editHref?: string
   onEdit?: () => void
   onDelete?: () => void
-  compact?: boolean
 }
 
 /** Renders the edit and cancellation controls available for a booking card. */
@@ -36,7 +35,6 @@ export const BookingCardActions = ({
   editHref,
   onEdit,
   onDelete,
-  compact = false,
 }: IProps): ReactElement | null => {
   const { t, i18n } = useTranslation()
   const [confirmCancel, setConfirmCancel] = useState(false)
@@ -94,9 +92,7 @@ export const BookingCardActions = ({
 
   return (
     <>
-      <div
-        className={cn("absolute -right-1 top-0 z-30 flex", compact && "top-1/2 -translate-y-1/2")}
-      >
+      <div className="absolute right-0 top-0 z-30 flex gap-0">
         {canEdit && onEdit && (
           <Button
             data-modal-opener="edit-booking"
@@ -104,7 +100,7 @@ export const BookingCardActions = ({
             size="icon-xs"
             variant="ghost"
             className={cn(
-              "size-4 transition-colors duration-200 hover:bg-transparent hover:text-primary"
+              "size-4 p-0 transition-colors duration-200 hover:bg-transparent hover:text-primary"
             )}
             aria-label={t("editBooking")}
             onClick={edit}
@@ -118,7 +114,7 @@ export const BookingCardActions = ({
             size="icon-xs"
             variant="ghost"
             className={cn(
-              "size-4 transition-colors duration-200 hover:bg-transparent hover:text-primary"
+              "size-4 p-0 transition-colors duration-200 hover:bg-transparent hover:text-primary"
             )}
             aria-label={t("editBooking")}
             onClick={stopPropagation}
@@ -133,7 +129,7 @@ export const BookingCardActions = ({
             size="icon-xs"
             variant="ghost"
             className={cn(
-              "size-4 transition-colors duration-200 hover:bg-transparent hover:text-destructive"
+              "size-4 p-0 transition-colors duration-200 hover:bg-transparent hover:text-destructive"
             )}
             aria-label={t("cancelBooking")}
             onClick={requestCancel}

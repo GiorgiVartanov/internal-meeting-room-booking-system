@@ -441,13 +441,12 @@ export const BookingTimeline = ({
                   </div>
                 </div>
               )}
-              <BookingCardActions
-                booking={booking}
-                compact={fifteenMinuteLayout}
-                onEdit={() => onEdit(booking)}
-                onDelete={() => onDelete(booking)}
-              />
             </div>
+            <BookingCardActions
+              booking={booking}
+              onEdit={() => onEdit(booking)}
+              onDelete={() => onDelete(booking)}
+            />
           </article>
         )
       })}

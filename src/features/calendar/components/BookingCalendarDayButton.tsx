@@ -48,11 +48,7 @@ export const BookingCalendarDayButton = ({
   const activity = availability[dateKey(day.date)] ?? "empty"
   const holiday = holidaysByDate[dateKey(day.date)]
   const showActivity = !modifiers.disabled && !modifiers.holiday && !modifiers.weekend
-  const dayLabel = modifiers.outside
-    ? format(day.date, "MMM do", { locale: dateLocale(i18n.language) }).toLocaleUpperCase(
-        i18n.language
-      )
-    : format(day.date, "d", { locale: dateLocale(i18n.language) })
+  const dayLabel = format(day.date, "d", { locale: dateLocale(i18n.language) })
 
   return (
     <div className="relative size-full min-w-0">
@@ -69,7 +65,7 @@ export const BookingCalendarDayButton = ({
         <span
           className={
             modifiers.outside
-              ? "max-w-full truncate text-[8px] min-[380px]:text-[9px] sm:text-xs"
+              ? "text-xs sm:text-sm"
               : ""
           }
         >

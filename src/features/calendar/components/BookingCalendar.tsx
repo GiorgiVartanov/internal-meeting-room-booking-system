@@ -9,7 +9,7 @@ import {
   startOfMonth,
   subMonths,
 } from "date-fns"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -246,6 +246,16 @@ export const BookingCalendar = ({
                 </Button>
               </div>
               <div />
+              <Button
+                type="button"
+                size="icon"
+                variant="ghost"
+                className="absolute right-2 top-2 size-8"
+                aria-label={t("close")}
+                onClick={() => setChoosingMonth(false)}
+              >
+                <X className="size-4" />
+              </Button>
             </div>
             <div
               className={cn(
@@ -255,7 +265,7 @@ export const BookingCalendar = ({
             >
               <div
                 className={cn(
-                  "calendar-desktop-gutter grid h-full min-h-0 auto-rows-max grid-cols-2 items-start gap-1 overflow-y-auto sm:grid-cols-3 sm:gap-1.5 lg:mx-auto lg:max-w-300 lg:grid-cols-4 lg:grid-rows-3 lg:auto-rows-fr lg:gap-2 lg:overflow-hidden",
+                  "calendar-desktop-gutter grid h-full min-h-0 auto-rows-max grid-cols-1 items-start gap-2 overflow-y-auto sm:grid-cols-2 sm:gap-1.5 lg:mx-auto lg:max-w-300 lg:grid-cols-4 lg:grid-rows-3 lg:auto-rows-fr lg:gap-2 lg:overflow-hidden",
                   horizontalYearScroll && "dashboard-year-calendar-grid px-2"
                 )}
               >
@@ -328,7 +338,7 @@ export const BookingCalendar = ({
                 weeks: `grid min-h-0 w-full flex-none grid-rows-6 gap-1 sm:gap-2 ${fillWidth ? "aspect-[7/6] lg:aspect-[2/1]" : "aspect-[7/6] min-[850px]:aspect-[14/9]"}`,
                 week: "mt-0 grid min-h-0 w-full grid-cols-7 gap-1 sm:gap-2",
                 day: `relative h-full min-h-0 w-full p-0 text-center ${dayClassName}`,
-                outside: "text-muted-foreground opacity-60 dark:opacity-35",
+                outside: "text-muted-foreground opacity-75 dark:opacity-65",
                 disabled: "text-muted-foreground opacity-75 dark:opacity-50",
                 nav: large
                   ? "hidden"

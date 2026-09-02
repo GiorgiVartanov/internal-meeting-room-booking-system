@@ -40,7 +40,7 @@ export const DashboardDayDrawer = ({
       onOpenChange={(open) => !open && onClose()}
       swipeDirection="right"
     >
-      <DrawerContent className="h-dvh">
+      <DrawerContent className="!top-16 !h-[calc(100dvh-4rem)]">
         <DashboardDayPanel
           date={date}
           dateValue={dateValue}

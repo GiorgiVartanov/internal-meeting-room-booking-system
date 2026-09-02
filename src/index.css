@@ -17,7 +17,7 @@
   }
 }
 
-@container (max-width: 1219px) {
+@container (min-width: 800px) and (max-width: 1219px) {
   .dashboard-year-calendar-scroll {
     overflow-x: auto;
   }

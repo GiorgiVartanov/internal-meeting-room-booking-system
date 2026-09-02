@@ -18,15 +18,15 @@ export const CalendarMineFilter = ({ selected, onToggle }: IProps): ReactElement
     <Button
       data-guide="dashboard-mine-filter"
       type="button"
-      size="icon"
+      size="sm"
       variant={selected ? "default" : "outline"}
-      className="size-8 shrink-0 sm:h-8 sm:w-auto sm:px-3"
+      className="h-8 min-w-max shrink-0 whitespace-nowrap px-3"
       aria-pressed={selected}
       aria-label={t("myBookingsOnly")}
       onClick={onToggle}
     >
       {selected ? <Check /> : <UserRound />}
-      <span className="hidden sm:inline">{t("myBookingsOnly")}</span>
+      <span>{t("myBookingsOnly")}</span>
     </Button>
   )
 }

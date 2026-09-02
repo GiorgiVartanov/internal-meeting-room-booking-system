@@ -307,14 +307,14 @@ const HomePage = () => {
       <section className="relative h-full min-h-0 min-w-0 overflow-hidden lg:hidden">
         <div className="absolute left-3 top-3 z-30 flex gap-2">
           <Button
-            className="shadow-lg ring-2 ring-background/80"
+            className="shadow-lg"
             onClick={() => setLeftOpen(true)}
           >
             <Clock3 />
             {t("schedule")}
           </Button>
           <Button
-            className="shadow-lg ring-2 ring-background/80"
+            className="shadow-lg"
             onClick={() => setRightOpen(true)}
           >
             <SlidersHorizontal />
@@ -328,7 +328,7 @@ const HomePage = () => {
         onOpenChange={handleLeftOpenChange}
         swipeDirection="left"
       >
-        <DrawerContent className="h-dvh bg-panel [&_[data-slot=drawer-close]]:border-0 [&_[data-slot=drawer-close]]:bg-panel [&_[data-slot=drawer-close]]:shadow-none data-[swipe-axis=x]:top-16 data-[swipe-axis=x]:bottom-auto data-[swipe-axis=x]:h-[calc(100dvh-4rem)] data-[swipe-axis=x]:[--drawer-content-width:min(30rem,86vw)]">
+        <DrawerContent className="h-dvh bg-panel [&_[data-slot=drawer-close]]:top-2.5 [&_[data-slot=drawer-close]]:right-3 [&_[data-slot=drawer-close]]:border-0 [&_[data-slot=drawer-close]]:bg-panel [&_[data-slot=drawer-close]]:shadow-none data-[swipe-axis=x]:top-16 data-[swipe-axis=x]:bottom-auto data-[swipe-axis=x]:h-[calc(100dvh-4rem)] data-[swipe-axis=x]:[--drawer-content-width:min(30rem,86vw)]">
           <DrawerHeader className="sticky top-0 z-10 shrink-0 flex-row items-baseline gap-2 border-b bg-panel p-4 pb-3 pr-12">
             <DrawerTitle>{t("schedule")}</DrawerTitle>
             <DrawerDescription>{scheduleDescription}</DrawerDescription>
@@ -341,7 +341,7 @@ const HomePage = () => {
         onOpenChange={handleRightOpenChange}
         swipeDirection="right"
       >
-        <DrawerContent className="h-dvh bg-panel [&_[data-slot=drawer-close]]:border-0 [&_[data-slot=drawer-close]]:bg-panel [&_[data-slot=drawer-close]]:shadow-none data-[swipe-axis=x]:top-16 data-[swipe-axis=x]:bottom-auto data-[swipe-axis=x]:h-[calc(100dvh-4rem)] data-[swipe-axis=x]:[--drawer-content-width:min(30rem,86vw)]">
+        <DrawerContent className="h-dvh bg-panel [&_[data-slot=drawer-close]]:top-1.5 [&_[data-slot=drawer-close]]:right-3 [&_[data-slot=drawer-close]]:border-0 [&_[data-slot=drawer-close]]:bg-panel [&_[data-slot=drawer-close]]:shadow-none data-[swipe-axis=x]:top-16 data-[swipe-axis=x]:bottom-auto data-[swipe-axis=x]:h-[calc(100dvh-4rem)] data-[swipe-axis=x]:[--drawer-content-width:min(30rem,86vw)]">
           <div className="min-h-0 flex-1">{mobileRooms}</div>
         </DrawerContent>
       </Drawer>

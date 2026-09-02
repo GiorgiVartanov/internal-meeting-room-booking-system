@@ -77,7 +77,7 @@ export const RoomsSidebar = ({
       <div className="border-b p-3">
         <div
           className={cn(
-            "flex items-center gap-2",
+            "-mx-3 flex items-center gap-2 border-b px-3 pb-3",
             countFirst ? "justify-start" : "justify-between"
           )}
         >

@@ -17,7 +17,9 @@ export const readCollection = <T>(key: string, seed: T[]): T[] => {
 
   if (stored) {
     try {
-      const records = JSON.parse(stored) as T[]
+      const parsed: unknown = JSON.parse(stored)
+      if (!Array.isArray(parsed)) throw new Error("Stored collection is not an array")
+      const records = parsed as T[]
       localStorage.setItem(storageKey, stored)
       collectionCache.set(storageKey, records)
 

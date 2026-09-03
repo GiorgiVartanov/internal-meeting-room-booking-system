@@ -46,6 +46,8 @@ export const ChangeBookingRoomDrawer = ({
 
   return (
     <Drawer
+      modal={false}
+      disablePointerDismissal
       open={open && !guideOpenerVisible}
       onOpenChange={(next) => {
         if (!guideOpenerVisible) onOpenChange(next)
@@ -55,10 +57,11 @@ export const ChangeBookingRoomDrawer = ({
       <DrawerContent
         data-dialog-dismiss-protected
         className="h-dvh"
-        overlayClassName="supports-backdrop-filter:backdrop-blur-none"
+        viewportClassName="z-[70]"
+        overlayClassName="z-[68] supports-backdrop-filter:backdrop-blur-none"
       >
         <ModalGuideQuestionButton guideId="change-room" />
-        <DrawerHeader>
+        <DrawerHeader className="bg-panel">
           <DrawerTitle>{t("changeRoom")}</DrawerTitle>
           <DrawerDescription>{t("selectRoomHint")}</DrawerDescription>
         </DrawerHeader>
@@ -83,7 +86,7 @@ export const ChangeBookingRoomDrawer = ({
             }}
           />
         </div>
-        <DrawerFooter>
+        <DrawerFooter className="bg-panel">
           <Button
             type="button"
             onClick={() => onOpenChange(false)}

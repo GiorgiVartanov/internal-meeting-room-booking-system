@@ -211,11 +211,18 @@ export const EditableBookingDialog = ({
   /** Requests confirmation when closing a form that contains unsaved changes. */
   const requestClose = () => (form.formState.isDirty ? setConfirmClose(true) : onOpenChange(false))
 
+  const handleDialogOpenChange = (next: boolean) => {
+    if (showEditGuideOpener || next) return
+
+    setRoomDrawerOpen(false)
+    requestClose()
+  }
+
   return (
     <>
       <Dialog
         open={open && !showEditGuideOpener}
-        onOpenChange={(next) => !showEditGuideOpener && !next && requestClose()}
+        onOpenChange={handleDialogOpenChange}
       >
         <DialogContent className="flex max-h-[90dvh] flex-col overflow-hidden gap-0 sm:max-w-xl">
           <ModalGuideQuestionButton guideId="edit-booking" />

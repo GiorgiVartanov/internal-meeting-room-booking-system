@@ -97,7 +97,7 @@
   "fullSearch": "Search booking history",
   "fullSearchHint": "Search every booking by title, organizer, room, attributes, or date range.",
   "organizer": "Organizer",
-  "attendees": "Attendees",
+  "attendees": "Attendees (other than organizer)",
   "attendeesOptional": "Attendees (optional)",
   "attendeeLimit": "Select up to {{count}} attendees for this room.",
   "noAttendees": "No attendees",

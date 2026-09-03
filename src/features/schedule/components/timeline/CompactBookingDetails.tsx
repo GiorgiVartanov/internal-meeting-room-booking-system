@@ -28,7 +28,7 @@ export const CompactBookingDetails = ({
       className
     )}
   >
-    <strong className="w-fit max-w-[55%] shrink-0 truncate font-semibold">{title}</strong>
+    <strong className="mr-1 w-fit max-w-[55%] shrink-0 truncate font-semibold">{title}</strong>
     <BookingTimeRange
       start={start}
       end={end}

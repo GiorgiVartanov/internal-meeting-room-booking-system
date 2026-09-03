@@ -48,10 +48,12 @@ export const ScheduleCalendarDialog = ({
     </div>
   )
   const filter = showMineFilter ? (
-    <CalendarMineFilter
-      selected={onlyMine}
-      onToggle={() => setOnlyMine((value) => !value)}
-    />
+    <div className="sm:mr-20">
+      <CalendarMineFilter
+        selected={onlyMine}
+        onToggle={() => setOnlyMine((value) => !value)}
+      />
+    </div>
   ) : null
 
   return (

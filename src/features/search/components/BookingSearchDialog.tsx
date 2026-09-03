@@ -1,4 +1,4 @@
-import { Check, Search, Users } from "lucide-react"
+import { Check, Search, UserRound, Users } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate, useSearchParams } from "react-router-dom"
@@ -198,7 +198,7 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                 }
               />
               <fieldset className="flex min-h-0 flex-1 flex-col">
-                <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                <legend className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground">
                   {t("rooms")}
                 </legend>
                 <div className="grid min-h-0 flex-1 grid-cols-2 content-start gap-1.5 overflow-y-auto pr-1">
@@ -214,7 +214,7 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                         key={room.id}
                         aria-pressed={selected}
                         className={cn(
-                          "border p-2 text-left outline outline-0 outline-primary/40 hover:border-primary",
+                          "border p-2 text-left outline outline-0 outline-primary/40 transition-colors hover:border-primary/70 hover:bg-accent/70",
                           selected && "border-primary bg-primary/10 outline-2 -outline-offset-2"
                         )}
                         onClick={() =>
@@ -227,8 +227,8 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                         <span className="block text-xs font-semibold">
                           {localize(room.name, i18n.language)}
                         </span>
-                        <span className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground">
-                          <Users className="size-3" />
+                        <span className="mt-1 flex items-start gap-1 text-[10px] text-muted-foreground">
+                          <Users className="mt-px size-3 shrink-0" />
                           {t("roomPlaces", { count: room.capacity })} ·{" "}
                           {room.amenities
                             .slice(0, 2)
@@ -241,7 +241,7 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                 </div>
               </fieldset>
               <fieldset className="flex min-h-0 flex-1 flex-col">
-                <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                <legend className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground">
                   {t("attendees")}
                 </legend>
                 <div className="grid min-h-0 flex-1 grid-cols-2 content-start gap-1.5 overflow-y-auto pr-1">
@@ -257,7 +257,7 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                         key={employee.id}
                         aria-pressed={selected}
                         className={cn(
-                          "border p-2 text-left outline outline-0 outline-primary/40 hover:border-primary",
+                          "border p-2 text-left outline outline-0 outline-primary/40 transition-colors hover:border-primary/70 hover:bg-accent/70",
                           selected && "border-primary bg-primary/10 outline-2 -outline-offset-2"
                         )}
                         onClick={() =>
@@ -267,8 +267,9 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                           })
                         }
                       >
-                        <span className="block truncate text-xs font-semibold">
-                          {localize(employee.name, i18n.language)}
+                        <span className="flex min-w-0 items-center gap-1.5 text-xs font-semibold">
+                          <UserRound className="size-3 shrink-0 text-muted-foreground" />
+                          <span className="truncate">{localize(employee.name, i18n.language)}</span>
                         </span>
                         <span className="mt-1 block truncate text-[10px] text-muted-foreground">
                           {employee.email}

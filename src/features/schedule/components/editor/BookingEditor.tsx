@@ -49,9 +49,10 @@ export const BookingEditor = ({
     >
       <div className="grid grid-cols-[1fr_auto] gap-2">
         <div className="space-y-1">
-          <Label htmlFor="booking-title">{t("bookingTitle")}</Label>
+          <Label htmlFor="meeting-booking-title">{t("bookingTitle")}</Label>
           <Input
-            id="booking-title"
+            id="meeting-booking-title"
+            autoComplete="off"
             {...form.register("title")}
             aria-invalid={Boolean(form.formState.errors.title)}
           />

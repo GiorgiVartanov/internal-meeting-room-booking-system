@@ -1,5 +1,4 @@
 import { addMonths, format, subMinutes } from "date-fns"
-import { UserRound } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -22,7 +21,6 @@ import { useTimelineBookingDrag } from "../../hooks"
 import {
   type IDragState,
   type IPositionedBooking,
-  bookingParticipationClassName,
   mergePersonalWeekRanges as mergeRanges,
   overlapRanges,
   positionBookings,
@@ -33,11 +31,10 @@ import {
   timelineTimeText,
   WEEK_TIMELINE_PIXELS_PER_MINUTE,
 } from "../../utils"
-import { BookingCardActions } from "../booking"
+import { BookingCard, BookingCardActions } from "../booking"
 
 import { BookingResizeHandles } from "./BookingResizeHandles"
-import { BookingTimeRange } from "./BookingTimeRange"
-import { CompactBookingDetails } from "./CompactBookingDetails"
+import { TimelineBookingDetails } from "./TimelineBookingDetails"
 
 import type { ReactElement } from "react"
 
@@ -303,14 +300,16 @@ export const PersonalWeekDayPanel = ({
             }
 
             return (
-              <article
-                data-booking
+              <BookingCard
                 draggable={false}
                 data-guide={canDrag ? "personal-reschedule" : undefined}
                 key={booking.id}
+                booking={booking}
+                accessibleLabel={localize(booking.title, i18n.language)}
+                onOpen={openBooking}
+                onTriggerFocus={() => onPrefetchBooking(booking.id)}
                 className={cn(
-                  "group/booking absolute z-10 overflow-hidden border border-primary/60 px-2 py-1 text-left shadow-sm outline-none transition-[transform,box-shadow,opacity,background-color] hover:z-20 hover:ring-2 hover:ring-primary focus-within:z-20 focus-within:ring-2 focus-within:ring-primary",
-                  bookingParticipationClassName(booking),
+                  "absolute z-10 border-primary/60 px-2 py-1 transition-[border-color,transform,box-shadow,opacity,background-color] hover:z-20 focus-within:z-20",
                   fifteenMinuteLayout && "py-0",
                   canDrag && "cursor-grab touch-none active:cursor-grabbing",
                   activeDrag && "z-40 opacity-80 shadow-lg"
@@ -336,88 +335,32 @@ export const PersonalWeekDayPanel = ({
                 onPointerMove={moveDrag}
                 onPointerUp={finishDrag}
                 onPointerCancel={cancelDrag}
-                onClick={openBooking}
                 onDragStart={(event) => event.preventDefault()}
                 onPointerEnter={() => {
                   onPrefetchBooking(booking.id)
                   if (room?.imageUrl) new Image().src = room.imageUrl
                 }}
               >
-                <button
-                  data-booking-trigger
-                  type="button"
-                  className="absolute inset-0 z-0"
-                  aria-label={localize(booking.title, i18n.language)}
-                  onFocus={() => onPrefetchBooking(booking.id)}
-                />
                 <BookingResizeHandles enabled={canDrag} />
-                <div
-                  className={cn(
-                    "pointer-events-none relative z-10",
-                    fifteenMinuteLayout && "flex h-full items-center gap-1 pr-8"
-                  )}
-                >
-                  {invited && !fifteenMinuteLayout && (
-                    <span className="absolute right-1 top-1 bg-secondary/90 px-1 text-[8px] font-semibold uppercase tracking-wide text-primary">
-                      {t("invited")}
-                    </span>
-                  )}
-                  {!fifteenMinuteLayout && (
-                    <strong
-                      className={cn(
-                        "block truncate pr-12 text-[11px]",
-                        fifteenMinuteLayout && "min-w-0 flex-[2] pr-0 leading-none"
-                      )}
-                    >
-                      {localize(booking.title, i18n.language)}
-                    </strong>
-                  )}
-                  {fifteenMinuteLayout ? (
-                    <CompactBookingDetails
-                      title={localize(booking.title, i18n.language)}
-                      organizer={
-                        organizer ? localize(organizer.name, i18n.language) : booking.organizerId
-                      }
-                      start={start}
-                      end={end}
-                      className="pr-8"
-                    />
-                  ) : (
-                    <>
-                      <span className="flex min-w-0 items-center gap-1 truncate text-[9px] opacity-75">
-                        <BookingTimeRange
-                          start={start}
-                          end={end}
-                          className="shrink-0"
-                        />
-                        <span aria-hidden>·</span>
-                        <span className="flex min-w-0 items-center gap-1 truncate">
-                          <UserRound className="size-2.5 shrink-0" />
-                          {organizer
-                            ? localize(organizer.name, i18n.language)
-                            : booking.organizerId}
-                        </span>
-                        {compactLayout && (
-                          <span className="inline-flex min-w-0 max-w-[40%] truncate border border-primary/30 bg-primary/10 px-1 font-medium text-primary">
-                            {room ? localize(room.name, i18n.language) : booking.roomId}
-                          </span>
-                        )}
-                      </span>
-                      {!compactLayout && (
-                        <span className="mt-0.5 inline-flex w-fit max-w-full truncate border border-primary/30 bg-primary/10 px-1 text-[9px] font-medium text-primary">
-                          {room ? localize(room.name, i18n.language) : booking.roomId}
-                        </span>
-                      )}
-                    </>
-                  )}
-                </div>
+                <TimelineBookingDetails
+                  title={localize(booking.title, i18n.language)}
+                  organizer={
+                    organizer ? localize(organizer.name, i18n.language) : booking.organizerId
+                  }
+                  start={start}
+                  end={end}
+                  compact={fifteenMinuteLayout}
+                  room={room ? localize(room.name, i18n.language) : booking.roomId}
+                  roomInline={compactLayout}
+                  badge={invited ? t("invited") : undefined}
+                />
                 <BookingCardActions
                   booking={booking}
                   onEdit={() => onEditBooking(booking)}
                   className="items-center"
                   style={{ height: BOOKING_SLOT_MINUTES * WEEK_TIMELINE_PIXELS_PER_MINUTE }}
                 />
-              </article>
+              </BookingCard>
             )
           })}
           {draggedItem && draggedRange && roomBlockerRanges.length > 0 && (

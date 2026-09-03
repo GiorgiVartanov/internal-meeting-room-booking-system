@@ -1,3 +1,4 @@
+export { BookingCard } from "./BookingCard"
 export { BookingCardActions } from "./BookingCardActions"
 export { BookingDetailsDialog } from "./BookingDetailsDialog"
 export { ChangeBookingRoomDrawer } from "./ChangeBookingRoomDrawer"

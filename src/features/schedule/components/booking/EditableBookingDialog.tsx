@@ -30,6 +30,7 @@ import {
 import { ModalGuideQuestionButton } from "@/features/guide"
 import { appDateKey, formatAppTime, fromDateAndTime, nativeDateLocale } from "@/lib/date"
 import { localize } from "@/lib/localize"
+import { cn } from "@/lib/utils"
 import type {
   IBooking,
   IEmployee,
@@ -399,7 +400,14 @@ export const EditableBookingDialog = ({
                             <label
                               key={employee.id}
                               aria-disabled={!selected && atCapacity}
-                              className={`flex cursor-pointer items-start gap-2 border p-2 text-sm transition-opacity ${!selected && atCapacity ? "cursor-not-allowed opacity-40" : ""}`}
+                              className={cn(
+                                "flex cursor-pointer items-start gap-2 border p-2 text-sm outline outline-0 outline-primary/40 transition-colors",
+                                selected &&
+                                  "border-primary bg-primary/10 outline-2 -outline-offset-2",
+                                !selected && atCapacity
+                                  ? "cursor-not-allowed opacity-40"
+                                  : "hover:border-primary/70 hover:bg-accent/70"
+                              )}
                             >
                               <Checkbox
                                 checked={selected}

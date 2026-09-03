@@ -1,12 +1,9 @@
-import { UserRound } from "lucide-react"
 import { useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 
 import { BOOKING_SLOT_MINUTES, WORKING_HOURS } from "@/constants"
-import { BookingCardActions, BookingTimeRange } from "@/features/schedule"
-import { CompactBookingDetails } from "@/features/schedule/components/timeline/CompactBookingDetails"
+import { BookingCard, BookingCardActions, TimelineBookingDetails } from "@/features/schedule"
 import {
-  bookingParticipationClassName,
   TIMELINE_DAY_MINUTES,
   TIMELINE_END_LABEL_OVERLAY_PIXELS,
   TIMELINE_FIRST_MINUTE,
@@ -142,14 +139,16 @@ export const DashboardBookingsTimeline = ({
         const duration = end - start
         const fifteenMinuteLayout = duration <= BOOKING_SLOT_MINUTES
         const compactLayout = duration <= 2 * BOOKING_SLOT_MINUTES
+        const roomLabel = room ? localize(room.name, i18n.language) : booking.roomId
 
         return (
-          <article
-            data-booking
+          <BookingCard
             key={booking.id}
+            booking={booking}
+            accessibleLabel={localize(booking.title, i18n.language)}
+            onOpen={() => onBooking(booking)}
             className={cn(
-              "absolute z-10 max-w-50 overflow-hidden border border-primary/60 px-2 py-1 text-left shadow-sm outline -outline-offset-1 outline-transparent transition-[background-color,outline-color] hover:outline-2 hover:outline-primary focus-within:outline-2 focus-within:outline-primary",
-              bookingParticipationClassName(booking),
+              "absolute z-10 max-w-50 border-primary/60 px-2 py-1",
               fifteenMinuteLayout && "py-0"
             )}
             style={{
@@ -159,65 +158,19 @@ export const DashboardBookingsTimeline = ({
               height: Math.max(1, duration * DASHBOARD_PIXELS_PER_MINUTE),
             }}
           >
-            <button
-              type="button"
-              className="absolute inset-0 z-0"
-              aria-label={localize(booking.title, i18n.language)}
-              onClick={() => onBooking(booking)}
+            <TimelineBookingDetails
+              title={localize(booking.title, i18n.language)}
+              organizer={organizer ? localize(organizer.name, i18n.language) : booking.organizerId}
+              start={start}
+              end={end}
+              compact={fifteenMinuteLayout}
+              room={compactLayout ? undefined : roomLabel}
             />
-            <div
-              className={cn(
-                "pointer-events-none relative z-10",
-                fifteenMinuteLayout && "flex h-full items-center gap-1 pr-8"
-              )}
-            >
-              {!fifteenMinuteLayout && (
-                <p
-                  className={cn(
-                    "truncate pr-12 text-[11px] font-semibold",
-                    fifteenMinuteLayout && "min-w-0 flex-1 pr-0 leading-none"
-                  )}
-                >
-                  {localize(booking.title, i18n.language)}
-                </p>
-              )}
-              {fifteenMinuteLayout ? (
-                <CompactBookingDetails
-                  title={localize(booking.title, i18n.language)}
-                  organizer={
-                    organizer ? localize(organizer.name, i18n.language) : booking.organizerId
-                  }
-                  start={start}
-                  end={end}
-                  className="pr-8"
-                />
-              ) : (
-                <>
-                  <span className="flex min-w-0 items-center gap-1 truncate text-[9px] opacity-75">
-                    <BookingTimeRange
-                      start={start}
-                      end={end}
-                      className="shrink-0"
-                    />
-                    <span aria-hidden>·</span>
-                    <span className="flex min-w-0 items-center gap-1 truncate">
-                      <UserRound className="size-2.5 shrink-0" />
-                      {organizer ? localize(organizer.name, i18n.language) : booking.organizerId}
-                    </span>
-                  </span>
-                  {!compactLayout && (
-                    <span className="mt-0.5 inline-flex w-fit max-w-full truncate border border-primary/30 bg-primary/10 px-1 text-[9px] font-medium text-primary">
-                      {room ? localize(room.name, i18n.language) : booking.roomId}
-                    </span>
-                  )}
-                </>
-              )}
-            </div>
             <BookingCardActions
               booking={booking}
               onEdit={() => onEditBooking(booking)}
             />
-          </article>
+          </BookingCard>
         )
       })}
       {!positioned.length && (

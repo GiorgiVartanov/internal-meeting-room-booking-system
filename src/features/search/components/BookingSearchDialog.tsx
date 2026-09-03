@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { BOOKING_SEARCH_DEBOUNCE_MILLISECONDS, DEFAULT_EMPLOYEE_ID, PATHS } from "@/constants"
 import { ModalGuide, ModalGuideQuestionButton } from "@/features/guide"
-import { BookingTimeRange } from "@/features/schedule"
+import { BookingCard, BookingTimeRange } from "@/features/schedule"
 import { useDebouncedCallback, useEmployees, useInfiniteBookingSearch, useRooms } from "@/hooks"
 import {
   appDateKey,
@@ -26,9 +26,9 @@ import {
   nativeDateLocale,
 } from "@/lib/date"
 import { localize } from "@/lib/localize"
-import { cn } from "@/lib/utils"
 import type { TCapacityBucket, TRoomAmenity } from "@/types"
 
+import { BookingSearchFilterCard } from "./BookingSearchFilterCard"
 import { FilterButtons } from "./FilterButtons"
 
 interface IProps {
@@ -209,15 +209,10 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                       : [...roomIds, room.id]
 
                     return (
-                      <button
-                        type="button"
+                      <BookingSearchFilterCard
                         key={room.id}
-                        aria-pressed={selected}
-                        className={cn(
-                          "border p-2 text-left outline outline-0 outline-primary/40 transition-colors hover:border-primary/70 hover:bg-accent/70",
-                          selected && "border-primary bg-primary/10 outline-2 -outline-offset-2"
-                        )}
-                        onClick={() =>
+                        selected={selected}
+                        onSelect={() =>
                           update({
                             historyRooms: nextRooms.length ? nextRooms.join(",") : undefined,
                             historyRoom: undefined,
@@ -235,7 +230,7 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                             .map((item) => t(item))
                             .join(", ")}
                         </span>
-                      </button>
+                      </BookingSearchFilterCard>
                     )
                   })}
                 </div>
@@ -252,15 +247,10 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                       : [...organizerIds, employee.id]
 
                     return (
-                      <button
-                        type="button"
+                      <BookingSearchFilterCard
                         key={employee.id}
-                        aria-pressed={selected}
-                        className={cn(
-                          "border p-2 text-left outline outline-0 outline-primary/40 transition-colors hover:border-primary/70 hover:bg-accent/70",
-                          selected && "border-primary bg-primary/10 outline-2 -outline-offset-2"
-                        )}
-                        onClick={() =>
+                        selected={selected}
+                        onSelect={() =>
                           update({
                             historyUsers: nextUsers.length ? nextUsers.join(",") : undefined,
                             historyMine: undefined,
@@ -274,7 +264,7 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                         <span className="mt-1 block truncate text-[10px] text-muted-foreground">
                           {employee.email}
                         </span>
-                      </button>
+                      </BookingSearchFilterCard>
                     )
                   })}
                 </div>
@@ -322,13 +312,15 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                   const employee = employees.data?.find((item) => item.id === booking.organizerId)
 
                   return (
-                    <button
-                      type="button"
+                    <BookingCard
                       key={booking.id}
-                      className="block w-full border bg-card p-3 text-left transition-colors hover:border-primary/70 hover:bg-accent/70"
-                      onClick={() => openBooking(booking.id, booking.roomId, booking.startAt)}
+                      booking={booking}
+                      accessibleLabel={localize(booking.title, i18n.language)}
+                      participationColors={false}
+                      className="w-full bg-card p-3 hover:bg-accent/70"
+                      onOpen={() => openBooking(booking.id, booking.roomId, booking.startAt)}
                     >
-                      <div className="flex justify-between gap-3">
+                      <div className="pointer-events-none relative z-10 flex justify-between gap-3">
                         <span className="flex min-w-0 items-center gap-2">
                           <strong className="truncate">
                             {localize(booking.title, i18n.language)}
@@ -341,18 +333,18 @@ export const BookingSearchDialog = ({ open, onOpenChange }: IProps) => {
                           {formatAppDate(booking.startAt, i18n.language, { dateStyle: "medium" })}
                         </span>
                       </div>
-                      <p className="mt-1 text-xs text-muted-foreground">
+                      <p className="pointer-events-none relative z-10 mt-1 text-xs text-muted-foreground">
                         <BookingTimeRange
                           start={formatAppTime(booking.startAt, i18n.language)}
                           end={formatAppTime(booking.endAt, i18n.language)}
                         />{" "}
                         · {room ? localize(room.name, i18n.language) : ""}
                       </p>
-                      <p className="mt-1 text-xs">
+                      <p className="pointer-events-none relative z-10 mt-1 text-xs">
                         {t("organizer")}:{" "}
                         {employee ? localize(employee.name, i18n.language) : booking.organizerId}
                       </p>
-                    </button>
+                    </BookingCard>
                   )
                 })}
                 {bookings.hasNextPage && (

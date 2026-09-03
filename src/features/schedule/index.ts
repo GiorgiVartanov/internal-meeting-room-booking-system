@@ -1,3 +1,4 @@
+export { BookingCard } from "./components/booking/BookingCard"
 export { BookingCardActions } from "./components/booking/BookingCardActions"
 export { BookingDetailsDialog } from "./components/booking/BookingDetailsDialog"
 export { EditableBookingDialog } from "./components/booking/EditableBookingDialog"
@@ -11,3 +12,4 @@ export { BookingTimeline, type ITimelineRange } from "./components/timeline/Book
 export { BookingTimeRange } from "./components/timeline/BookingTimeRange"
 export { PersonalWeekTimeline } from "./components/timeline/PersonalWeekTimeline"
 export { SelectedTimePanel } from "./components/timeline/SelectedTimePanel"
+export { TimelineBookingDetails } from "./components/timeline/TimelineBookingDetails"

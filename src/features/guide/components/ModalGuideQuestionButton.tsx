@@ -14,10 +14,11 @@ export const ModalGuideQuestionButton = ({ guideId }: IProps) => {
   return (
     <Button
       data-dialog-dismiss-protected
+      data-slot="modal-guide-question"
       type="button"
       size="icon"
       variant="ghost"
-      className="absolute right-[3.25rem] top-4 z-[90]"
+      className="absolute right-[3.25rem] top-3 z-[90] group-data-[swipe-axis=x]/drawer-popup:top-2.5"
       aria-label={t("guideOpen")}
       onClick={() =>
         window.dispatchEvent(

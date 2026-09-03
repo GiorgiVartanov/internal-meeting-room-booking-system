@@ -1,5 +1,4 @@
 import { addMonths, subMinutes } from "date-fns"
-import { UserRound } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 
@@ -25,15 +24,13 @@ import {
   TIMELINE_FIRST_MINUTE,
   TIMELINE_PIXELS_PER_MINUTE,
   type IDragState,
-  bookingParticipationClassName,
   timelineTimeText,
 } from "../../utils"
-import { BookingCardActions } from "../booking"
+import { BookingCard, BookingCardActions } from "../booking"
 
 import { BookingResizeHandles } from "./BookingResizeHandles"
 import { BookingTimelineGrid } from "./BookingTimelineGrid"
-import { BookingTimeRange } from "./BookingTimeRange"
-import { CompactBookingDetails } from "./CompactBookingDetails"
+import { TimelineBookingDetails } from "./TimelineBookingDetails"
 
 import type { RefObject } from "react"
 
@@ -364,13 +361,14 @@ export const BookingTimeline = ({
         }
 
         return (
-          <article
-            data-booking
+          <BookingCard
             draggable={false}
             key={booking.id}
+            booking={booking}
+            accessibleLabel={localize(booking.title, i18n.language)}
+            onOpen={openBooking}
             className={cn(
-              "group/booking absolute left-12 right-1 z-10 touch-none overflow-hidden border border-primary/60 px-2 py-1 shadow-sm outline -outline-offset-1 outline-transparent hover:z-20 hover:outline-2 hover:outline-primary focus-within:z-20 focus-within:outline-2 focus-within:outline-primary",
-              bookingParticipationClassName(booking),
+              "absolute left-12 right-1 z-10 touch-none border-primary/60 px-2 py-1 hover:z-20 focus-within:z-20",
               fifteenMinuteLayout && "py-0",
               selected && "z-20 outline-2 outline-primary",
               canDrag && "cursor-grab active:cursor-grabbing",
@@ -395,69 +393,22 @@ export const BookingTimeline = ({
             onPointerMove={moveDrag}
             onPointerUp={finishDrag}
             onPointerCancel={cancelDrag}
-            onClick={openBooking}
             onDragStart={(event) => event.preventDefault()}
           >
-            <button
-              data-booking-trigger
-              type="button"
-              className="absolute inset-0 z-0"
-              aria-label={localize(booking.title, i18n.language)}
-            />
             <BookingResizeHandles enabled={canDrag} />
-            <div className="pointer-events-none relative z-10 h-full">
-              {fifteenMinuteLayout ? (
-                <CompactBookingDetails
-                  title={localize(booking.title, i18n.language)}
-                  organizer={
-                    organizer ? localize(organizer.name, i18n.language) : booking.organizerId
-                  }
-                  start={displayStart}
-                  end={displayEnd}
-                  className="pr-8"
-                />
-              ) : (
-                <div className="pointer-events-none relative z-10 flex h-full items-start gap-1">
-                  <div className="min-w-0 flex-1">
-                    <p
-                      className={cn(
-                        "truncate text-[11px] font-semibold",
-                        fifteenMinuteLayout && "leading-none"
-                      )}
-                    >
-                      {localize(booking.title, i18n.language)}
-                    </p>
-                    <p
-                      className={cn(
-                        "flex min-w-0 items-center gap-1 text-[9px] opacity-75",
-                        fifteenMinuteLayout && "leading-none"
-                      )}
-                    >
-                      <BookingTimeRange
-                        start={displayStart}
-                        end={displayEnd}
-                        className="shrink-0"
-                      />
-                      <span aria-hidden>·</span>
-                      <span className="flex min-w-0 items-center gap-1 truncate">
-                        <UserRound className="size-2.5 shrink-0" />
-                        <span className="truncate">
-                          {organizer
-                            ? localize(organizer.name, i18n.language)
-                            : booking.organizerId}
-                        </span>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
+            <TimelineBookingDetails
+              title={localize(booking.title, i18n.language)}
+              organizer={organizer ? localize(organizer.name, i18n.language) : booking.organizerId}
+              start={displayStart}
+              end={displayEnd}
+              compact={fifteenMinuteLayout}
+            />
             <BookingCardActions
               booking={booking}
               onEdit={() => onEdit(booking)}
               onDelete={() => onDelete(booking)}
             />
-          </article>
+          </BookingCard>
         )
       })}
       {showNow && (

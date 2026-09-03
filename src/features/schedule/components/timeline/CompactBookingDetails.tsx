@@ -9,8 +9,8 @@ import type { ReactElement } from "react"
 interface IProps {
   title: string
   organizer: string
-  start: number
-  end: number
+  start: number | string
+  end: number | string
   className?: string
 }
 

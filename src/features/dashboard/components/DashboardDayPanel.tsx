@@ -9,11 +9,9 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsIndicator, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DEFAULT_EMPLOYEE_ID, PATHS } from "@/constants"
 import { RoomCard } from "@/features/rooms"
-import { BookingCardActions, BookingTimeRange } from "@/features/schedule"
-import { bookingParticipationClassName } from "@/features/schedule/utils"
+import { BookingCard, BookingCardActions, BookingTimeRange } from "@/features/schedule"
 import { formatAppTime } from "@/lib/date"
 import { localize } from "@/lib/localize"
-import { cn } from "@/lib/utils"
 import type { IBooking, IEmployee, IRoom } from "@/types"
 
 import { DashboardBookingsTimeline } from "./DashboardBookingsTimeline"
@@ -162,19 +160,13 @@ export const DashboardDayPanel = ({
                       )
 
                       return (
-                        <article
+                        <BookingCard
                           key={booking.id}
-                          className={cn(
-                            "relative mt-2 cursor-pointer border p-2 pr-12 text-xs text-muted-foreground outline outline-1 -outline-offset-1 outline-transparent transition-[background-color,outline-color] hover:bg-accent/70 hover:outline-primary focus-within:outline-2 focus-within:outline-primary",
-                            bookingParticipationClassName(booking)
-                          )}
+                          booking={booking}
+                          accessibleLabel={localize(booking.title, i18n.language)}
+                          onOpen={() => onBooking(booking)}
+                          className="mt-2 cursor-pointer p-2 pr-12 text-xs text-muted-foreground"
                         >
-                          <button
-                            type="button"
-                            className="absolute inset-0 z-0"
-                            aria-label={localize(booking.title, i18n.language)}
-                            onClick={() => onBooking(booking)}
-                          />
                           <div className="pointer-events-none relative z-10">
                             <strong className="block truncate text-foreground">
                               {localize(booking.title, i18n.language)}
@@ -200,7 +192,7 @@ export const DashboardDayPanel = ({
                             booking={booking}
                             onEdit={() => onEditBooking(booking)}
                           />
-                        </article>
+                        </BookingCard>
                       )
                     })}
                   </div>

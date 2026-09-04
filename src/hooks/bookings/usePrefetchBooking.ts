@@ -9,8 +9,10 @@ export const usePrefetchBooking = () => {
   const queryClient = useQueryClient()
 
   return (bookingId: TBookingId) =>
-    queryClient.prefetchQuery({
-      queryKey: bookingKeys.detail(bookingId),
-      queryFn: () => getBooking(bookingId),
-    })
+    queryClient
+      .query({
+        queryKey: bookingKeys.detail(bookingId),
+        queryFn: () => getBooking(bookingId),
+      })
+      .catch(() => undefined)
 }

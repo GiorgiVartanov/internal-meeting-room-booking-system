@@ -50,9 +50,11 @@ const startApplication = async () => {
   )
 }
 
-void startApplication().catch((error: unknown) => {
+try {
+  await startApplication()
+} catch (error: unknown) {
   const root = document.getElementById("root")
   if (!root) throw error
 
   createRoot(root).render(<ApplicationStartupError error={error} />)
-})
+}

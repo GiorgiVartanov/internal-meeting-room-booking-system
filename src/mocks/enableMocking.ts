@@ -7,7 +7,12 @@ export const enableMocking = async () => {
   try {
     await startWorker()
   } catch (error) {
-    const registration = await navigator.serviceWorker.getRegistration()
+    const registrations = await navigator.serviceWorker.getRegistrations()
+    const registration = registrations.find((candidate) => {
+      const serviceWorker = candidate.active ?? candidate.waiting ?? candidate.installing
+
+      return serviceWorker && new URL(serviceWorker.scriptURL).pathname === "/mockServiceWorker.js"
+    })
 
     if (!registration) throw error
 

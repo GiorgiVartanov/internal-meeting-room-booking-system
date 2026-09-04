@@ -201,10 +201,13 @@ export const BookingTimeline = ({
       if (!timeline || !scrollContainer || !nowLine || scrollContainer.clientHeight === 0)
         return false
 
-      scrollContainer.scrollTop = Math.max(
-        0,
-        timeline.offsetTop + nowLine.offsetTop - scrollContainer.clientHeight / 2
-      )
+      scrollContainer.scrollTo({
+        top: Math.max(
+          0,
+          timeline.offsetTop + nowLine.offsetTop - scrollContainer.clientHeight / 2
+        ),
+        behavior: "smooth",
+      })
       hasScrolledToNowRef.current = true
 
       return true

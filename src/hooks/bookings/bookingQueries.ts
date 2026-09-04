@@ -69,4 +69,7 @@ export const employeeBookingOptions = ({
 export const prefetchEmployeeBookingPages = (
   queryClient: QueryClient,
   params: IEmployeeBookingHookParams
-) => queryClient.prefetchInfiniteQuery({ ...employeeBookingOptions(params), pages: 2 })
+) =>
+  queryClient
+    .infiniteQuery({ ...employeeBookingOptions(params), pages: 2 })
+    .catch(() => undefined)

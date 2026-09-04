@@ -12,7 +12,7 @@ if (savedLanguage === "en" || savedLanguage === "ka") initialLanguage = savedLan
 
 document.documentElement.lang = initialLanguage
 
-void i18n.use(initReactI18next).init({
+await i18n.use(initReactI18next).init({
   resources: { en: { translation: en }, ka: { translation: ka } },
   lng: initialLanguage,
   fallbackLng: "en",

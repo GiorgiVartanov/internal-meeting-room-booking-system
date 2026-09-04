@@ -1,4 +1,4 @@
-import { addDays, addWeeks, format, isSameDay, startOfWeek } from "date-fns"
+import { addDays, addWeeks, format, isSameDay, isSameWeek, startOfWeek } from "date-fns"
 import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
@@ -16,14 +16,30 @@ interface IProps {
 export const WeekPicker = ({ selected, onSelect, onOpenCalendar }: IProps) => {
   const { t, i18n } = useTranslation()
 
+  const today = appCalendarDate()
   const weekStart = startOfWeek(selected, { weekStartsOn: 1 })
   const days = Array.from({ length: 5 }, (_, index) => addDays(weekStart, index))
+  const viewingCurrentWeek = isSameWeek(selected, today, { weekStartsOn: 1 })
 
   return (
     <div className="space-y-3 border-b p-3">
-      <p className="text-left text-sm font-semibold capitalize text-foreground">
-        {format(selected, "LLLL yyyy", { locale: dateLocale(i18n.language) })}
-      </p>
+      <div className="flex min-h-8 items-center justify-between gap-2">
+        <p className="text-left text-sm font-semibold capitalize text-foreground">
+          {format(selected, "LLLL yyyy", { locale: dateLocale(i18n.language) })}
+        </p>
+        {!viewingCurrentWeek && (
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="h-8 shrink-0"
+            aria-label={t("goToCurrentDate")}
+            onClick={() => onSelect(today)}
+          >
+            {t("goToCurrentDate")}
+          </Button>
+        )}
+      </div>
       <div className="flex items-center gap-2">
         <Button
           variant="outline"
@@ -38,7 +54,7 @@ export const WeekPicker = ({ selected, onSelect, onOpenCalendar }: IProps) => {
         </Button>
         <div className="grid min-w-0 flex-1 grid-cols-5 gap-1.5">
           {days.map((day) => {
-            const current = isSameDay(day, appCalendarDate())
+            const current = isSameDay(day, today)
             const selectedDay = isSameDay(day, selected)
 
             return (

@@ -181,10 +181,10 @@ export const DashboardBookingsTimeline = ({
       {showNow && (
         <div
           ref={nowLineRef}
-          className="pointer-events-none absolute left-10 right-0 z-20 border-t-2 border-destructive"
+          className="pointer-events-none absolute left-10 right-0 z-20 h-0.5 bg-destructive"
           style={{ top: (currentMinute - TIMELINE_FIRST_MINUTE) * DASHBOARD_PIXELS_PER_MINUTE }}
         >
-          <span className="absolute -left-1 -top-1 size-2 bg-destructive" />
+          <span className="absolute -left-1 top-1/2 size-2 -translate-y-1/2 bg-destructive" />
         </div>
       )}
       <span className="pointer-events-none absolute bottom-0 left-0 w-11 translate-y-1/2 pr-2 text-right font-mono text-[10px] text-muted-foreground">

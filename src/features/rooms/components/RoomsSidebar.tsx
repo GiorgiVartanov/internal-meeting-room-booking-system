@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils"
 import type { IRoom, IRoomFilters } from "@/types"
 import { useDebouncedCallback } from "@/hooks"
 
+import { roomImagePreloadUrl } from "../utils/roomImageSources"
+
 import { RoomFilters } from "./RoomFilters"
 
 interface IProps {
@@ -156,10 +158,10 @@ export const RoomsSidebar = ({
               type="button"
               disabled={unavailable}
               onPointerEnter={() => {
-                if (room.imageUrl) new Image().src = room.imageUrl
+                if (room.imageUrl) new Image().src = roomImagePreloadUrl(room.imageUrl)
               }}
               onFocus={() => {
-                if (room.imageUrl) new Image().src = room.imageUrl
+                if (room.imageUrl) new Image().src = roomImagePreloadUrl(room.imageUrl)
               }}
               onClick={() => onSelect(room)}
               className={cn(

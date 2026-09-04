@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/utils"
 import type { IRoom } from "@/types"
 
+import { roomImageSrcSet } from "../utils/roomImageSources"
+
 interface IProps {
   room: IRoom
   compact: boolean
@@ -35,6 +37,8 @@ export const RoomImage = ({ room, compact }: IProps) => {
   return (
     <img
       src={room.imageUrl}
+      srcSet={roomImageSrcSet(room.imageUrl)}
+      sizes={compact ? "(max-width: 640px) 100vw, 640px" : "(max-width: 640px) 100vw, 960px"}
       alt=""
       onError={() => setFailedSource(room.imageUrl)}
       className={compact ? "h-44 w-full border object-cover" : "size-full min-h-0 object-cover"}

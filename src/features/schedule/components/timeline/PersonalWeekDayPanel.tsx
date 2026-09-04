@@ -16,6 +16,7 @@ import { appClockMinutes, appDateKey, dateKey, dateLocale, fromDateAndTime } fro
 import { localize } from "@/lib/localize"
 import { cn } from "@/lib/utils"
 import type { IBooking, IEmployee, IRoom } from "@/types"
+import { roomImagePreloadUrl } from "@/features/rooms/utils/roomImageSources"
 
 import { useTimelineBookingDrag } from "../../hooks"
 import {
@@ -302,7 +303,6 @@ export const PersonalWeekDayPanel = ({
             return (
               <BookingCard
                 draggable={false}
-                data-guide={canDrag ? "personal-reschedule" : undefined}
                 key={booking.id}
                 booking={booking}
                 accessibleLabel={localize(booking.title, i18n.language)}
@@ -338,7 +338,7 @@ export const PersonalWeekDayPanel = ({
                 onDragStart={(event) => event.preventDefault()}
                 onPointerEnter={() => {
                   onPrefetchBooking(booking.id)
-                  if (room?.imageUrl) new Image().src = room.imageUrl
+                  if (room?.imageUrl) new Image().src = roomImagePreloadUrl(room.imageUrl)
                 }}
               >
                 <BookingResizeHandles enabled={canDrag} />
@@ -392,12 +392,12 @@ export const PersonalWeekDayPanel = ({
           {showNow && (
             <div
               ref={nowLineRef}
-              className="pointer-events-none absolute left-9 right-0 z-30 border-t-2 border-destructive"
+              className="pointer-events-none absolute left-9 right-0 z-30 h-0.5 bg-destructive"
               style={{
                 top: (currentMinute - TIMELINE_FIRST_MINUTE) * WEEK_TIMELINE_PIXELS_PER_MINUTE,
               }}
             >
-              <span className="absolute -left-1 -top-1 size-2 bg-destructive" />
+              <span className="absolute -left-1 top-1/2 size-2 -translate-y-1/2 bg-destructive" />
             </div>
           )}
           {!bookings.length && (

@@ -240,6 +240,7 @@ export const AppHeader = () => {
               key={to}
               to={to}
               end={to === "/"}
+              aria-label={label}
               onPointerEnter={() => {
                 void preloadPage(to)
                 if (to === PATHS.schedule) void prefetchSchedule()

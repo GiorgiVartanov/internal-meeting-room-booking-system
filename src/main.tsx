@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 import { QUERY_GC_TIME_MILLISECONDS, QUERY_STALE_TIME_MILLISECONDS } from "@/constants"
+import { ApplicationStartupError } from "@/components/ApplicationStartupError"
 
 import "./index.css"
 import "./i18n"
@@ -49,4 +50,9 @@ const startApplication = async () => {
   )
 }
 
-void startApplication()
+void startApplication().catch((error: unknown) => {
+  const root = document.getElementById("root")
+  if (!root) throw error
+
+  createRoot(root).render(<ApplicationStartupError error={error} />)
+})

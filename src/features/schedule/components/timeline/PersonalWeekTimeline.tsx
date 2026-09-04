@@ -103,7 +103,10 @@ export const PersonalWeekTimeline = ({
   }
 
   return (
-    <div className="overflow-x-clip border bg-card">
+    <div
+      data-guide="personal-reschedule"
+      className="overflow-x-clip border bg-card"
+    >
       <div className="sticky -top-2 z-40 grid grid-cols-5 gap-1 border-b bg-card p-2 md:hidden">
         {days.map((day) => (
           <Button

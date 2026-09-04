@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 
+import { DATA_SCHEMA_VERSION } from "@/constants"
+
 class MemoryStorage implements Storage {
   private readonly values = new Map<string, string>()
 
@@ -48,5 +50,41 @@ describe("booking repository cancellation", () => {
     expect(cancelled?.status).toBe("cancelled")
     expect(cancelled?.cancelledAt).toBeTruthy()
     expect(after.find((item) => item.id === booking.id)?.status).toBe("cancelled")
+  })
+
+  it("reseeds bookings when persisted data contains an invalid record", async () => {
+    localStorage.setItem(
+      `meeting-room-booking:v${DATA_SCHEMA_VERSION}:bookings`,
+      '[{"title":"broken"}]'
+    )
+    const { bookingRepository } = await import("@/mocks/db/repositories")
+
+    const bookings = bookingRepository.list()
+
+    expect(bookings.length).toBeGreaterThan(0)
+    expect(bookings.every((booking) => Boolean(booking.id))).toBe(true)
+  })
+
+  it("reseeds bookings when persisted timestamps cannot be displayed", async () => {
+    localStorage.setItem(
+      `meeting-room-booking:v${DATA_SCHEMA_VERSION}:bookings`,
+      JSON.stringify([
+        {
+          id: "broken-booking",
+          roomId: "room-sommen",
+          organizerId: "employee-193846",
+          title: "Broken booking",
+          startAt: "not-a-date",
+          endAt: "not-a-date",
+          attendeeIds: [],
+          status: "confirmed",
+          createdAt: "not-a-date",
+          updatedAt: "not-a-date",
+        },
+      ])
+    )
+    const { bookingRepository } = await import("@/mocks/db/repositories")
+
+    expect(bookingRepository.list().some((booking) => booking.id === "broken-booking")).toBe(false)
   })
 })

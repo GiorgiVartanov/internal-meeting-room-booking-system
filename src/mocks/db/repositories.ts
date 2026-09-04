@@ -12,15 +12,17 @@ import type {
   TBookingId,
 } from "@/types"
 
+import { isBookingRecord, isEmployeeRecord, isRoomRecord } from "./recordValidators"
 import { readCollection, writeCollection } from "./storage"
 
 export const roomRepository = {
-  list: () => readCollection<IRoom>("rooms", roomsSeed as IRoom[]),
+  list: () => readCollection<IRoom>("rooms", roomsSeed as IRoom[], isRoomRecord),
   get: (id: string) => roomRepository.list().find((room) => room.id === id),
 }
 
 export const employeeRepository = {
-  list: () => readCollection<IEmployee>("employees", employeesSeed as IEmployee[]),
+  list: () =>
+    readCollection<IEmployee>("employees", employeesSeed as IEmployee[], isEmployeeRecord),
 }
 export const holidayRepository = {
   list: () => {
@@ -31,7 +33,7 @@ export const holidayRepository = {
 }
 
 export const bookingRepository = {
-  list: () => readCollection<IBooking>("bookings", bookingsSeed as IBooking[]),
+  list: () => readCollection<IBooking>("bookings", bookingsSeed as IBooking[], isBookingRecord),
   get: (id: TBookingId) => bookingRepository.list().find((booking) => booking.id === id),
   create: (input: ICreateBookingInput, organizerId: string) => {
     const now = new Date().toISOString()

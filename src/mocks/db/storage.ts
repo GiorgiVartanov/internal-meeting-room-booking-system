@@ -5,7 +5,11 @@ const PREVIOUS_STORAGE_PREFIX = "meeting-room-booking:v13"
 const RESEEDED_COLLECTIONS = new Set(["rooms"])
 const collectionCache = new Map<string, unknown[]>()
 
-export const readCollection = <T>(key: string, seed: T[]): T[] => {
+export const readCollection = <T>(
+  key: string,
+  seed: T[],
+  isValidRecord: (value: unknown) => value is T
+): T[] => {
   const storageKey = `${STORAGE_PREFIX}:${key}`
   const cached = collectionCache.get(storageKey)
   if (cached) return cached as T[]
@@ -18,8 +22,9 @@ export const readCollection = <T>(key: string, seed: T[]): T[] => {
   if (stored) {
     try {
       const parsed: unknown = JSON.parse(stored)
-      if (!Array.isArray(parsed)) throw new Error("Stored collection is not an array")
-      const records = parsed as T[]
+      if (!Array.isArray(parsed) || !parsed.every(isValidRecord))
+        throw new Error("Stored collection contains invalid records")
+      const records = parsed
       localStorage.setItem(storageKey, stored)
       collectionCache.set(storageKey, records)
 

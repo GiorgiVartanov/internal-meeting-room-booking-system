@@ -36,6 +36,7 @@ export const RoomImage = ({ room, compact }: IProps) => {
 
   return (
     <img
+      key={room.imageUrl}
       src={room.imageUrl}
       srcSet={roomImageSrcSet(room.imageUrl)}
       sizes={compact ? "(max-width: 640px) 100vw, 640px" : "(max-width: 640px) 100vw, 960px"}

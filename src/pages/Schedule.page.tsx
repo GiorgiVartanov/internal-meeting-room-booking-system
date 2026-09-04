@@ -224,6 +224,7 @@ const SchedulePage = (): ReactElement => {
             data-modal-opener="calendar"
             type="button"
             variant="outline"
+            aria-label={t("chooseWeek")}
             onClick={() => setCalendarOpen(true)}
           >
             <CalendarDays />

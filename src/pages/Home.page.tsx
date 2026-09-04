@@ -62,7 +62,7 @@ const HomePage = () => {
   const peopleCount = peopleValue(params.get("people"), 1)
 
   const selectedId = params.get("room") ?? allRooms.data?.[0]?.id ?? ""
-  const selectedRoom = allRooms.data?.find((room) => room.id === selectedId) ?? allRooms.data?.[0]
+  const selectedRoom = allRooms.data?.find((room) => room?.id === selectedId) ?? allRooms.data?.[0]
 
   const dayBookings = useRoomBookings(
     {
